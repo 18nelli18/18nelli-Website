@@ -48,18 +48,18 @@ document.addEventListener("DOMContentLoaded", redirectIfMobile);
         LIGNE- ARCHIVES - MUSIQUES - PHOTO -&nbsp; PROJET - VIDEO&nbsp; </span
       >
     </h1>
-    <img
-      class="tada animated"
-      src="assets/img/qskldq.png"
-      style="
-        border-radius: 0;
-        border: 16px solid #ff0018;
-        border-left-width: 1px;
-        filter: contrast(124%);
-      "
-      width="501"
-      height="760"
-    />
+    <div class="image-container">
+  <img
+    class="tada animated"
+    src="assets/img/qskldq.png"
+    alt="qskldq"
+  />
+
+  <!-- L'image cliquable en bas -->
+  <a href="prediction.html" class="bottom-clickable">
+    <img src="assets/img/prédiction.png" alt="Prediction" />
+  </a>
+</div>
     <div
       style="
         top: 100px;
@@ -123,6 +123,8 @@ document.addEventListener("DOMContentLoaded", redirectIfMobile);
     <div class="camera-zone">
       <video id="camera" autoplay playsinline></video>
     </div>
+
+    
 
     <div class="cd-player">
       <div class="title-bar">

@@ -357,3 +357,39 @@ html, body {
   image-rendering: auto;     /* propre même en mouvement */
   filter: drop-shadow(0 0 4px white) ;
 }
+
+/* Conteneur qui englobe l'image principale */
+.image-container {
+  position: relative; /* Nécessaire pour le positionnement absolu interne */
+  display: inline-block;
+  border: 16px solid #ff0018;
+  border-left-width: 1px;
+  filter: contrast(124%);
+}
+
+/* Image principale */
+.image-container img.tada {
+  display: block;
+  width: 501px;
+  height: 760px;
+}
+
+/* L'image cliquable */
+.bottom-clickable {
+  position: absolute;
+  bottom: 10px; /* Décalage depuis le bas */
+  left: 20%;
+  transform: translateX(-50%); /* Centrage horizontal */
+  z-index: 10;
+}
+
+.bottom-clickable img {
+  width: 50%; /* Taille de l'image cliquable */
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.bottom-clickable img:hover {
+  filter: drop-shadow(0 0 4px rgba(255, 0, 0, 0.8)) drop-shadow(0 0 12px rgba(255, 0, 0, 0.6));
+}
+
