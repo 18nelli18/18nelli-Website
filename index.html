@@ -21,16 +21,18 @@
     <link rel="stylesheet" href="assets/css/animate.min.css" />
     <link rel="stylesheet" href="assets/css/styles.css" />
     <script>
-  window.onload = function() {
-    const ua = navigator.userAgent.toLowerCase();
-    const isMobileDevice = /android|iphone|ipad|ipod|blackberry|windows phone|opera mini|mobile/i.test(ua);
-    const isSmallScreen = window.innerWidth <= 768;
+// --- redirection: lancer tôt, dès que le DOM est prêt
+function redirectIfMobile() {
+  const ua = navigator.userAgent.toLowerCase();
+  const isMobileDevice = /android|iphone|ipad|ipod|blackberry|windows phone|opera mini|mobile/i.test(ua);
+  const isSmallScreen = window.innerWidth <= 768;
 
-    // Redirige si c'est un vrai mobile OU si l'écran est petit
-    if (isMobileDevice || isSmallScreen) {
-      window.location.href = "mobile.html";
-    }
-  };
+  if (isMobileDevice || isSmallScreen) {
+    // replace évite de revenir en arrière sur la page desktop
+    window.location.replace("mobile.html");
+  }
+}
+document.addEventListener("DOMContentLoaded", redirectIfMobile);
 </script>
   </head>
 
@@ -145,41 +147,33 @@
     <script src="assets/js/camera.js"></script>
     <script src="assets/js/dvd-bounce.js"></script>
     <script>
-  async function loadRandomSong() {
-    try {
-      // On récupère la liste des chansons
-      const res = await fetch("songs.json");
-      if (!res.ok) throw new Error(`Erreur ${res.status}`);
-      const songs = await res.json();
+async function loadRandomSong() {
+  try {
+    const res = await fetch("songs.json");
+    if (!res.ok) throw new Error(`Erreur ${res.status}`);
+    const songs = await res.json();
+    const randomSong = songs[Math.floor(Math.random() * songs.length)];
 
-      // On choisit une musique au hasard
-      const randomSong = songs[Math.floor(Math.random() * songs.length)];
+    const audioElement = document.getElementById("audio");
+    audioElement.src = `song/${randomSong}`;
 
-      // On met à jour la balise audio
-      const audioElement = document.getElementById("audio");
-      audioElement.src = `song/${randomSong}`;
+    document.getElementById("title").textContent = randomSong;
+    document.getElementById("artist").textContent = "18nelli";
 
-      // Met à jour l'affichage du titre et de l'artiste
-      document.getElementById("title").textContent = randomSong;
-      document.getElementById("artist").textContent = "18nelli";
-
-      // Lance automatiquement la lecture de la nouvelle chanson
-      audioElement.play().catch(err => {
-        console.warn("Lecture automatique bloquée par le navigateur :", err);
-      });
-    } catch (e) {
-      console.error("Erreur lors du chargement des chansons :", e);
-    }
+    audioElement.play().catch(err => {
+      console.warn("Lecture auto bloquée :", err);
+    });
+  } catch (e) {
+    console.error("Erreur lors du chargement des chansons :", e);
   }
+}
 
-  // Lance le chargement d'une chanson au hasard dès le chargement de la page
-  window.onload = () => {
-    // Charge une chanson aléatoire au démarrage
-    loadRandomSong();
-
-    // Active le bouton ⏭ pour changer de chanson
-    document.querySelector('.controls button:last-child').onclick = loadRandomSong;
-  };
+// Ne PAS utiliser window.onload = ...
+window.addEventListener("load", () => {
+  loadRandomSong();
+  // Bouton ⏭ pour changer de chanson
+  document.querySelector(".controls button:last-child").onclick = loadRandomSong;
+});
 </script>
   </body>
 </html>
