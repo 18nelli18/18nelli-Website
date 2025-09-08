@@ -156,7 +156,13 @@
   }
 
   // Lance le chargement d'une chanson au hasard dès le chargement de la page
-  window.onload = loadRandomSong;
+  window.onload = () => {
+    // Charge une chanson aléatoire au démarrage
+    loadRandomSong();
+
+    // Active le bouton ⏭ pour changer de chanson
+    document.querySelector('.controls button:last-child').onclick = loadRandomSong;
+  };
 </script>
   </body>
 </html>
