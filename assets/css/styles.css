@@ -89,6 +89,7 @@ img {
 }
 
 a {
+  position: relative;
   z-index: 10;
   margin-left: 40px;
 }
@@ -342,4 +343,17 @@ html, body {
   filter: 
   invert(1) contrast(20000%) saturate(200%);
 
+}
+
+#dvdLogo {
+  position: fixed;           /* se déplace par rapport à la fenêtre */
+  top: 20px;                 /* position de départ */
+  left: 20px;
+  width: 120px;              /* adapte à la taille de ton PNG */
+  height: auto;
+  z-index: 0;             /* au-dessus du reste */
+  pointer-events: none;      /* l'image ne bloque pas les clics; mets 'auto' si tu veux la cliquer */
+  will-change: transform;    /* perf */
+  image-rendering: auto;     /* propre même en mouvement */
+  filter: drop-shadow(0 0 4px white) ;
 }
