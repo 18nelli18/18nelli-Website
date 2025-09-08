@@ -131,7 +131,32 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/camera.js"></script>
-    
     <script src="assets/js/dvd-bounce.js"></script>
+    <script>
+  async function loadRandomSong() {
+    try {
+      // On récupère la liste des chansons
+      const res = await fetch("songs.json");
+      if (!res.ok) throw new Error(`Erreur ${res.status}`);
+      const songs = await res.json();
+
+      // On choisit une musique au hasard
+      const randomSong = songs[Math.floor(Math.random() * songs.length)];
+
+      // On met à jour la balise audio
+      const audioElement = document.getElementById("audio");
+      audioElement.src = `song/${randomSong}`;
+
+      // Met à jour l'affichage du titre et de l'artiste
+      document.getElementById("title").textContent = randomSong;
+      document.getElementById("artist").textContent = "18nelli";
+    } catch (e) {
+      console.error("Erreur lors du chargement des chansons :", e);
+    }
+  }
+
+  // Lance le chargement d'une chanson au hasard dès le chargement de la page
+  window.onload = loadRandomSong;
+</script>
   </body>
 </html>
