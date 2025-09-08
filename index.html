@@ -20,6 +20,18 @@
     />
     <link rel="stylesheet" href="assets/css/animate.min.css" />
     <link rel="stylesheet" href="assets/css/styles.css" />
+    <script>
+  window.onload = function() {
+    const ua = navigator.userAgent.toLowerCase();
+    const isMobileDevice = /android|iphone|ipad|ipod|blackberry|windows phone|opera mini|mobile/i.test(ua);
+    const isSmallScreen = window.innerWidth <= 768;
+
+    // Redirige si c'est un vrai mobile OU si l'écran est petit
+    if (isMobileDevice || isSmallScreen) {
+      window.location.href = "mobile.html";
+    }
+  };
+</script>
   </head>
 
   <body
