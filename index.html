@@ -150,6 +150,11 @@
       // Met à jour l'affichage du titre et de l'artiste
       document.getElementById("title").textContent = randomSong;
       document.getElementById("artist").textContent = "18nelli";
+
+      // Lance automatiquement la lecture de la nouvelle chanson
+      audioElement.play().catch(err => {
+        console.warn("Lecture automatique bloquée par le navigateur :", err);
+      });
     } catch (e) {
       console.error("Erreur lors du chargement des chansons :", e);
     }
