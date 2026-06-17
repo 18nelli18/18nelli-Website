@@ -1,0 +1,176 @@
+/* =======================================================
+   Blog 18nelli — style des articles + index
+   Ce fichier est généré une seule fois : tu peux le bidouiller
+   à la main, le script ne l'écrasera plus s'il existe déjà.
+   Il NEUTRALISE les règles globales un peu sauvages de styles.css
+   (p nowrap, a margin-left, img décalée...) en restant dans la
+   DA rouge/noir du site.
+   ======================================================= */
+
+.article,
+.blog-index {
+  position: relative;
+  z-index: 10;
+  max-width: 760px;
+  margin: 2rem auto 6rem;
+  padding: 1.5rem 2rem;
+  background: rgba(0, 0, 0, 0.92);
+  border: 1px solid #ff0000;
+  box-shadow: 4px 4px 0 #ff0000, 8px 8px 24px rgba(0, 0, 0, 0.8);
+  color: #ff0000;
+  font-family: "Comic Neue", sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* --- on casse les règles globales nowrap / décalages, scope blog --- */
+.article p,
+.article li,
+.article blockquote,
+.blog-index li {
+  white-space: normal;
+  left: auto;
+  background: transparent;
+  color: #ff0000;
+  font-family: "Comic Neue", sans-serif;
+}
+
+.article a,
+.blog-index a {
+  margin-left: 0;
+  color: #ff0000;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.article a:hover,
+.blog-index a:hover {
+  color: #000;
+  background: #ff0000;
+}
+
+.article img {
+  position: static;
+  left: auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+  border: 1px solid #ff0000;
+}
+
+/* --- titres : police Iceland, comme les écrans/fenêtres du site --- */
+.article h1,
+.article h2,
+.article h3,
+.article h4 {
+  font-family: "Iceland", "Comic Neue", sans-serif;
+  color: #ff0000;
+  line-height: 1.2;
+  white-space: normal;
+  max-width: none;
+  margin: 1.8rem 0 0.8rem;
+}
+.article h1 {
+  font-size: 2.4rem;
+  border-bottom: 2px solid #ff0000;
+  padding-bottom: 0.3rem;
+}
+.article h2 { font-size: 1.8rem; }
+.article h3 { font-size: 1.4rem; }
+
+.article hr {
+  border: none;
+  border-top: 1px dashed #ff0000;
+  margin: 2rem 0;
+}
+
+/* --- citations --- */
+.article blockquote {
+  margin: 1.2rem 0;
+  padding: 0.6rem 1rem;
+  border-left: 4px solid #ff0000;
+  background: rgba(255, 0, 0, 0.08);
+  font-style: italic;
+}
+
+/* --- code : vibe terminal CRT (cf. .screen du site) --- */
+.article code {
+  font-family: "Iceland", monospace;
+  background: #000;
+  color: #ff0000;
+  border: 1px solid #ff0000;
+  padding: 0.05em 0.35em;
+  font-size: 0.95em;
+}
+.article pre {
+  background: #000;
+  color: #ff0000;
+  border: 1px solid #ff0000;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.15);
+  padding: 1rem;
+  overflow-x: auto;
+  white-space: pre;
+}
+.article pre code {
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
+/* --- tableaux --- */
+.article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2rem 0;
+}
+.article th,
+.article td {
+  border: 1px solid #ff0000;
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+}
+.article th {
+  background: #ff0000;
+  color: #000;
+}
+
+/* --- date sous le titre de l'article --- */
+.article-meta {
+  font-family: "Iceland", monospace;
+  opacity: 0.8;
+  margin: 0 0 1.5rem;
+}
+
+/* =======================================================
+   Index du blog (liste des articles dans blog.html)
+   ======================================================= */
+.blog-index ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.blog-index li {
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed rgba(255, 0, 0, 0.4);
+  white-space: normal;
+}
+.blog-index li:last-child {
+  border-bottom: none;
+}
+.blog-index .date {
+  font-family: "Iceland", monospace;
+  opacity: 0.7;
+  margin-left: 0.6rem;
+  font-size: 0.85em;
+}
+
+/* --- petit confort mobile (les articles ne redirigent pas vers mobile.html) --- */
+@media (max-width: 768px) {
+  .article,
+  .blog-index {
+    margin: 1rem 0.5rem 4rem;
+    padding: 1rem 1.1rem;
+    font-size: 17px;
+  }
+  .article h1 { font-size: 1.9rem; }
+}
