@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>Blog</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Iceland&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Comic+Neue&amp;display=swap"
+    />
+    <link rel="stylesheet" href="assets/css/animate.min.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script>
+// --- redirection: lancer tôt, dès que le DOM est prêt
+function redirectIfMobile() {
+  const ua = navigator.userAgent.toLowerCase();
+  const isMobileDevice = /android|iphone|ipad|ipod|blackberry|windows phone|opera mini|mobile/i.test(ua);
+  const isSmallScreen = window.innerWidth <= 768;
+
+  if (isMobileDevice || isSmallScreen) {
+    // replace évite de revenir en arrière sur la page desktop
+    window.location.replace("mobile.html");
+  }
+}
+document.addEventListener("DOMContentLoaded", redirectIfMobile);
+</script>
+  </head>
+  <body
+    style="
+      background: url('assets/img/dmontag.png') center / contain, rgb(0, 0, 0);
+    "
+  >
+  <h1 class="photoh1">Blog</h1>
+  <a href="javascript:history.back()" class="house-link">
+    <img src="assets/img/retour.png" alt="Retour" class="house-icon" />
+  </a>
+  <br /><a href="./blog/blog.html">Blog</a>
+
+    
+
+  </body>
+</html>
