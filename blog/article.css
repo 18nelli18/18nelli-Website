@@ -39,6 +39,8 @@
   text-decoration: underline;
   text-underline-offset: 3px;
   white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 .article a:hover,
 .blog-index a:hover {
@@ -56,21 +58,17 @@
 
 /* ---- IMAGE SEULE -------------------------------------------------
    Taille par défaut plus raisonnable que "plein cadre".
-   Change le 70% ci-dessous si tu veux + grand / + petit par défaut.
-   Tu peux surcharger image par image (voir blog-gen.sh, tag w=).   */
-.article .img-single {
-  text-align: center;
-  margin: 1.5rem 0;
-}
+   Change le 70% si tu veux + grand / + petit par défaut.
+   Surcharge image par image avec le tag w= (voir blog-gen.sh).   */
+.article .img-single { text-align: center; margin: 1.5rem 0; }
 .article .img-single img {
   display: inline-block;
-  width: 70%;        /* <-- défaut. Surchargé par un style inline w= */
+  width: 70%;         /* <-- défaut, surchargé par un style inline w= */
   max-width: 100%;
   margin: 0;
 }
 
-/* ---- IMAGES CÔTE À CÔTE (colonnes Notion) -----------------------
-   Deux images collées dans le .md = elles étaient en colonnes.    */
+/* ---- IMAGES CÔTE À CÔTE (colonnes Notion) ----------------------- */
 .article .img-row {
   display: flex;
   flex-wrap: wrap;
@@ -79,22 +77,41 @@
   justify-content: center;
   margin: 1.5rem 0;
 }
-.article .img-row img {
-  flex: 1 1 0;       /* largeurs égales par défaut */
-  min-width: 0;
-  max-width: 100%;
-  margin: 0;
-}
+.article .img-row img { flex: 1 1 0; min-width: 0; max-width: 100%; margin: 0; }
 @media (max-width: 600px) {
-  .article .img-row { flex-direction: column; }   /* empilées sur tel */
+  .article .img-row { flex-direction: column; }
   .article .img-single img { width: 100%; }
 }
 
+/* ---- EMBED FALSTAD (circuitjs) ----------------------------------
+   Un lien Falstad seul dans le markdown est transformé en iframe.  */
+.article .embed-falstad {
+  margin: 1.5rem 0;
+  border: 1px solid #ff0000;
+  background: #000;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.12);
+}
+.article .embed-falstad iframe {
+  display: block;
+  width: 100%;
+  height: 520px;
+  border: 0;
+}
+.article .embed-falstad .embed-link {
+  display: block;
+  text-align: right;
+  font-family: "Iceland", monospace;
+  font-size: 0.85em;
+  padding: 0.3rem 0.7rem;
+  border-top: 1px dashed rgba(255, 0, 0, 0.5);
+  text-decoration: none;
+}
+@media (max-width: 600px) {
+  .article .embed-falstad iframe { height: 400px; }
+}
+
 /* ---- titres : police Iceland comme le site --------------------- */
-.article h1,
-.article h2,
-.article h3,
-.article h4 {
+.article h1, .article h2, .article h3, .article h4 {
   font-family: "Iceland", "Comic Neue", sans-serif;
   color: #ff0000;
   line-height: 1.2;
@@ -102,19 +119,11 @@
   max-width: none;
   margin: 1.8rem 0 0.8rem;
 }
-.article h1 {
-  font-size: 2.4rem;
-  border-bottom: 2px solid #ff0000;
-  padding-bottom: 0.3rem;
-}
+.article h1 { font-size: 2.4rem; border-bottom: 2px solid #ff0000; padding-bottom: 0.3rem; }
 .article h2 { font-size: 1.8rem; }
 .article h3 { font-size: 1.4rem; }
 
-.article hr {
-  border: none;
-  border-top: 1px dashed #ff0000;
-  margin: 2rem 0;
-}
+.article hr { border: none; border-top: 1px dashed #ff0000; margin: 2rem 0; }
 
 .article blockquote {
   margin: 1.2rem 0;
@@ -124,23 +133,18 @@
   font-style: italic;
 }
 
-/* code : vibe terminal CRT (cf. .screen du site) */
+/* code : vibe terminal CRT */
 .article code {
   font-family: "Iceland", monospace;
-  background: #000;
-  color: #ff0000;
+  background: #000; color: #ff0000;
   border: 1px solid #ff0000;
-  padding: 0.05em 0.35em;
-  font-size: 0.95em;
+  padding: 0.05em 0.35em; font-size: 0.95em;
 }
 .article pre {
-  background: #000;
-  color: #ff0000;
+  background: #000; color: #ff0000;
   border: 1px solid #ff0000;
   box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.15);
-  padding: 1rem;
-  overflow-x: auto;
-  white-space: pre;
+  padding: 1rem; overflow-x: auto; white-space: pre;
 }
 .article pre code { border: none; padding: 0; background: transparent; }
 
@@ -149,29 +153,13 @@
 .article th, .article td { border: 1px solid #ff0000; padding: 0.4rem 0.6rem; text-align: left; }
 .article th { background: #ff0000; color: #000; }
 
-/* liens externes longs (les URL falstad etc.) : on évite le débordement */
-.article a { word-break: break-word; overflow-wrap: anywhere; }
-
-.article-meta {
-  font-family: "Iceland", monospace;
-  opacity: 0.8;
-  margin: 0 0 1.5rem;
-}
+.article-meta { font-family: "Iceland", monospace; opacity: 0.8; margin: 0 0 1.5rem; }
 
 /* ===== Index du blog ===== */
 .blog-index ul { list-style: none; padding: 0; margin: 0; }
-.blog-index li {
-  padding: 0.6rem 0;
-  border-bottom: 1px dashed rgba(255, 0, 0, 0.4);
-  white-space: normal;
-}
+.blog-index li { padding: 0.6rem 0; border-bottom: 1px dashed rgba(255, 0, 0, 0.4); white-space: normal; }
 .blog-index li:last-child { border-bottom: none; }
-.blog-index .date {
-  font-family: "Iceland", monospace;
-  opacity: 0.7;
-  margin-left: 0.6rem;
-  font-size: 0.85em;
-}
+.blog-index .date { font-family: "Iceland", monospace; opacity: 0.7; margin-left: 0.6rem; font-size: 0.85em; }
 
 @media (max-width: 768px) {
   .article, .blog-index { margin: 1rem 0.5rem 4rem; padding: 1rem 1.1rem; font-size: 17px; }

@@ -10,16 +10,17 @@
 #    3. tu lances :  ./blog-gen.sh
 #
 #  IMAGES :
-#   - deux images collées dans le .md (rien que des lignes vides entre
-#     elles) -> affichées CÔTE À CÔTE (reproduit les colonnes Notion).
-#   - taille par défaut = 70% (réglable dans article.css).
-#   - pour forcer une largeur précise sur UNE image, ajoute un tag w=
-#     dans la légende/alt de l'image, ex :  w=320  ou  w=100%  ou  w=50%
-#     (Notion : mets-le dans la légende de l'image ; sinon édite l'alt
-#      du .md, le bout "![...]" -> "![... w=320]").
+#   - deux images collées dans le .md -> affichées CÔTE À CÔTE.
+#   - taille par défaut 70% (réglable dans article.css).
+#   - largeur forcée sur UNE image : tag w= dans la légende/alt,
+#     ex : w=320 / w=100% / w=50%.
 #
-#  Compatible macOS (Bash 3.2, sed/stat/date BSD) ET Linux.
-#  Idempotent : relançable à volonté, pas de doublons.
+#  EMBED FALSTAD :
+#   - un lien Falstad seul sur sa ligne dans le .md
+#     [https://www.falstad.com/circuit/circuitjs.html?ctz=...](...même url...)
+#     est transformé en circuit interactif intégré (iframe), en dark.
+#
+#  Compatible macOS (Bash 3.2, sed/stat/date BSD) ET Linux. Idempotent.
 # =====================================================================
 
 set -euo pipefail
@@ -29,6 +30,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BLOG_DIR="$SCRIPT_DIR/blog"
 INDEX_FILE="$SCRIPT_DIR/blog.html"
 ASSETS="../assets"
+# Paramètres d'intégration Falstad (modifie à ta sauce) :
+FALSTAD_PARAMS="hideSidebar=true&hideMenu=true&running=true&whiteBackground=false&editable=false"
 # ---------------------------------------------------------------------
 
 c_ok=$'\033[0;32m'; c_warn=$'\033[0;33m'; c_err=$'\033[0;31m'; c_rst=$'\033[0m'
@@ -67,7 +70,6 @@ PY
 
 html_escape() { sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g' -e 's/"/\&quot;/g'; }
 
-# Nom Notion -> slug propre (accents translittérés, hash viré)
 make_slug() {
   printf '%s' "$1" \
     | sed 's/ [0-9a-f]\{32\}$//' \
@@ -82,11 +84,11 @@ rewrite() {
   awk "$@" "$f" > "$tmp" && mv "$tmp" "$f"
 }
 
-# Programme awk : regroupe les images et applique les largeurs.
-# Lignes "![alt](src)" consécutives (séparées par des lignes vides
-# uniquement) -> <div class="img-row">...; une seule -> <div class="img-single">.
-read -r -d '' IMG_AWK <<'AWK' || true
+# Pré-processeur markdown (awk, syntaxe verbatim car heredoc quoté).
+# FALSTAD_PARAMS est injecté via -v à l'appel.
+read -r -d '' PRE_AWK <<'AWK' || true
 function esc(s){ gsub(/&/,"\\&amp;",s); gsub(/</,"\\&lt;",s); gsub(/>/,"\\&gt;",s); gsub(/"/,"\\&quot;",s); return s }
+function escurl(s){ gsub(/&/,"\\&amp;",s); return s }
 function imgtag(i,   tag,w){
   w=a_w[i]
   tag="<img src=\"" a_src[i] "\" alt=\"" esc(a_alt[i]) "\""
@@ -109,8 +111,22 @@ function flush(   i,row){
   print ""
   n=0
 }
+function falstad(url,   sep,src){
+  sep=(url ~ /\?/)?"&":"?"
+  src=url sep FALSTAD_PARAMS
+  return "<div class=\"embed-falstad\"><iframe src=\"" escurl(src) "\" loading=\"lazy\" allowfullscreen></iframe>" \
+         "<a class=\"embed-link\" href=\"" escurl(url) "\" target=\"_blank\" rel=\"noopener\">Ouvrir dans Falstad &#8599;</a></div>"
+}
 {
   line=$0
+  # 1) Lien Falstad seul -> embed
+  if (line ~ /^\[.*\]\(https?:\/\/[^)]*falstad\.com\/circuit\/circuitjs\.html[^)]*\)[[:space:]]*$/){
+    if(n>0) flush()
+    url=line; sub(/^\[.*\]\(/,"",url); sub(/\)[[:space:]]*$/,"",url)
+    print ""; print falstad(url); print ""
+    next
+  }
+  # 2) Image seule sur sa ligne
   if (line ~ /^!\[[^]]*\]\([^)]*\)[[:space:]]*$/){
     alt=line; sub(/^!\[/,"",alt); sub(/\].*$/,"",alt)
     src=line; sub(/^!\[[^]]*\]\(/,"",src); sub(/\)[[:space:]]*$/,"",src)
@@ -123,8 +139,10 @@ function flush(   i,row){
     n++; a_src[n]=src; a_alt[n]=alt; a_w[n]=w
     next
   }
+  # 3) ligne vide : on garde le groupe d'images ouvert
   if (line ~ /^[[:space:]]*$/){ if(n>0) next; print line; next }
-  if (n>0) flush()
+  # 4) ligne normale : on ferme un éventuel groupe puis on imprime
+  if(n>0) flush()
   print line
 }
 END{ if(n>0) flush() }
@@ -153,10 +171,10 @@ for md in "${mds[@]}"; do
   mtime="$(stat -c %Y "$md" 2>/dev/null || stat -f %m "$md")"
   date_fr="$(date -d "@$mtime" '+%d/%m/%Y' 2>/dev/null || date -r "$mtime" '+%d/%m/%Y')"
 
-  # 1) retire le 1er H1   2) regroupe/dimensionne les images   3) convertit
+  # 1) retire le 1er H1   2) images + embeds Falstad   3) convertit
   body_tmp="$(mktemp)"
   awk 'BEGIN{d=0} /^# /{ if(!d){d=1; next} } {print}' "$md" \
-    | awk "$IMG_AWK" > "$body_tmp"
+    | awk -v FALSTAD_PARAMS="$FALSTAD_PARAMS" "$PRE_AWK" > "$body_tmp"
   article_html="$(md_to_html "$body_tmp")"
   rm -f "$body_tmp"
 
