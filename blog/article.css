@@ -1,10 +1,8 @@
 /* =======================================================
    Blog 18nelli — style des articles + index
-   Ce fichier est généré une seule fois : tu peux le bidouiller
-   à la main, le script ne l'écrasera plus s'il existe déjà.
-   Il NEUTRALISE les règles globales un peu sauvages de styles.css
-   (p nowrap, a margin-left, img décalée...) en restant dans la
-   DA rouge/noir du site.
+   Généré une fois, bidouillable à la main (le script ne
+   l'écrase plus s'il existe). Neutralise les règles globales
+   un peu sauvages de styles.css en restant dans la DA rouge/noir.
    ======================================================= */
 
 .article,
@@ -23,7 +21,6 @@
   line-height: 1.6;
 }
 
-/* --- on casse les règles globales nowrap / décalages, scope blog --- */
 .article p,
 .article li,
 .article blockquote,
@@ -41,6 +38,7 @@
   color: #ff0000;
   text-decoration: underline;
   text-underline-offset: 3px;
+  white-space: normal;
 }
 .article a:hover,
 .blog-index a:hover {
@@ -48,17 +46,51 @@
   background: #ff0000;
 }
 
+/* base commune des images : bordure rouge, hauteur auto */
 .article img {
   position: static;
   left: auto;
-  display: block;
-  max-width: 100%;
   height: auto;
-  margin: 1.5rem auto;
   border: 1px solid #ff0000;
 }
 
-/* --- titres : police Iceland, comme les écrans/fenêtres du site --- */
+/* ---- IMAGE SEULE -------------------------------------------------
+   Taille par défaut plus raisonnable que "plein cadre".
+   Change le 70% ci-dessous si tu veux + grand / + petit par défaut.
+   Tu peux surcharger image par image (voir blog-gen.sh, tag w=).   */
+.article .img-single {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+.article .img-single img {
+  display: inline-block;
+  width: 70%;        /* <-- défaut. Surchargé par un style inline w= */
+  max-width: 100%;
+  margin: 0;
+}
+
+/* ---- IMAGES CÔTE À CÔTE (colonnes Notion) -----------------------
+   Deux images collées dans le .md = elles étaient en colonnes.    */
+.article .img-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+.article .img-row img {
+  flex: 1 1 0;       /* largeurs égales par défaut */
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+}
+@media (max-width: 600px) {
+  .article .img-row { flex-direction: column; }   /* empilées sur tel */
+  .article .img-single img { width: 100%; }
+}
+
+/* ---- titres : police Iceland comme le site --------------------- */
 .article h1,
 .article h2,
 .article h3,
@@ -84,7 +116,6 @@
   margin: 2rem 0;
 }
 
-/* --- citations --- */
 .article blockquote {
   margin: 1.2rem 0;
   padding: 0.6rem 1rem;
@@ -93,7 +124,7 @@
   font-style: italic;
 }
 
-/* --- code : vibe terminal CRT (cf. .screen du site) --- */
+/* code : vibe terminal CRT (cf. .screen du site) */
 .article code {
   font-family: "Iceland", monospace;
   background: #000;
@@ -111,52 +142,30 @@
   overflow-x: auto;
   white-space: pre;
 }
-.article pre code {
-  border: none;
-  padding: 0;
-  background: transparent;
-}
+.article pre code { border: none; padding: 0; background: transparent; }
 
-/* --- tableaux --- */
-.article table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.2rem 0;
-}
-.article th,
-.article td {
-  border: 1px solid #ff0000;
-  padding: 0.4rem 0.6rem;
-  text-align: left;
-}
-.article th {
-  background: #ff0000;
-  color: #000;
-}
+/* tableaux */
+.article table { width: 100%; border-collapse: collapse; margin: 1.2rem 0; }
+.article th, .article td { border: 1px solid #ff0000; padding: 0.4rem 0.6rem; text-align: left; }
+.article th { background: #ff0000; color: #000; }
 
-/* --- date sous le titre de l'article --- */
+/* liens externes longs (les URL falstad etc.) : on évite le débordement */
+.article a { word-break: break-word; overflow-wrap: anywhere; }
+
 .article-meta {
   font-family: "Iceland", monospace;
   opacity: 0.8;
   margin: 0 0 1.5rem;
 }
 
-/* =======================================================
-   Index du blog (liste des articles dans blog.html)
-   ======================================================= */
-.blog-index ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+/* ===== Index du blog ===== */
+.blog-index ul { list-style: none; padding: 0; margin: 0; }
 .blog-index li {
   padding: 0.6rem 0;
   border-bottom: 1px dashed rgba(255, 0, 0, 0.4);
   white-space: normal;
 }
-.blog-index li:last-child {
-  border-bottom: none;
-}
+.blog-index li:last-child { border-bottom: none; }
 .blog-index .date {
   font-family: "Iceland", monospace;
   opacity: 0.7;
@@ -164,13 +173,7 @@
   font-size: 0.85em;
 }
 
-/* --- petit confort mobile (les articles ne redirigent pas vers mobile.html) --- */
 @media (max-width: 768px) {
-  .article,
-  .blog-index {
-    margin: 1rem 0.5rem 4rem;
-    padding: 1rem 1.1rem;
-    font-size: 17px;
-  }
+  .article, .blog-index { margin: 1rem 0.5rem 4rem; padding: 1rem 1.1rem; font-size: 17px; }
   .article h1 { font-size: 1.9rem; }
 }

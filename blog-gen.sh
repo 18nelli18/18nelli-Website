@@ -5,22 +5,30 @@
 #  et (re)génère la liste des articles dans la page d'accueil blog.html.
 #
 #  Workflow :
-#    1. tu rédiges sur Notion -> "Export" -> Markdown
+#    1. Notion -> "Export" -> Markdown & CSV
 #    2. tu déposes le .md (et son dossier d'images) dans blog/
 #    3. tu lances :  ./blog-gen.sh
 #
-#  - Compatible macOS (Bash 3.2, sed/stat/date BSD) ET Linux.
-#  - Idempotent : relançable à volonté, pas de doublons.
-#  - Slugifie les noms Notion à rallonge en URLs propres.
+#  IMAGES :
+#   - deux images collées dans le .md (rien que des lignes vides entre
+#     elles) -> affichées CÔTE À CÔTE (reproduit les colonnes Notion).
+#   - taille par défaut = 70% (réglable dans article.css).
+#   - pour forcer une largeur précise sur UNE image, ajoute un tag w=
+#     dans la légende/alt de l'image, ex :  w=320  ou  w=100%  ou  w=50%
+#     (Notion : mets-le dans la légende de l'image ; sinon édite l'alt
+#      du .md, le bout "![...]" -> "![... w=320]").
+#
+#  Compatible macOS (Bash 3.2, sed/stat/date BSD) ET Linux.
+#  Idempotent : relançable à volonté, pas de doublons.
 # =====================================================================
 
 set -euo pipefail
 
 # --- Config ----------------------------------------------------------
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BLOG_DIR="$SCRIPT_DIR/blog"          # dossier où tu déposes les .md
-INDEX_FILE="$SCRIPT_DIR/blog.html"   # page d'accueil des articles (racine)
-ASSETS="../assets"                   # chemin des assets depuis blog/
+BLOG_DIR="$SCRIPT_DIR/blog"
+INDEX_FILE="$SCRIPT_DIR/blog.html"
+ASSETS="../assets"
 # ---------------------------------------------------------------------
 
 c_ok=$'\033[0;32m'; c_warn=$'\033[0;33m'; c_err=$'\033[0;31m'; c_rst=$'\033[0m'
@@ -28,10 +36,10 @@ info() { printf '%s==>%s %s\n' "$c_ok"   "$c_rst" "$*"; }
 warn() { printf '%s/!\\%s %s\n' "$c_warn" "$c_rst" "$*"; }
 die()  { printf '%sX%s %s\n'   "$c_err"  "$c_rst" "$*" >&2; exit 1; }
 
-[ -d "$BLOG_DIR" ]    || die "Dossier introuvable : $BLOG_DIR"
-[ -f "$INDEX_FILE" ]  || die "Page d'accueil introuvable : $INDEX_FILE"
+[ -d "$BLOG_DIR" ]   || die "Dossier introuvable : $BLOG_DIR"
+[ -f "$INDEX_FILE" ] || die "Page d'accueil introuvable : $INDEX_FILE"
 
-# --- Détection du convertisseur markdown -----------------------------
+# --- Convertisseur markdown ------------------------------------------
 MD_ENGINE=""
 if command -v pandoc >/dev/null 2>&1; then
   MD_ENGINE="pandoc"
@@ -44,7 +52,6 @@ else
 fi
 info "Moteur de conversion : $MD_ENGINE"
 
-# md_to_html <fichier.md>  -> fragment HTML sur stdout
 md_to_html() {
   if [ "$MD_ENGINE" = "pandoc" ]; then
     pandoc -f markdown -t html5 --no-highlight "$1"
@@ -58,24 +65,70 @@ PY
   fi
 }
 
-# Echappe & < > " pour insertion sure dans le HTML
 html_escape() { sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g' -e 's/"/\&quot;/g'; }
 
-# Nom de fichier Notion a rallonge -> slug propre :
-#  "Migser - a 6ch mixer 37dfcec0...(32 hexa)" -> "migser-a-6ch-mixer"
+# Nom Notion -> slug propre (accents translittérés, hash viré)
 make_slug() {
   printf '%s' "$1" \
     | sed 's/ [0-9a-f]\{32\}$//' \
     | tr '[:upper:]' '[:lower:]' \
+    | sed 's/à/a/g; s/â/a/g; s/ä/a/g; s/á/a/g; s/é/e/g; s/è/e/g; s/ê/e/g; s/ë/e/g; s/î/i/g; s/ï/i/g; s/í/i/g; s/ô/o/g; s/ö/o/g; s/ó/o/g; s/û/u/g; s/ü/u/g; s/ù/u/g; s/ç/c/g; s/ñ/n/g' \
     | sed 's/[^a-z0-9]\{1,\}/-/g; s/^-*//; s/-*$//'
 }
 
-# Reecrit un fichier "sur place" de facon portable (pas de sed -i BSD/GNU)
 rewrite() {
   local f="$1"; shift
   local tmp="$f.tmp.$$"
   awk "$@" "$f" > "$tmp" && mv "$tmp" "$f"
 }
+
+# Programme awk : regroupe les images et applique les largeurs.
+# Lignes "![alt](src)" consécutives (séparées par des lignes vides
+# uniquement) -> <div class="img-row">...; une seule -> <div class="img-single">.
+read -r -d '' IMG_AWK <<'AWK' || true
+function esc(s){ gsub(/&/,"\\&amp;",s); gsub(/</,"\\&lt;",s); gsub(/>/,"\\&gt;",s); gsub(/"/,"\\&quot;",s); return s }
+function imgtag(i,   tag,w){
+  w=a_w[i]
+  tag="<img src=\"" a_src[i] "\" alt=\"" esc(a_alt[i]) "\""
+  if(w!=""){
+    if(rowmode) tag=tag " style=\"flex-basis:" w "; flex-grow:0\""
+    else        tag=tag " style=\"width:" w "\""
+  }
+  return tag " />"
+}
+function flush(   i,row){
+  if(n==0) return
+  print ""
+  if(n==1){ rowmode=0; print "<div class=\"img-single\">" imgtag(1) "</div>" }
+  else {
+    rowmode=1
+    row="<div class=\"img-row\">"
+    for(i=1;i<=n;i++) row=row imgtag(i)
+    print row "</div>"
+  }
+  print ""
+  n=0
+}
+{
+  line=$0
+  if (line ~ /^!\[[^]]*\]\([^)]*\)[[:space:]]*$/){
+    alt=line; sub(/^!\[/,"",alt); sub(/\].*$/,"",alt)
+    src=line; sub(/^!\[[^]]*\]\(/,"",src); sub(/\)[[:space:]]*$/,"",src)
+    w=""
+    if (match(alt, /w=[0-9]+(px|%)?/)){
+      tok=substr(alt,RSTART,RLENGTH); w=substr(tok,3)
+      sub(/ *w=[0-9]+(px|%)?/,"",alt)
+      if (w ~ /^[0-9]+$/) w=w "px"
+    }
+    n++; a_src[n]=src; a_alt[n]=alt; a_w[n]=w
+    next
+  }
+  if (line ~ /^[[:space:]]*$/){ if(n>0) next; print line; next }
+  if (n>0) flush()
+  print line
+}
+END{ if(n>0) flush() }
+AWK
 
 # --- Génération des articles -----------------------------------------
 shopt -s nullglob
@@ -84,28 +137,26 @@ mds=("$BLOG_DIR"/*.md)
 
 index_tmp="$(mktemp)"; block_tmp="$(mktemp)"
 trap 'rm -f "$index_tmp" "$block_tmp"' EXIT
-
 TAB="$(printf '\t')"
+
 count=0
 for md in "${mds[@]}"; do
   base="$(basename "$md")"; base="${base%.md}"
-  slug="$(make_slug "$base")"
-  [ -n "$slug" ] || slug="article"
+  slug="$(make_slug "$base")"; [ -n "$slug" ] || slug="article"
   html_name="$slug.html"
   html_path="$BLOG_DIR/$html_name"
 
-  # Titre = 1er "# Titre"; sinon nom de fichier nettoye
   title="$(grep -m1 '^#\{1,\} ' "$md" 2>/dev/null | sed 's/^#\{1,\} *//' || true)"
   [ -n "$title" ] || title="$(printf '%s' "$base" | sed 's/ [0-9a-f]\{32\}$//')"
   title_esc="$(printf '%s' "$title" | html_escape)"
 
-  # Date (modif du .md) : GNU d'abord, BSD ensuite
   mtime="$(stat -c %Y "$md" 2>/dev/null || stat -f %m "$md")"
   date_fr="$(date -d "@$mtime" '+%d/%m/%Y' 2>/dev/null || date -r "$mtime" '+%d/%m/%Y')"
 
-  # Corps = markdown sans son 1er H1 (deja servi comme titre de page)
+  # 1) retire le 1er H1   2) regroupe/dimensionne les images   3) convertit
   body_tmp="$(mktemp)"
-  awk 'BEGIN{d=0} /^# /{ if(!d){d=1; next} } {print}' "$md" > "$body_tmp"
+  awk 'BEGIN{d=0} /^# /{ if(!d){d=1; next} } {print}' "$md" \
+    | awk "$IMG_AWK" > "$body_tmp"
   article_html="$(md_to_html "$body_tmp")"
   rm -f "$body_tmp"
 
@@ -157,31 +208,21 @@ HTML
   count=$((count + 1))
 done
 
-# --- Mise à jour de blog.html (racine) -------------------------------
-
-# 1) Lier article.css dans le <head> si absent (apres styles.css)
+# --- Mise à jour de blog.html ----------------------------------------
 if ! grep -q 'blog/article.css' "$INDEX_FILE"; then
   rewrite "$INDEX_FILE" '
     { print }
-    /href="assets\/css\/styles.css"/ {
-      print "    <link rel=\"stylesheet\" href=\"./blog/article.css\" />"
-    }'
+    /href="assets\/css\/styles.css"/ { print "    <link rel=\"stylesheet\" href=\"./blog/article.css\" />" }'
   info "Lien vers blog/article.css ajoute dans blog.html"
 fi
 
-# 2) Poser les marqueurs avant </body> s'ils n'existent pas
 if ! grep -q '<!-- BLOG:START -->' "$INDEX_FILE"; then
   rewrite "$INDEX_FILE" '
-    /<\/body>/ && !done {
-      print "    <!-- BLOG:START -->"
-      print "    <!-- BLOG:END -->"
-      done=1
-    }
+    /<\/body>/ && !done { print "    <!-- BLOG:START -->"; print "    <!-- BLOG:END -->"; done=1 }
     { print }'
   info "Marqueurs BLOG:START/END poses dans blog.html"
 fi
 
-# 3) Construire le bloc liste (tri par date decroissante, plus recent en haut)
 {
   echo '    <div class="blog-index">'
   echo '      <ul>'
@@ -193,16 +234,9 @@ fi
   echo '    </div>'
 } > "$block_tmp"
 
-# 4) Remplacer ce qui est entre les marqueurs par le nouveau bloc
 rewrite "$INDEX_FILE" -v blockfile="$block_tmp" '
-  /<!-- BLOG:START -->/ {
-    print
-    while ((getline line < blockfile) > 0) print line
-    close(blockfile)
-    skip = 1
-    next
-  }
-  /<!-- BLOG:END -->/ { skip = 0; print; next }
+  /<!-- BLOG:START -->/ { print; while ((getline line < blockfile) > 0) print line; close(blockfile); skip=1; next }
+  /<!-- BLOG:END -->/   { skip=0; print; next }
   !skip { print }'
 
 info "Index mis a jour : $count article(s) dans blog.html"
