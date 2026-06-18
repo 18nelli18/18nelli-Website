@@ -57,7 +57,8 @@ info "Moteur de conversion : $MD_ENGINE"
 
 md_to_html() {
   if [ "$MD_ENGINE" = "pandoc" ]; then
-    pandoc -f markdown -t html5 --no-highlight "$1"
+    # +autolink_bare_uris : rend cliquables les URLs collées sans [..](..)
+    pandoc -f markdown+autolink_bare_uris -t html5 --no-highlight "$1"
   else
     python3 - "$1" <<'PY'
 import sys, markdown
