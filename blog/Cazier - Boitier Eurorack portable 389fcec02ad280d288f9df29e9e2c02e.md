@@ -2,6 +2,10 @@
 
 ![Ouaiis.png](Cazier%20-%20Boitier%20Eurorack%20portable/d2dd2cf1-6c2b-4df2-a49a-d18254295a7e.png)
 
+Dernière version à jour : https://www.thingiverse.com/thing:7374654
+
+***25/06/2026***
+
 J’ai envie de me faire une case eurorack portable avec une poignée ect un peu comme les beaux boitiers intellijel. Mais c’est super cher, c out of stock et en plus je veux pas de rangées de 1U en haut. 
 
 ![image.png](Cazier%20-%20Boitier%20Eurorack%20portable/image.png)
@@ -90,3 +94,28 @@ J’ai essayé le moteur de rendu de fusion avec des paramètre aléatoire.
 Prochaine étape, faire le découpage pour que je puisse l’imprimer avec ma petite neptune 3 pro.
 
 ![dklsjsdq.png](Cazier%20-%20Boitier%20Eurorack%20portable/31fb676f-fbe9-48c4-818d-5202722417a4.png)
+
+***26/06/2026***
+
+Après une nuit de gamberge je me dit que ça pourrait être bien d’utiliser les machine du FabLab de mon école. Y’a des imprimante 3D, des CNC, des découpeuse laser. J’adapte donc mon projet 3D en réfléchissant à comment chacune des pièces sera faite.
+
+![image.png](Cazier%20-%20Boitier%20Eurorack%20portable/image%204.png)
+
+Je pense que je commencerai par l’imprimer en 3D pour verifer que j’ai pas fait de grosse bêtise.
+
+Je dois ajouter des trous pour que je puisse visser les pieces entre elle. Je prévois d’utiliser des vis M3 de 16mm pour les côté. J’ai fais le choix de ne pas mettre d’emplacement de vis côté rails pour éviter de fragiliser la structure
+
+![Capture d’écran 2026-06-25 à 14.18.22.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-06-25_a_14.18.22.png)
+
+### Planification de la fabrication
+
+- Plaques latérales (G/D) :
+    - *Impression 3D possible en 1 seule partie (maison)*
+    - **CNC Métal possible (fablab)**
+- Plaques Haut/Bas et Rail central:
+    - *Impression 3D possible en 2 partie (maison)*
+    - **Impression 3D via z infini possble (fablab)**
+    - CNC Impossible sans fraise en T (fablab)
+- Plaque du fond
+    - *Impression 3D possible en 4 partie*
+    - **CNC Métal possible**
