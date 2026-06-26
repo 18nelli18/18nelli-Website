@@ -2,6 +2,8 @@
 
 ![Capture d’écran 2026-06-12 à 13.26.07.png](Migser%20-%20mixer%20eurorack%20st%C3%A9r%C3%A9o%206%20entr%C3%A9es/Capture_decran_2026-06-12_a_13.26.07.png)
 
+*18/06/2026*
+
 Je voulais faire un module moi même depuis longtemps. J’avais vu pas mal de kit diy ou de tuto type Moritz Klein etc mais j’était pas méga hypé jsp pq. Jpense que quand je me lance dans un truc nouveau qui me demande un minimum d’effort, j’ai besoin que la récompense aille au dela de reussir à faire ce qui était prévu. J’ai besoin de me sentir légitime à revendiquer le projet de “personnel”. C’est surement un problème d’égo ou ptet que c’est pas si deep et que tt le monde est comme ça mais on s’en fout.
 
 J’ai actuellement dans mon [systeme eurorack actuel](https://modulargrid.net/e/racks/view/3014739) un Behringer 305. ****Il est moche, il est gros (24hp) mais il est pas cher.  J’en m’en fou de son EQ et il n’a que 4 entrées donc je pense que je peux le remplacer facilement.
@@ -57,3 +59,17 @@ Au total j’ai payé
 - Panier Aliexpress - 25,83 (les potentiomètre double sont chiant à trouver et rentre pas dans la livraison gratuite pardon)
 
 ![Capture d’écran 2026-06-18 à 01.16.47.png](Migser%20-%20mixer%20eurorack%20st%C3%A9r%C3%A9o%206%20entr%C3%A9es/Capture_decran_2026-06-18_a_01.16.47.png)
+
+*17/06/2026*
+
+J’ai reçu aujourd’hui les PCBs et la quasi totalité des composants (il me manque juste les jack 3.5 qui ne devraient pas tarder). Je suis super content du rendu des panel ça fait pas cheap du tout.
+
+![WhatsApp Image 2026-06-27 at 00.06.03.jpeg](Migser%20-%20mixer%20eurorack%20st%C3%A9r%C3%A9o%206%20entr%C3%A9es/WhatsApp_Image_2026-06-27_at_00.06.03.jpeg)
+
+J’ai soudé tout au fer à souder avec une grosse pannes plate de bourrin et tout c’est bien passé. Comme je suis impatient de voire le résultat j’ai monté le panel alors même qu’il manque les jacks. Je remarques un défaut de conception que je n’avais pas anticiper: les potards sont trop rapprocher entre eux ce qui m’empêche de mettre des knob classique dessus. Je vais devoir en designer moi meme ou en trouver des plus fin pour que ça fit avec ma conception.
+
+![Capture d’écran 2026-06-27 à 00.08.03.png](Migser%20-%20mixer%20eurorack%20st%C3%A9r%C3%A9o%206%20entr%C3%A9es/Capture_decran_2026-06-27_a_00.08.03.png)
+
+![Capture d’écran 2026-06-27 à 00.08.47.png](Migser%20-%20mixer%20eurorack%20st%C3%A9r%C3%A9o%206%20entr%C3%A9es/Capture_decran_2026-06-27_a_00.08.47.png)
+
+![image.png](Migser%20-%20mixer%20eurorack%20st%C3%A9r%C3%A9o%206%20entr%C3%A9es/image%201.png)
