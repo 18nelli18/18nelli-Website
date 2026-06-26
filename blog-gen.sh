@@ -215,7 +215,7 @@ for md in "${mds[@]}"; do
     </a>
 
     <article class="article">
-      <p class="article-meta">$date_fr</p>
+      <p class="article-meta">last modified: $date_fr</p>
 $article_html
     </article>
   </body>
