@@ -128,14 +128,17 @@
   font-weight: bold;
 }
 
-/* L'image remplit la fenêtre et ne capte aucun événement :
-   tous les clics/drags remontent à la fenêtre parente. */
+/* L'image remplit la fenêtre et reste cliquable pour l'agrandir.
+   Le déplacement de la fenêtre passe uniquement par .titlebar, donc
+   capter les clics ici ne gêne pas le drag. Le mousedown remonte quand
+   même à .window, qui gère le passage au premier plan. */
 .window img {
   display: block;
   width: 100%;
   height: auto;
   left: auto; /* annule le décalage global de base.css */
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: zoom-in;
 }
 
 /* Empêche la sélection de texte et le drag natif pendant le déplacement. */
@@ -148,7 +151,106 @@
 
 
 /* ---------------------------------------------------------------------
-   5. Reliquats — plus référencés par aucune page
+   5. Visionneuse plein écran des photos  (assets/js/windows.js)
+   ---------------------------------------------------------------------
+   Un clic sur la photo d'une fenêtre l'affiche ici en grand ; un
+   nouveau clic (ou Échap, ou la croix) la réduit.
+
+   L'overlay est créé une seule fois et ajouté à <body>, donc HORS de
+   .window : les règles .window ci-dessus ne l'affectent pas.
+   ------------------------------------------------------------------ */
+
+.photo-viewer {
+  position: fixed;
+  inset: 0;
+  /* Au-dessus de tout : les fenêtres montent en z-index a l'infini au
+     fil des clics, et .house-link est a 999. */
+  z-index: 2147483000;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.92);
+  cursor: zoom-out;
+}
+
+.photo-viewer.is-open {
+  display: flex;
+}
+
+/* Cadre qui se rétrécit à la taille de la photo : c'est lui qui aligne
+   la barre de titre sur la largeur exacte de l'image.
+
+   Pas de max-height ici : ce sont les dimensions de l'IMAGE qui sont
+   bornées (plus bas). Contraindre le cadre écraserait la boîte de
+   l'image sans respecter son ratio, et la bordure rouge deborderait
+   largement autour de la photo en portrait. */
+.photo-viewer-frame {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  max-width: 95vw;
+}
+
+/* Barre de titre reprenant le style des fenêtres. */
+.photo-viewer-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex: 0 0 auto;
+  /* width:0 + min-width:100% : la barre s'étire sur la largeur du cadre
+     sans jamais l'élargir elle-même. Sans ça, un nom de fichier très
+     long rendrait la barre plus large que la photo. */
+  width: 0;
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 4px 8px;
+  background: #000;
+  color: #ff0000;
+  border: 1px solid #ff0000;
+  border-bottom: none;
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 14px;
+}
+
+/* Le nom peut être long : on le tronque plutôt que d'élargir le cadre. */
+.photo-viewer-name {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.photo-viewer-close {
+  flex: 0 0 auto;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* position/left : annulent le décalage global de base.css (img).
+   width/height auto + max-* : l'image se réduit pour tenir à l'écran en
+   conservant son ratio, et sa boîte garde donc exactement ses
+   proportions (c'est ce qui fait coller la bordure à la photo).
+   Le 3rem retranché laisse la place à la barre de titre. */
+.photo-viewer img {
+  position: static;
+  left: auto;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 95vw;
+  max-height: calc(92vh - 3rem);
+  border: 1px solid #ff0000;
+  cursor: zoom-out;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+
+/* ---------------------------------------------------------------------
+   6. Reliquats — plus référencés par aucune page
    ---------------------------------------------------------------------
    Conservés tels quels par précaution. Supprimables sans risque si tu
    confirmes ne plus en vouloir.

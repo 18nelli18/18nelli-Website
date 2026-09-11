@@ -7,6 +7,7 @@
      - déplacement à la souris via la barre de titre
      - passage au premier plan au clic
      - fermeture par la croix
+     - clic sur la photo : affichage plein écran, reclic : réduction
 
    Le déplacement se fait en `transform: translate(x, y)` (accéléré GPU)
    et non en `left/top` : la position courante est mémorisée dans
@@ -21,6 +22,84 @@
 
   /** Compteur global de z-index : la dernière fenêtre cliquée passe devant. */
   var highestZ = 1;
+
+  /* ===================================================================
+     Visionneuse plein écran
+     -------------------------------------------------------------------
+     Un seul overlay pour toute la page, créé à la demande et réutilisé :
+     inutile d'en fabriquer un par photo.
+     Styles : .photo-viewer dans assets/css/layout.css
+     =================================================================== */
+
+  var viewer = null;   // l'overlay
+  var viewerImg = null;
+  var viewerName = null;
+
+  /** Construit l'overlay au premier usage. */
+  function buildViewer() {
+    if (viewer) return;
+
+    viewer = document.createElement('div');
+    viewer.className = 'photo-viewer';
+    viewer.setAttribute('role', 'dialog');
+    viewer.setAttribute('aria-modal', 'true');
+    viewer.setAttribute('aria-label', 'Photo en plein ecran');
+
+    // Cadre : se retrecit a la taille de la photo, ce qui aligne la
+    // barre de titre sur la largeur de l'image.
+    var frame = document.createElement('div');
+    frame.className = 'photo-viewer-frame';
+
+    var bar = document.createElement('div');
+    bar.className = 'photo-viewer-bar';
+
+    viewerName = document.createElement('span');
+    viewerName.className = 'photo-viewer-name';
+
+    var close = document.createElement('span');
+    close.className = 'photo-viewer-close';
+    close.title = 'Fermer (Echap)';
+    close.textContent = '\u2715';
+
+    bar.appendChild(viewerName);
+    bar.appendChild(close);
+
+    viewerImg = document.createElement('img');
+    viewerImg.alt = '';
+    viewerImg.draggable = false;
+
+    frame.appendChild(bar);
+    frame.appendChild(viewerImg);
+    viewer.appendChild(frame);
+    document.body.appendChild(viewer);
+
+    // Reclic n'importe ou sur l'overlay (fond, image ou croix) -> reduire.
+    viewer.addEventListener('click', closeViewer);
+  }
+
+  /** Affiche une photo en grand. */
+  function openViewer(img, titre) {
+    buildViewer();
+    // currentSrc : respecte un eventuel srcset, sinon src.
+    viewerImg.src = img.currentSrc || img.src;
+    viewerImg.alt = img.alt || '';
+    viewerName.textContent = titre || img.alt || '';
+    viewerName.title = viewerName.textContent; // infobulle si le nom est tronque
+    viewer.classList.add('is-open');
+  }
+
+  function closeViewer() {
+    if (viewer) viewer.classList.remove('is-open');
+  }
+
+  function viewerIsOpen() {
+    return !!viewer && viewer.classList.contains('is-open');
+  }
+
+  // Echap ferme la visionneuse.
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && viewerIsOpen()) closeViewer();
+  });
 
   window.addEventListener('load', function () {
     var windows = document.querySelectorAll('.window');
@@ -41,6 +120,21 @@
       win.dataset.x = x0;
       win.dataset.y = y0;
       win.style.transform = 'translate(' + x0 + 'px, ' + y0 + 'px)';
+
+      // --- Clic sur la photo : plein ecran ---------------------------
+      // Ecouteur pose directement sur l'image : si l'utilisateur relache
+      // le bouton sur la photo apres avoir demarre un glisser depuis la
+      // barre de titre, l'evenement `click` est dispatche sur .window
+      // (ancetre commun) et non sur l'image -> pas d'ouverture parasite.
+      var photo = win.querySelector('img');
+      if (photo) {
+        var titreSpan = win.querySelector('.titlebar span');
+        photo.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          openViewer(photo, titreSpan ? titreSpan.textContent : '');
+        });
+      }
 
       // --- Fermeture ------------------------------------------------
       var closeBtn = win.querySelector('.close-btn');
