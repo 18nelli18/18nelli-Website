@@ -1,0 +1,86 @@
+/* =====================================================================
+   base.css — fondations globales
+   ---------------------------------------------------------------------
+   Reset minimal, règles sur les balises nues (h1, img, a, p) et
+   animations partagées.
+
+   ATTENTION : les règles de ce fichier ciblent des BALISES, donc toute
+   règle de classe définie ailleurs les surcharge automatiquement
+   (spécificité supérieure). C'est ce qui fait tenir le design actuel —
+   ne pas transformer ces sélecteurs en classes.
+   ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+   1. Reset document
+   ------------------------------------------------------------------ */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  /* Le site déborde volontairement à droite (GIFs, aigle, lecteur CD) :
+     on coupe le scroll horizontal plutôt que de repositionner. */
+  overflow-x: hidden !important;
+}
+
+/* Utilisé par les pages d'album : la grille de fenêtres est en position
+   absolue, le scroll vertical n'aurait aucun sens. */
+body.no-scroll-page {
+  overflow: hidden !important;
+  height: 100vh;
+}
+
+
+/* ---------------------------------------------------------------------
+   2. Balises nues
+   ------------------------------------------------------------------ */
+
+/* Les titres ne se coupent jamais : le marquee de l'accueil en dépend. */
+h1 {
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+  max-width: none;
+}
+
+/* Décalage global des images. Surchargé par .window img, .house-icon,
+   .album-ico, .banner-truc et .bottom-clickable img. */
+img {
+  position: relative;
+  left: 80px;
+}
+
+/* Les liens passent au-dessus des GIFs de fond (z-index) et héritent
+   du même décalage horizontal que les images. */
+a {
+  position: relative;
+  z-index: 10;
+  margin-left: 40px;
+}
+
+/* Paragraphes "terminal" : rouge sur noir, jamais coupés. */
+p {
+  position: relative;
+  z-index: 10;
+  white-space: nowrap;
+  font-family: 'Comic Neue', serif;
+  color: #ff0000;
+  background-color: #000;
+}
+
+
+/* ---------------------------------------------------------------------
+   3. Animations partagées
+   ------------------------------------------------------------------ */
+
+/* Défilement horizontal continu — utilisé par .marquee (accueil). */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

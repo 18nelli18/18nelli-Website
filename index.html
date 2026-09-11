@@ -1,5 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--
+  =====================================================================
+  index.html — page d'accueil
+  ---------------------------------------------------------------------
+  Structure de la page :
+    1. Bandeau rouge défilant (.marquee)
+    2. Cadre central + vignette vers prediction.html (.image-container)
+    3. Bloc de liens vers les sections du site
+    4. Décor : aigle, GIF, webcam, logo DVD rebondissant
+    5. Lecteur CD façon Windows 95 (.cd-player)
+
+  Styles  : assets/css/styles.css  -> base + layout + pages/home.css
+  Scripts : assets/js/{mobile-redirect,camera,dvd-bounce,cd-player}.js
+  =====================================================================
+-->
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -7,7 +22,8 @@
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     />
     <title>Portfolio</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+
+    <!-- Polices Google : Iceland (lecteur CD) et Comic Neue (textes) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,22 +34,15 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Comic+Neue&amp;display=swap"
     />
-    <link rel="stylesheet" href="assets/css/animate.min.css" />
-    <link rel="stylesheet" href="assets/css/styles.css" />
-    <script>
-// --- redirection: lancer tôt, dès que le DOM est prêt
-function redirectIfMobile() {
-  const ua = navigator.userAgent.toLowerCase();
-  const isMobileDevice = /android|iphone|ipad|ipod|blackberry|windows phone|opera mini|mobile/i.test(ua);
-  const isSmallScreen = window.innerWidth <= 768;
 
-  if (isMobileDevice || isSmallScreen) {
-    // replace évite de revenir en arrière sur la page desktop
-    window.location.replace("mobile.html");
-  }
-}
-document.addEventListener("DOMContentLoaded", redirectIfMobile);
-</script>
+    <!-- Feuilles de style : tierces puis les nôtres -->
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/vendor/animate.min.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+
+    <!-- Sans `defer` : doit s'exécuter au plus tôt pour éviter le flash
+         de la version desktop sur mobile. -->
+    <script src="assets/js/mobile-redirect.js"></script>
   </head>
 
   <body
@@ -41,6 +50,9 @@ document.addEventListener("DOMContentLoaded", redirectIfMobile);
       background: url('assets/img/dmontag.png') center / contain, rgb(0, 0, 0);
     "
   >
+    <!-- ============================================================
+         1. Bandeau défilant
+         ============================================================ -->
     <h1 class="marquee">
       <span style="color: rgb(255, 0, 0)">SITE</span>&nbsp;<span
         style="color: rgb(255, 0, 0)"
@@ -48,18 +60,26 @@ document.addEventListener("DOMContentLoaded", redirectIfMobile);
         LIGNE- ARCHIVES - MUSIQUES - PHOTO -&nbsp; PROJET - VIDEO&nbsp; </span
       >
     </h1>
-    <div class="image-container">
-  <img
-    class="tada animated"
-    src="assets/img/qskldq.png"
-    alt="qskldq"
-  />
 
-  <!-- L'image cliquable en bas -->
-  <a href="prediction.html" class="bottom-clickable">
-    <img src="./assets/img/prediction.png" alt="Prediction" />
-  </a>
-</div>
+    <!-- ============================================================
+         2. Cadre central + accès à la page "prédiction"
+         ============================================================ -->
+    <div class="image-container">
+      <img class="tada animated" src="assets/img/qskldq.png" alt="qskldq" />
+
+      <!-- Vignette cliquable posée en bas du cadre -->
+      <a href="prediction.html" class="bottom-clickable">
+        <img src="./assets/img/prediction.png" alt="Prediction" />
+      </a>
+    </div>
+
+    <!-- ============================================================
+         3. Menu principal
+         ---------------------------------------------------------
+         Bloc positionné et filtré à la main. Les valeurs en pixels
+         sont volontaires : le rendu est calé pour un grand écran,
+         les visiteurs mobiles partent sur mobile.html.
+         ============================================================ -->
     <div
       style="
         top: 100px;
@@ -95,10 +115,12 @@ document.addEventListener("DOMContentLoaded", redirectIfMobile);
       >
         liens pour accede aux trucs:
         <br /><a href="photo.html">· Photos !!!</a>
-        <br /><a href="truc.html">· Trucs !!!</a>
+        <br /><a href="projets.html">· Trucs !!!</a>
         <br /><a href="musique.html">· MusiQue !!!</a>
         <br /><a href="blog.html">· Blog !!!</a>
       </p>
+
+      <!-- GIF décoratif désaturé, en fond du menu -->
       <img
         src="assets/img/tenor-3089517422.gif"
         width="198"
@@ -110,6 +132,12 @@ document.addEventListener("DOMContentLoaded", redirectIfMobile);
         "
       />
     </div>
+
+    <!-- ============================================================
+         4. Décor
+         ============================================================ -->
+
+    <!-- Aigle inversé en bas à droite -->
     <img
       class="aigle"
       src="assets/img/1417768-1345806767.gif"
@@ -121,12 +149,21 @@ document.addEventListener("DOMContentLoaded", redirectIfMobile);
         opacity: 0.41;
       "
     />
+
+    <!-- Flux webcam en direct (assets/js/camera.js) -->
     <div class="camera-zone">
       <video id="camera" autoplay playsinline></video>
     </div>
 
-    
+    <!-- Logo DVD rebondissant (assets/js/dvd-bounce.js) -->
+    <img id="dvdLogo" src="assets/img/dvd-logo.png" alt="DVD" />
 
+    <!-- ============================================================
+         5. Lecteur CD (assets/js/cd-player.js)
+         ---------------------------------------------------------
+         Les boutons ⏮ et ⏭ encadrent ▶/⏸ ; seul ⏭ est actif
+         (tire un morceau au hasard), ⏮ reste décoratif.
+         ============================================================ -->
     <div class="cd-player">
       <div class="title-bar">
         CD Player <span class="win-controls">_ ◻ ✕</span>
@@ -142,41 +179,16 @@ document.addEventListener("DOMContentLoaded", redirectIfMobile);
         <div><strong>Artist:</strong> <span id="artist">18nelli</span></div>
         <div><strong>Title:</strong> <span id="title">Track 01</span></div>
       </div>
-      <audio id="audio" src="assets/audio/drum elektron.wav"></audio>
+      <!-- Source de repli, remplacée au chargement par un morceau aléatoire -->
+      <audio id="audio" src="assets/media/audio/drum elektron.wav"></audio>
     </div>
-    <img id="dvdLogo" src="assets/img/dvd-logo.png" alt="DVD" />
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/bs-init.js"></script>
+
+    <!-- ============================================================
+         Scripts
+         ============================================================ -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/camera.js"></script>
     <script src="assets/js/dvd-bounce.js"></script>
-    <script>
-async function loadRandomSong() {
-  try {
-    const res = await fetch("songs.json");
-    if (!res.ok) throw new Error(`Erreur ${res.status}`);
-    const songs = await res.json();
-    const randomSong = songs[Math.floor(Math.random() * songs.length)];
-
-    const audioElement = document.getElementById("audio");
-    audioElement.src = `song/${randomSong}`;
-
-    document.getElementById("title").textContent = randomSong;
-    document.getElementById("artist").textContent = "18nelli";
-
-    audioElement.play().catch(err => {
-      console.warn("Lecture auto bloquée :", err);
-    });
-  } catch (e) {
-    console.error("Erreur lors du chargement des chansons :", e);
-  }
-}
-
-// Ne PAS utiliser window.onload = ...
-window.addEventListener("load", () => {
-  loadRandomSong();
-  // Bouton ⏭ pour changer de chanson
-  document.querySelector(".controls button:last-child").onclick = loadRandomSong;
-});
-</script>
+    <script src="assets/js/cd-player.js"></script>
   </body>
 </html>

@@ -1,5 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--
+  =====================================================================
+  photo.html — sommaire des albums photo
+  ---------------------------------------------------------------------
+  Chaque album vit dans albums/<nom>/ avec :
+    - <nom>.html  la galerie (générée avec tools/gen.sh)
+    - ico.png     la vignette affichée ici
+    - img/        les photos  (NON versionnées : à uploader à part)
+
+  Styles : assets/css/styles.css -> layout.css + pages/galerie.css
+  =====================================================================
+-->
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -7,19 +19,25 @@
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     />
     <title>Portfolio</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Iceland&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Iceland&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Comic+Neue&amp;display=swap"
     />
-    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
 
-    <link rel="stylesheet" href="assets/css/animate.min.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/vendor/animate.min.css" />
     <link rel="stylesheet" href="assets/css/styles.css" />
- 
   </head>
 
   <body
@@ -27,54 +45,63 @@
       background: url('assets/img/dmontag.png') center / contain, rgb(0, 0, 0);
     "
   >
+    <!-- ============================================================
+         Titre et présentation
+         ============================================================ -->
+    <h1 class="photoh1">LES PHOTOS</h1>
+    <p class="p-photo">
+      Je prends les photos d fois avec mon lumix GX80 + objectif olympus 25mm
+      f1.8 <br />mais aussi d fois avec un vieux lumix LX5 genre quand je vais en
+      montagne pour pas trop <br />abîmer mon autre appareil je met pas mal de
+      grain sur les photos car jaime ça et aussi prcq ça éviter de faire
+      attention à la qualité de la photo. Je retouche avec lightroom
+    </p>
 
-      <h1 class="photoh1">LES PHOTOS</h1>
-      <p class="p-photo">Je prends les photos d fois avec mon lumix GX80 + objectif olympus 25mm f1.8 <br>mais aussi d fois avec un vieux lumix LX5 genre quand je vais en montagne pour pas trop <br>abîmer mon autre appareil
-      je met pas mal de grain sur les photos car jaime ça et aussi prcq ça éviter de faire attention à la qualité de la photo. Je retouche avec lightroom</p>
-        <img
-          src="assets/img/tenor-3089517422.gif"
-          width="198"
-          height="468"
-          style="
-            filter: blur(0px) brightness(200%) contrast(200%) grayscale(100%)
-              hue-rotate(360deg);
-            opacity: 0.48;
-          "
-        />
-    </div>
+    <!-- GIF décoratif désaturé -->
+    <img
+      src="assets/img/tenor-3089517422.gif"
+      width="198"
+      height="468"
+      style="
+        filter: blur(0px) brightness(200%) contrast(200%) grayscale(100%)
+          hue-rotate(360deg);
+        opacity: 0.48;
+      "
+    />
+
     <a href="javascript:history.back()" class="house-link">
       <img src="assets/img/retour.png" alt="Retour" class="house-icon" />
     </a>
+
     <img
       class="camera-gif"
       src="assets/img/camera.gif"
       width="279"
       height="235"
-      style="
-        filter: brightness(100%) contrast(200%)  hue-rotate(0deg)
-           saturate(100%);
-        
-      "
-    />  
+      style="filter: brightness(100%) contrast(200%) hue-rotate(0deg) saturate(100%)"
+    />
 
+    <!-- ============================================================
+         Vignettes des albums
+         ============================================================ -->
     <a href="./albums/vercors/vercors.html">
-      <img class="album-ico" src="albums/vercors/ico.png" alt="vercors">
+      <img class="album-ico" src="albums/vercors/ico.png" alt="vercors" />
     </a>
     <a href="./albums/queyras2025/queyras.html">
-      <img class="album-ico" src="albums/queyras2025/ico.png" alt="queyras">
+      <img class="album-ico" src="albums/queyras2025/ico.png" alt="queyras" />
     </a>
     <a href="./albums/reptcheque/reptcheque.html">
-      <img class="album-ico" src="albums/reptcheque/ico.png" alt="reptcheque">
+      <img class="album-ico" src="albums/reptcheque/ico.png" alt="reptcheque" />
     </a>
     <a href="./albums/tatras/tatras.html">
-      <img class="album-ico" src="albums/tatras/ico.png" alt="tatras">
+      <img class="album-ico" src="albums/tatras/ico.png" alt="tatras" />
     </a>
     <a href="./albums/belledonne2025/belledonne.html">
-      <img class="album-ico" src="albums/belledonne2025/ico.png" alt="belledonne2025">
+      <img
+        class="album-ico"
+        src="albums/belledonne2025/ico.png"
+        alt="belledonne2025"
+      />
     </a>
-      
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/bs-init.js"></script>
-    <script src="assets/js/camera.js"></script>
   </body>
 </html>

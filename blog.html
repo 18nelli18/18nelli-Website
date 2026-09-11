@@ -1,5 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--
+  =====================================================================
+  blog.html — sommaire du blog
+  ---------------------------------------------------------------------
+  ATTENTION : la liste d'articles plus bas est encadrée par deux
+  marqueurs BLOG:START / BLOG:END et REGENEREE AUTOMATIQUEMENT par
+  tools/blog-gen.sh. Toute modification manuelle entre ces marqueurs
+  sera écrasée. (Les marqueurs ne sont pas répétés ici : le générateur
+  cherche la première occurrence dans le fichier.)
+
+  Pour ajouter un article : déposer l'export Notion (.md + dossier
+  d'images) dans blog/_sources/ puis lancer ./tools/blog-gen.sh
+  =====================================================================
+-->
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -7,7 +21,7 @@
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     />
     <title>Blog</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,36 +32,25 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Comic+Neue&amp;display=swap"
     />
-    <link rel="stylesheet" href="assets/css/animate.min.css" />
+
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/vendor/animate.min.css" />
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="./blog/article.css" />
-    <script>
-// --- redirection: lancer tôt, dès que le DOM est prêt
-function redirectIfMobile() {
-  const ua = navigator.userAgent.toLowerCase();
-  const isMobileDevice = /android|iphone|ipad|ipod|blackberry|windows phone|opera mini|mobile/i.test(ua);
-  const isSmallScreen = window.innerWidth <= 768;
 
-  if (isMobileDevice || isSmallScreen) {
-    // replace évite de revenir en arrière sur la page desktop
-    window.location.replace("mobile.html");
-  }
-}
-document.addEventListener("DOMContentLoaded", redirectIfMobile);
-</script>
+    <script src="assets/js/mobile-redirect.js"></script>
   </head>
+
   <body
     style="
       background: url('assets/img/dmontag.png') center / contain, rgb(0, 0, 0);
     "
   >
-  <h1 class="photoh1">Blog</h1>
-  <a href="javascript:history.back()" class="house-link">
-    <img src="assets/img/retour.png" alt="Retour" class="house-icon" />
-  </a>
+    <h1 class="photoh1">Blog</h1>
 
-
-    
+    <a href="javascript:history.back()" class="house-link">
+      <img src="assets/img/retour.png" alt="Retour" class="house-icon" />
+    </a>
 
     <!-- BLOG:START -->
     <div class="blog-index">

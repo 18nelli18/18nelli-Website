@@ -1,0 +1,366 @@
+/* =====================================================================
+   pages/prediction.css — page prédiction (prediction.html)
+   ---------------------------------------------------------------------
+   Faux chatbot rétro noir & blanc : écran d'intro, cadre type logiciel
+   des années 2000, bulles de conversation, barre d'état.
+
+   Cette page ne charge NI Bootstrap NI assets/css/styles.css : elle est
+   entièrement autonome, d'où le reset et les variables ci-dessous.
+   ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+   1. Variables et base
+   ------------------------------------------------------------------ */
+
+:root {
+  --bg: #00000083;
+  --fg: #fff;
+  --mid: #cfcfcf;
+  --dim: #9a9a9a;
+  --line: #1a1a1a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #000 url('../../img/dmontag.png') center / contain no-repeat;
+  color: var(--fg);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  letter-spacing: 0.2px;
+}
+
+
+/* ---------------------------------------------------------------------
+   2. Écran d'intro
+   ---------------------------------------------------------------------
+   Recouvre toute la page pendant 2 s, puis disparaît en fondu sur 2 s.
+   Piloté par assets/js/prediction.js.
+   ------------------------------------------------------------------ */
+
+/* Posée sur <body> pendant l'intro pour bloquer le scroll. */
+body.splash-lock {
+  overflow: hidden;
+}
+
+#prediction-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  opacity: 1;
+  transition: opacity 2s ease;
+}
+
+#prediction-screen img {
+  max-width: 80vw;
+  max-height: 80vh;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.2));
+}
+
+#prediction-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------------------
+   3. Cadre de l'application
+   ------------------------------------------------------------------ */
+
+.chrome {
+  position: relative;
+  max-width: 920px;
+  height: min(86vh, 760px);
+  margin: 24px auto;
+  border: 2px solid var(--fg);
+  border-radius: 12px;
+  overflow: hidden;
+  /* Deux couches : fond sombre dans le padding-box, bordure zébrée
+     noir/blanc dans le border-box. */
+  background:
+    linear-gradient(#0b0b0bb1, #0000009f) padding-box,
+    repeating-linear-gradient(90deg, #fff 0 1px, #000 1px 2px) border-box;
+  box-shadow:
+    0 0 0 2px #000 inset,
+    0 0 18px rgba(255, 255, 255, 0.08),
+    0 12px 40px rgba(0, 0, 0, 0.8);
+}
+
+.titlebar {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  border-bottom: 1px solid #2b2b2b;
+  background: linear-gradient(#1c1c1c, #0d0d0d);
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1.8px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+}
+
+.brand .logo {
+  width: 22px;
+  height: 22px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #fff, #bbb 40%, #444 60%, #000);
+  box-shadow: 0 0 0 1px #000 inset;
+}
+
+.brand .name {
+  font-weight: 700;
+  filter: drop-shadow(0 1px 0 #000);
+}
+
+/* Diodes décoratives (POWER / NET / SYNC) : seule la première est allumée. */
+.titlebar .lights {
+  display: flex;
+  gap: 6px;
+}
+
+.led {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid #444;
+  background: #111;
+  box-shadow:
+    0 0 6px rgba(255, 255, 255, 0.1) inset,
+    0 0 8px rgba(255, 255, 255, 0.05);
+}
+
+.led.on {
+  background: radial-gradient(#fff, #bbb, #333);
+}
+
+
+/* ---------------------------------------------------------------------
+   4. Zone de conversation
+   ------------------------------------------------------------------ */
+
+.chat {
+  position: absolute;
+  inset: 42px 0 0 0; /* commence sous la barre de titre */
+  display: grid;
+  grid-template-rows: 1fr auto; /* messages extensibles, saisie fixe */
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 30%),
+    #000000a2;
+}
+
+/* Scanlines façon écran cathodique, purement décoratives. */
+.chat:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+.messages {
+  padding: 16px;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #7a7a7a #0a0a0a;
+}
+
+.messages::-webkit-scrollbar {
+  width: 10px;
+}
+
+.messages::-webkit-scrollbar-thumb {
+  background: #7a7a7a;
+}
+
+.messages::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+
+/* ---------------------------------------------------------------------
+   5. Bulles de message
+   ------------------------------------------------------------------ */
+
+.bubble {
+  max-width: 80%;
+  margin: 8px 0;
+  padding: 10px 12px;
+  border: 1px solid var(--mid);
+  background: linear-gradient(180deg, #111, #000);
+  box-shadow:
+    0 0 0 1px #000 inset,
+    0 8px 24px rgba(0, 0, 0, 0.6);
+  line-height: 1.4;
+  font-size: 15px;
+}
+
+/* Message de l'utilisateur : collé à droite, bordure blanche. */
+.bubble.user {
+  margin-left: auto;
+  border-color: #fff;
+  background: linear-gradient(180deg, #1a1a1a, #000);
+}
+
+/* Message du bot : collé à gauche, bordure grise. */
+.bubble.bot {
+  margin-right: auto;
+  border-color: #bfbfbf;
+}
+
+/* Ligne "toi • 14:32" sous chaque bulle. */
+.meta {
+  display: block;
+  margin-top: 6px;
+  color: var(--dim);
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+
+/* ---------------------------------------------------------------------
+   6. Zone de saisie
+   ------------------------------------------------------------------ */
+
+.composer {
+  position: relative;
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid #2b2b2b;
+  background: linear-gradient(#0e0e0e, #0a0a0a);
+}
+
+.input {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #151515, #0a0a0a);
+  box-shadow: 0 0 0 1px #000 inset;
+}
+
+.input input {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--fg);
+  font-size: 15px;
+}
+
+/* Bouton "Envoyer" : dégradé à cassure nette = relief plastique 2000s. */
+.btn {
+  min-width: 120px;
+  padding: 10px 14px;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  background: linear-gradient(
+    180deg,
+    #fff,
+    #cfcfcf 60%,
+    #8d8d8d 60%,
+    #3a3a3a 90%,
+    #000
+  );
+  color: #000;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow:
+    0 1px 0 #000 inset,
+    0 6px 18px rgba(255, 255, 255, 0.15),
+    0 0 0 2px #000;
+  transition: transform 0.05s ease, filter 0.2s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:focus-visible {
+  outline: 2px dashed #fff;
+  outline-offset: 2px;
+}
+
+
+/* ---------------------------------------------------------------------
+   7. Barre d'état
+   ------------------------------------------------------------------ */
+
+.status {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+  border-top: 1px solid #2b2b2b;
+  background: linear-gradient(#0f0f0f, #0a0a0a);
+  color: #bbb;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  user-select: none;
+}
+
+/* Jauge zébrée figée, purement décorative. */
+.status .meter {
+  width: 130px;
+  height: 10px;
+  border: 1px solid #fff;
+  background: repeating-linear-gradient(90deg, #fff 0 6px, #000 6px 12px);
+  box-shadow: 0 0 0 1px #000 inset;
+}
+
+.status .sep {
+  color: #3a3a3a;
+}
+
+
+/* ---------------------------------------------------------------------
+   8. Accessibilité : respect de "réduire les animations"
+   ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  #prediction-screen {
+    transition: none;
+  }
+
+  .btn {
+    transition: none;
+  }
+}

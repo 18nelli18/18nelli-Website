@@ -1,1 +1,20 @@
-/albums/vercors/img
+# =====================================================================
+#  .gitignore — 18nelli-Website
+# =====================================================================
+
+# --- Fichiers système macOS ------------------------------------------
+.DS_Store
+**/.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# --- Éditeurs ---------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+
+# --- Photos des albums ------------------------------------------------
+# Trop lourdes pour git : elles sont uploadées directement sur le
+# serveur. Seules les vignettes ico.png sont versionnées.
+/albums/*/img/

@@ -1,0 +1,179 @@
+/* =====================================================================
+   layout.css — composants partagés entre plusieurs pages
+   ---------------------------------------------------------------------
+   Tout ce qui apparaît sur au moins deux pages : titres de section,
+   bouton retour, fenêtres façon Win95 des galeries.
+   ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+   1. Titre de section  (photo, projets, blog, articles, albums)
+   ------------------------------------------------------------------ */
+
+.photoh1 {
+  position: relative;
+  margin: 1%;
+  display: inline-block; /* pour que le fond noir colle au texte */
+  font-family: 'Comic Neue', serif;
+  font-weight: 700;
+  color: #ff0000;
+  background-color: #000;
+}
+
+/* Paragraphe descriptif sous un titre de section (photo + albums). */
+.p-photo {
+  padding: 0.2em 0.4em;
+  border-radius: 0.2em;
+  font-family: 'Comic Neue', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ff0000;
+  background-color: #000;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+}
+
+
+/* ---------------------------------------------------------------------
+   2. Bouton retour  (toutes les pages sauf l'accueil)
+   ------------------------------------------------------------------ */
+
+.house-link {
+  position: fixed;
+  top: 16px;
+  right: 130px;
+  z-index: 999; /* toujours au-dessus des GIFs et des fenêtres */
+}
+
+.house-icon {
+  display: block; /* supprime l'espace inline sous l'image */
+  width: 200px;
+  height: auto;
+  cursor: pointer;
+  transition: none;
+  filter: none;
+}
+
+/* Au survol : inversion + double halo blanc. */
+.house-link:hover .house-icon {
+  transform: scale(1.1);
+  filter:
+    invert(1)
+    drop-shadow(0 0 4px rgba(255, 255, 255, 0.8))  /* contour fin */
+    drop-shadow(0 0 12px rgba(255, 255, 255, 0.6)); /* halo large */
+}
+
+
+/* ---------------------------------------------------------------------
+   3. GIF décoratif "appareil photo"  (photo, musique)
+   ------------------------------------------------------------------ */
+
+.camera-gif {
+  position: absolute;
+  top: auto;
+  right: 109px;
+  bottom: 100px;
+  left: auto;
+  transform: scaleX(-1);
+  mix-blend-mode: multiply;
+  /* isole le contexte de fusion pour que seul ce GIF soit mélangé */
+  isolation: isolate;
+}
+
+
+/* ---------------------------------------------------------------------
+   4. Fenêtres déplaçables des galeries  (albums/*)
+   ---------------------------------------------------------------------
+   Le positionnement initial et le drag sont gérés par assets/js/windows.js
+   via `transform: translate(...)` — d'où le will-change ci-dessous.
+   ------------------------------------------------------------------ */
+
+#windows-container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 60px);
+  overflow: hidden;
+}
+
+.window {
+  position: absolute;
+  width: 300px;
+  border: 1px solid #aaa;
+  background: #fff;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+  font-family: sans-serif;
+  will-change: transform; /* indique au navigateur que ça va bouger */
+  pointer-events: auto;
+}
+
+/* Barre de titre : c'est la poignée de déplacement. */
+.window .titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  background: #000000;
+  color: #ff0000;
+  box-shadow: inset 0 0 10px #ffffffea;
+  cursor: move;
+  pointer-events: auto;
+  font-family: 'Pixelify Sans', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.window .close-btn {
+  cursor: pointer;
+  pointer-events: auto;
+  font-weight: bold;
+}
+
+/* L'image remplit la fenêtre et ne capte aucun événement :
+   tous les clics/drags remontent à la fenêtre parente. */
+.window img {
+  display: block;
+  width: 100%;
+  height: auto;
+  left: auto; /* annule le décalage global de base.css */
+  pointer-events: none;
+}
+
+/* Empêche la sélection de texte et le drag natif pendant le déplacement. */
+.window,
+.window *,
+.window img {
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+}
+
+
+/* ---------------------------------------------------------------------
+   5. Reliquats — plus référencés par aucune page
+   ---------------------------------------------------------------------
+   Conservés tels quels par précaution. Supprimables sans risque si tu
+   confirmes ne plus en vouloir.
+   ------------------------------------------------------------------ */
+
+.rolling-text {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.rolling-text h1 {
+  display: inline-block;
+  padding-left: 100%;
+  white-space: nowrap;
+  animation: scroll-left 15s linear infinite;
+}
+
+.media-links {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 400%;
+}

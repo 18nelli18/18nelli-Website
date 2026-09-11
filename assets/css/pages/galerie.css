@@ -1,0 +1,44 @@
+/* =====================================================================
+   pages/galerie.css — index photo (photo.html) et liste des projets
+                       (projets.html)
+   ---------------------------------------------------------------------
+   Uniquement les vignettes d'entrée. Les fenêtres des albums eux-mêmes
+   sont dans layout.css.
+   ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+   1. Icônes d'album  (photo.html)
+   ------------------------------------------------------------------ */
+
+.album-ico {
+  /* La transition est déclarée ici, pas dans :hover, pour qu'elle
+     joue aussi au retour (sortie de survol). */
+  transition:
+    transform 0.3s ease-in-out,
+    filter 0.3s ease-in-out;
+}
+
+.album-ico:hover {
+  transform: scale(1.1);
+  filter:
+    drop-shadow(0 0 4px rgba(255, 0, 0, 0.8))  /* contour fin */
+    drop-shadow(0 0 12px rgba(255, 0, 0, 0.6)); /* halo large */
+}
+
+
+/* ---------------------------------------------------------------------
+   2. Bannières de projet  (projets.html)
+   ------------------------------------------------------------------ */
+
+.banner-truc {
+  display: block;    /* évite l'espace blanc sous l'image */
+  max-width: 20%;
+  height: auto;      /* conserve le ratio */
+  transition: none;  /* changement sec au survol, volontaire */
+  filter: invert(0);
+}
+
+.banner-truc:hover {
+  filter: invert(1) contrast(20000%) saturate(200%);
+}

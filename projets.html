@@ -1,5 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--
+  =====================================================================
+  projets.html — sommaire des mini-projets  (anciennement truc.html)
+  ---------------------------------------------------------------------
+  Chaque projet est autonome dans projets/<nom>/ avec son propre
+  index.html, ses styles et ses scripts. La bannière affichée ici est
+  l'image <nom>ico.png du dossier du projet.
+
+  Styles : assets/css/styles.css -> pages/galerie.css (.banner-truc)
+  =====================================================================
+-->
+<html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -7,7 +18,7 @@
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     />
     <title>Portfolio</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -23,7 +34,8 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="assets/css/animate.min.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/vendor/animate.min.css" />
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
 
@@ -35,26 +47,26 @@
     <h1 class="photoh1">LESTRUCS</h1>
     <br />
 
-    <a href="./truc/gameOfLife/index.html">
+    <!-- Jeu de la vie de Conway, en canvas -->
+    <a href="./projets/gameOfLife/index.html">
       <img
         class="banner-truc"
-        src="truc/gameOfLife/gofico.png"
+        src="projets/gameOfLife/gofico.png"
         alt="gameoflife"
       />
     </a>
-    <a href="./truc/vinylSlider/index.html">
+
+    <!-- Platine vinyle / boîte à rythmes, Web Audio API -->
+    <a href="./projets/vinylSlider/index.html">
       <img
         class="banner-truc"
-        src="truc/vinylSlider/vinylslideico.png"
+        src="projets/vinylSlider/vinylslideico.png"
         alt="vinylSlider"
       />
     </a>
-    
+
     <a href="javascript:history.back()" class="house-link">
       <img src="assets/img/retour.png" alt="Retour" class="house-icon" />
     </a>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/bs-init.js"></script>
-    <script src="assets/js/camera.js"></script>
   </body>
 </html>

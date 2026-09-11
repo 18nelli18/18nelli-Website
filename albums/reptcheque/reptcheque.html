@@ -1,4 +1,21 @@
 <!DOCTYPE html>
+<!--
+  =====================================================================
+  Album photo : Rep. Tcheque
+  ---------------------------------------------------------------------
+  Les blocs <div class="window"> plus bas sont GENERES par tools/gen.sh :
+
+      ./tools/gen.sh albums/reptcheque/img
+
+  ...puis collés dans #windows-container.
+
+  Les photos vivent dans ./img/ et ne sont PAS versionnées : il faut les
+  uploader séparément sur le serveur.
+
+  Positionnement aléatoire + déplacement : assets/js/windows.js
+  Styles des fenêtres                    : assets/css/layout.css
+  =====================================================================
+-->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -9,7 +26,7 @@
     <title>Tchéquie</title>
     <link
       rel="stylesheet"
-      href="../../assets/bootstrap/css/bootstrap.min.css"
+      href="../../assets/vendor/bootstrap/css/bootstrap.min.css"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,7 +43,7 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="../../assets/css/animate.min.css" />
+    <link rel="stylesheet" href="../../assets/vendor/animate.min.css" />
     <link rel="stylesheet" href="../../assets/css/styles.css" />
   </head>
   <body
@@ -434,7 +451,6 @@
         </div>
         <div class="content"></div>
         <img src="./img/_1120092.jpg" alt="_1120092" draggable="false" />
-      </div>
 
       <script src="../../assets/js/windows.js"></script>
 
@@ -450,8 +466,5 @@
       />
     </div>
 
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/bs-init.js"></script>
-    <script src="assets/js/camera.js"></script>
   </body>
 </html>

@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+<!--
+  =====================================================================
+  musique.html — lecteur MP3 + visualiseur
+  ---------------------------------------------------------------------
+  Styles  : assets/css/pages/musique.css  (chargé EN DERNIER, il doit
+            surcharger styles.css et Bootstrap : fond, typographie)
+  Script  : assets/js/mp3-player.js
+  Données : data/songs.json  ->  assets/media/song/*.mp3
+  =====================================================================
+-->
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
@@ -7,215 +17,54 @@
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     />
     <title>ECOUTE ECOUTE JAI FAIT UN TRUC</title>
+
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Comic+Neue&amp;display=swap"
     />
-    <link rel="stylesheet" href="assets/css/styles.css" />
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
-    <style>
-      /* ==== STYLE VISTA ==== */
-      html,
-      body {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        background: url("assets/img/bg_music.png") center/contain no-repeat, #000;
-        color: #ffffff;
-        font-family: "Comic Neue", serif;
-        margin: 2rem;
-      }
-      #mp3-player {
-        max-width: 760px;
-        margin: auto;
-        padding: 1rem;
-        background: linear-gradient(to bottom, #ffffff, #ff0000);
-        border: 2px solid #ff0000;
-        box-shadow: 0 4px 8px rgb(0, 0, 0);
-      }
-      #mp3-player h2 {
-        text-align: center;
-        -webkit-text-stroke: 2px black; /* Épaisseur et couleur du contour */
-        /* Pour Firefox récent : */
-        
 
-        margin-bottom: 1rem;
-        font-family: "Comic Neue", serif;
-      }
-      #playlist {
-        list-style: none;
-        max-height: 150px;
-        overflow-y: auto;
-        padding: 0;
-        margin-bottom: 1rem;
-        color: white;
-  /* Quatre ombres pour chaque direction */
-  text-shadow:
-     -2px  0    0 black,
-      2px  0    0 black,
-      0    2px  0 black,
-      0   -2px  0 black;
-      }
-      #playlist li {
-        padding: 0.4rem;
-        cursor: pointer;
-      }
-      #playlist li:hover,
-      #playlist .active {
-        background: #000000;
-        color: white;
-      }
-      #controls {
-        text-align: center;
-        margin-bottom: 1rem;
-      }
-      #controls button {
-        color: #ffffff;
-        background: #ff0000;
-        margin: 0 0.5rem;
-        border: 4px solid #000000;
-        border-radius: 0px;
-      }
-      #visualizer {
-        width: 100%;
-        height: 400px;
-        background: #000;
-        border: 1px solid #000000;
-      }
-    </style>
+    <!-- L'ordre ci-dessous est significatif : chaque feuille peut
+         surcharger la précédente. -->
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/pages/musique.css" />
   </head>
+
   <body>
-    
-   
+    <!-- ============================================================
+         Lecteur
+         ============================================================ -->
     <div id="mp3-player">
       <h2>ECOUTE EN BOUCLE</h2>
+
+      <!-- Rempli dynamiquement depuis data/songs.json -->
       <ul id="playlist"></ul>
+
       <div id="controls">
         <button id="prev" class="btn btn-secondary">◄◄</button>
         <button id="play" class="btn btn-primary">Play ▶</button>
         <button id="next" class="btn btn-secondary">►►</button>
       </div>
+
+      <!-- Spectre audio dessiné via la Web Audio API -->
       <canvas id="visualizer"></canvas>
     </div>
- <a href="javascript:history.back()" class="house-link">
+
+    <!-- ============================================================
+         Navigation et décor
+         ============================================================ -->
+    <a href="javascript:history.back()" class="house-link">
       <img src="assets/img/retour.png" alt="Retour" class="house-icon" />
     </a>
+
     <img
       class="camera-gif"
       src="assets/img/musiqu.gif"
       width="800"
       height="435"
-      style="
-        filter: brightness(100%) contrast(200%)  hue-rotate(0deg)
-           saturate(0%);
-        
-      "
-    />  
+      style="filter: brightness(100%) contrast(200%) hue-rotate(0deg) saturate(0%)"
+    />
 
-    <script>
-      // —— Import de la liste (100% front)
-      async function fetchSongs() {
-        try {
-          const res = await fetch("songs.json");
-          if (!res.ok) throw new Error(`Erreur ${res.status}`);
-          return await res.json();
-        } catch (e) {
-          console.error("Impossible de récupérer songs.json :", e);
-          return [];
-        }
-      }
-
-      let songs = [],
-        current = 0;
-      let audio, ctx, analyser, dataArray, canvas, canvasCtx;
-
-      async function init() {
-        songs = await fetchSongs();
-        populatePlaylist();
-        setupAudio();
-        updatePlaylistUI();
-      }
-
-      function populatePlaylist() {
-        const ul = document.getElementById("playlist");
-        songs.forEach((name, i) => {
-          const li = document.createElement("li");
-          li.textContent = name;
-          li.dataset.index = i;
-          li.onclick = () => loadTrack(i);
-          ul.appendChild(li);
-        });
-      }
-
-      function setupAudio() {
-        audio = new Audio(`song/${songs[current]}`);
-        audio.crossOrigin = "anonymous";
-
-        ctx = new (window.AudioContext || window.webkitAudioContext)();
-        analyser = ctx.createAnalyser();
-        const srcNode = ctx.createMediaElementSource(audio);
-        srcNode.connect(analyser);
-        analyser.connect(ctx.destination);
-        analyser.fftSize = 256;
-        dataArray = new Uint8Array(analyser.frequencyBinCount);
-
-        canvas = document.getElementById("visualizer");
-        canvasCtx = canvas.getContext("2d");
-
-        document.getElementById("play").onclick = togglePlay;
-        document.getElementById("prev").onclick = () => changeTrack(-1);
-        document.getElementById("next").onclick = () => changeTrack(+1);
-        drawVisualizer();
-      }
-
-      function loadTrack(i) {
-        current = i;
-        audio.src = `song/${songs[current]}`;
-        audio.play();
-        document.getElementById("play").textContent = "Pause ❚❚";
-        updatePlaylistUI();
-      }
-
-      function changeTrack(dir) {
-        current = (current + dir + songs.length) % songs.length;
-        loadTrack(current);
-      }
-
-      function togglePlay() {
-        if (audio.paused) {
-          audio.play();
-          this.textContent = "Pause ❚❚";
-        } else {
-          audio.pause();
-          this.textContent = "Play ▶";
-        }
-        updatePlaylistUI();
-      }
-
-      function updatePlaylistUI() {
-        document.querySelectorAll("#playlist li").forEach((li) => {
-          li.classList.toggle("active", +li.dataset.index === current);
-        });
-      }
-
-      function drawVisualizer() {
-        requestAnimationFrame(drawVisualizer);
-        analyser.getByteFrequencyData(dataArray);
-        canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
-        const barWidth = (canvas.width / dataArray.length) * 1.5;
-        let x = 0;
-        dataArray.forEach((v) => {
-          const h = v / 2;
-          canvasCtx.fillStyle = "lime";
-          canvasCtx.fillRect(x, canvas.height - h, barWidth, h);
-          x += barWidth + 1;
-        });
-      }
-
-      window.onload = init;
-    </script>
+    <script src="assets/js/mp3-player.js"></script>
   </body>
 </html>

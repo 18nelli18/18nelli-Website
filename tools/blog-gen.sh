@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
 # =====================================================================
 #  blog-gen.sh — 18nelli
-#  Convertit les .md déposés dans ./blog/ en pages .html stylées site,
-#  et (re)génère la liste des articles dans la page d'accueil blog.html.
+#  Convertit les .md déposés dans blog/_sources/ en pages .html stylées
+#  site (écrites dans blog/), et (re)génère la liste des articles dans la
+#  page d'accueil blog.html.
+#
+#  Emplacement : tools/blog-gen.sh — à lancer depuis n'importe où, le
+#  script retrouve seul la racine du site (dossier parent de tools/).
 #
 #  Workflow :
 #    1. Notion -> "Export" -> Markdown & CSV
-#    2. tu déposes le .md (et son dossier d'images) dans blog/
-#    3. tu lances :  ./blog-gen.sh
+#    2. tu déposes le .md ET son dossier d'images dans blog/_sources/
+#    3. tu lances :  ./tools/blog-gen.sh
 #
 #  BLOCS DE CODE (NOTION / GITHUB) :
 #   - blocs ```lang ... ``` indentés ou racine correctement isolés et convertis.
@@ -51,10 +55,18 @@ for arg in "${@:-}"; do
 done
 
 # --- Config ----------------------------------------------------------
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BLOG_DIR="$SCRIPT_DIR/blog"
-INDEX_FILE="$SCRIPT_DIR/blog.html"
+# tools/ -> on remonte d'un cran pour atteindre la racine du site.
+TOOLS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SITE_DIR="$(cd "$TOOLS_DIR/.." && pwd)"
+
+BLOG_DIR="$SITE_DIR/blog"          # pages .html générées
+SRC_DIR="$BLOG_DIR/_sources"       # exports Notion (.md + images)
+INDEX_FILE="$SITE_DIR/blog.html"   # sommaire à mettre à jour
+
+# Chemin des assets depuis un article (blog/xxx.html -> ../assets/...)
 ASSETS="../assets"
+# Dossier des images, relatif à un article généré.
+IMG_PREFIX="_sources"
 # Paramètres d'intégration Falstad (modifie à ta sauce) :
 FALSTAD_PARAMS="hideSidebar=true&hideMenu=true&running=true&whiteBackground=false&editable=false"
 # ---------------------------------------------------------------------
@@ -65,6 +77,7 @@ warn() { printf '%s/!\\%s %s\n' "$c_warn" "$c_rst" "$*"; }
 die()  { printf '%sX%s %s\n'   "$c_err"  "$c_rst" "$*" >&2; exit 1; }
 
 [ -d "$BLOG_DIR" ]   || die "Dossier introuvable : $BLOG_DIR"
+[ -d "$SRC_DIR" ]    || die "Dossier des sources introuvable : $SRC_DIR"
 [ -f "$INDEX_FILE" ] || die "Page d'accueil introuvable : $INDEX_FILE"
 
 # --- Scripts JS article (zoom + mermaid) -----------------------------
@@ -520,6 +533,12 @@ else
      - python markdown  (pip3 install markdown)"
 fi
 info "Moteur de conversion : $MD_ENGINE"
+if [ "$MD_ENGINE" != "pandoc" ]; then
+  warn "pandoc est absent : le HTML produit par python-markdown differe
+     sensiblement (titres, listes, blocs de code). Les articles deja
+     generes avec pandoc ne seront PAS retouches tant qu'ils sont a jour,
+     mais evite --force sans pandoc installe (brew install pandoc)."
+fi
 
 md_to_html() {
   if [ "$MD_ENGINE" = "pandoc" ]; then
@@ -536,6 +555,50 @@ PY
 }
 
 html_escape() { sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g' -e 's/"/\&quot;/g'; }
+
+# Encode un nom de dossier en pourcent-encodage, comme le fait un
+# convertisseur markdown :
+#   "Setup IA"                    -> "Setup%20IA"
+#   "Migser - mixer stereo"       -> "Migser%20-%20mixer%20stereo"
+#   "...stereo 6 entrees" accentue -> "...st%C3%A9r%C3%A9o%206%20entr%C3%A9es"
+# LC_ALL=C force un parcours OCTET par octet : indispensable pour que les
+# caracteres accentues (UTF-8, 2 octets) soient encodes correctement.
+url_encode_path() {
+  local LC_ALL=C
+  local s="$1" out="" i c
+  for (( i = 0; i < ${#s}; i++ )); do
+    c="${s:i:1}"
+    case "$c" in
+      [a-zA-Z0-9._~-]) out="$out$c" ;;
+      /)               out="$out/" ;;
+      *)               out="$out$(printf '%%%02X' "'$c")" ;;
+    esac
+  done
+  printf '%s' "$out"
+}
+
+# Repréfixe par $IMG_PREFIX/ tout src="..." / href="..." pointant vers un
+# dossier d'images présent dans $SRC_DIR.
+#   src="Setup%20IA/image.png"  ->  src="_sources/Setup%20IA/image.png"
+# Les chemins déjà préfixés, les URL absolues et ../assets sont ignorés
+# puisqu'ils ne commencent pas par un nom de dossier connu.
+prefix_image_paths() {
+  local html="$1" dir name enc
+  for dir in "$SRC_DIR"/*/; do
+    [ -d "$dir" ] || continue
+    name="$(basename "$dir")"
+    enc="$(url_encode_path "$name")"
+    # On essaie le nom brut ET le nom encode : selon le convertisseur
+    # (pandoc ou python-markdown) l'un ou l'autre apparait dans le HTML.
+    for variant in "$name" "$enc"; do
+      html="${html//src=\"$variant\//src=\"$IMG_PREFIX/$variant/}"
+      html="${html//href=\"$variant\//href=\"$IMG_PREFIX/$variant/}"
+      html="${html//src=\"./$variant\//src=\"$IMG_PREFIX/$variant/}"
+      html="${html//href=\"./$variant\//href=\"$IMG_PREFIX/$variant/}"
+    done
+  done
+  printf '%s' "$html"
+}
 
 make_slug() {
   printf '%s' "$1" \
@@ -660,8 +723,8 @@ AWK
 
 # --- Génération des articles -----------------------------------------
 shopt -s nullglob
-mds=("$BLOG_DIR"/*.md)
-[ ${#mds[@]} -gt 0 ] || die "Aucun .md trouve dans $BLOG_DIR — rien a faire."
+mds=("$SRC_DIR"/*.md)
+[ ${#mds[@]} -gt 0 ] || die "Aucun .md trouve dans $SRC_DIR — rien a faire."
 
 index_tmp="$(mktemp)"; block_tmp="$(mktemp)"
 trap 'rm -f "$index_tmp" "$block_tmp"' EXIT
@@ -699,18 +762,35 @@ for md in "${mds[@]}"; do
         date_fr="$old_date"
       fi
     fi
-    mtime="$(git log -1 --format=%ct "$md" 2>/dev/null || true)"
+    # --follow : retrouve l'historique meme apres un deplacement du .md
+    mtime="$(git log -1 --follow --format=%ct -- "$md" 2>/dev/null || true)"
     if [ -n "$mtime" ] && [ -z "$date_fr" ]; then
       date_fr="$(date -d "@$mtime" '+%d/%m/%Y' 2>/dev/null || date -r "$mtime" '+%d/%m/%Y')"
     fi
   fi
 
-  if [ -z "$mtime" ] || [ -z "$date_fr" ]; then
+  # Replis INDEPENDANTS.
+  # (Avant : un seul bloc `if vide(mtime) OU vide(date)`, qui ecrasait une
+  #  date correctement lue dans HEAD:blog.html des que mtime manquait --
+  #  ce qui arrive pour un .md deplace mais pas encore commite.)
+  if [ -z "$mtime" ]; then
     mtime="$(stat -c %Y "$md" 2>/dev/null || stat -f %m "$md")"
+  fi
+  if [ -z "$date_fr" ]; then
     date_fr="$(date -d "@$mtime" '+%d/%m/%Y' 2>/dev/null || date -r "$mtime" '+%d/%m/%Y')"
   fi
 
-  printf '%s%s%s%s%s%s%s\n' "$mtime" "$TAB" "$html_name" "$TAB" "$title_esc" "$TAB" "$date_fr" >> "$index_tmp"
+  # Cle de tri = date AFFICHEE (JJ/MM/AAAA -> AAAAMMJJ), pas la date de
+  # commit : le sommaire doit suivre l'ordre que voit le lecteur.
+  # A date egale, on departage sur le titre (ordre alphabetique inverse) :
+  # c'est arbitraire mais STABLE d'une generation a l'autre, contrairement
+  # au mtime qui bouge a chaque copie/clone du depot.
+  sort_key="$(printf '%s' "$date_fr" | awk -F/ '{ printf "%04d%02d%02d", $3, $2, $1 }')"
+  [ -n "$sort_key" ] || sort_key="00000000"
+
+  printf '%s%s%s%s%s%s%s%s%s\n' \
+    "$sort_key" "$TAB" "$mtime" "$TAB" "$html_name" "$TAB" "$title_esc" "$TAB" "$date_fr" \
+    >> "$index_tmp"
   count_total=$((count_total + 1))
 
   # Si le HTML existe déjà, est plus récent que le .md et porte la bonne date : on saute
@@ -726,6 +806,13 @@ for md in "${mds[@]}"; do
     | awk -v FALSTAD_PARAMS="$FALSTAD_PARAMS" "$PRE_AWK" > "$body_tmp"
   article_html="$(md_to_html "$body_tmp")"
   rm -f "$body_tmp"
+
+  # Les images vivent dans blog/_sources/<Dossier Notion>/ alors que la
+  # page générée est dans blog/. On repréfixe donc les src/href qui
+  # pointent vers le dossier d'images de CET article.
+  # On liste les vrais dossiers présents plutôt que de deviner : c'est
+  # exact même avec espaces, accents ou tirets dans le nom.
+  article_html="$(prefix_image_paths "$article_html")"
 
   # Détection présence de diagrammes Mermaid
   mermaid_tag=""
@@ -751,7 +838,7 @@ for md in "${mds[@]}"; do
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
     />
     <title>$title_esc</title>
-    <link rel="stylesheet" href="$ASSETS/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="$ASSETS/vendor/bootstrap/css/bootstrap.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -762,7 +849,7 @@ for md in "${mds[@]}"; do
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Comic+Neue&amp;display=swap"
     />
-    <link rel="stylesheet" href="$ASSETS/css/animate.min.css" />
+    <link rel="stylesheet" href="$ASSETS/vendor/animate.min.css" />
     <link rel="stylesheet" href="$ASSETS/css/styles.css" />
     <link rel="stylesheet" href="article.css" />
 ${mermaid_tag:+$mermaid_tag
@@ -808,7 +895,7 @@ fi
 {
   echo '    <div class="blog-index">'
   echo '      <ul>'
-  sort -t "$TAB" -k1,1nr "$index_tmp" | while IFS="$TAB" read -r _mt fhtml ftitle fdate; do
+  LC_ALL=C sort -t "$TAB" -k1,1nr -k4,4r "$index_tmp" | while IFS="$TAB" read -r _key _mt fhtml ftitle fdate; do
     printf '        <li><a href="./blog/%s">%s</a> <span class="date">%s</span></li>\n' \
       "$fhtml" "$ftitle" "$fdate"
   done
