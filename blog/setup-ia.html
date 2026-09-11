@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>Setup IA</title>
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Iceland&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Comic+Neue&amp;display=swap"
+    />
+    <link rel="stylesheet" href="../assets/css/animate.min.css" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="article.css" />
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      import elkLayouts from 'https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0/dist/mermaid-layout-elk.esm.min.mjs';
+      if (typeof mermaid.registerLayoutLoaders === 'function') {
+        mermaid.registerLayoutLoaders(elkLayouts);
+        window._elkRegistered = true;
+      }
+      window.mermaid = mermaid;
+    </script>
+    <script defer src="article.js"></script>
+  </head>
+  <body
+    style="
+      background: url('../assets/img/dmontag.png') center / contain, rgb(0, 0, 0);
+    "
+  >
+    <h1 class="photoh1">Setup IA</h1>
+    <a href="../blog.html" class="house-link">
+      <img src="../assets/img/retour.png" alt="Retour" class="house-icon" />
+    </a>
+
+    <article class="article">
+      <p class="article-meta">last modified: 10/09/2026</p>
+<p><em>26/08/26</em></p>
+<p>Mon cerveau déjà très ramolli est fatigué de devoir réfléchir. J’aimerai qu’une IA puisse utiliser mon intelligence feignante au service de truc cool. Si l’IA avait accès à la puissance de calcul de mon cerveau elle ferait de grande chose. Malheureusement la relation avec l’IA est unilatérale. Elle a besoin que j’exploite sa puissance de calcule pour fonctionner, moi je fonctionne par défaut sans tâches à accomplir. Du coup autant essayer d’en tirer profit un peu.</p>
+<h3>Modèles testé et utilisé</h3>
+<ul>
+<li>gemini-pro-agent : tache agentique</li>
+<li>gemini-flash3.8 : le mieux entre vitesse / qualité de google</li>
+<li>gpt-oss-20b : rapide, prends 10gb de RAM environ</li>
+</ul>
+<h3>Setup codage agentique V1:</h3>
+<h4>Outils généraux:</h4>
+<p>https://ghostty.org/: Terminal </p>
+<p>https://pi.dev/: CLI de codage argentique </p>
+<p>https://help.router-for.me/: Pour récupérer les clé API d’abonnement  mensuel classique</p>
+<p>https://tmux.app/</p>
+<ul>
+<li><strong>Config de tmux pour ghostty</strong> (<code>nano ~/.tmux.conf</code>)</li>
+</ul>
+<pre><code class="language-markdown">set -g extended-keys on
+set -g extended-keys-format csi-u
+set -g allow-passthrough on
+set -g extended-keys on
+set -g extended-keys-format csi-u
+set -g allow-passthrough on
+set -g default-command &quot;${SHELL} -l&quot;
+set -g mouse on
+
+# Défilement fluide (1 ligne par cran de molette au lieu de 5)
+bind-key -T copy-mode-vi WheelUpPane send-keys -X -N 1 scroll-up
+bind-key -T copy-mode-vi WheelDownPane send-keys -X -N 1 scroll-down
+bind-key -T copy-mode-emacs WheelUpPane send-keys -X -N 1 scroll-up
+bind-key -T copy-mode-emacs WheelDownPane send-keys -X -N 1 scroll-down
+
+# Défilement fluide quand on n'est pas encore en mode copie
+bind-key -n WheelUpPane if-shell -F -t = &quot;#{mouse_any_flag}&quot; &quot;send-keys -M&quot; &quot;if -Ft= '#{pane_in_mode}' 'send-keys -M' 'copy-mode -e; send-keys -X -N 1 scroll-up'&quot;
+</code></pre>
+<ul>
+<li><strong>Config Ghostty</strong></li>
+</ul>
+<pre><code class="language-json"># This is the configuration file for Ghostty.
+#
+# This template file has been automatically created at the following
+# path since Ghostty couldn't find any existing config files on your system:
+#
+#   /Users/18nelli/Library/Application Support/com.mitchellh.ghostty/config
+#
+# The template does not set any default options, since Ghostty ships
+# with sensible defaults for all options. Users should only need to set
+# options that they want to change from the default.
+#
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+#
+# Additionally, each config option is also explained in detail
+# on Ghostty's website, at https://ghostty.org/docs/config.
+#
+# Ghostty can reload the configuration while running by using the menu
+# options or the bound key (default: Command + Shift + comma on macOS and
+# Control + Shift + comma on other platforms). Not all config options can be
+# reloaded while running; some only apply to new windows and others may require
+# a full restart to take effect.
+
+# Config syntax crash course
+# ==========================
+# # The config file consists of simple key-value pairs,
+# # separated by equals signs.
+# font-family = Iosevka
+# window-padding-x = 2
+#
+# # Spacing around the equals sign does not matter.
+# # All of these are identical:
+# key=value
+# key= value
+# key =value
+# key = value
+#
+# # Any line beginning with a # is a comment. It's not possible to put
+# # a comment after a config option, since it would be interpreted as a
+# # part of the value. For example, this will have a value of &quot;#123abc&quot;:
+# background = #123abc
+#
+# # Empty values are used to reset config keys to default.
+# key =
+#
+# # Some config options have unique syntaxes for their value,
+# # which is explained in the docs for that config option.
+# # Just for example:
+# resize-overlay-duration = 4s 200ms
+
+background = #121212
+
+# Transparence et flou (effet glassmorphism)
+background-opacity = 0.75
+background-blur-radius = 30
+foreground = #ffffff
+
+# Intégration macOS épurée
+macos-titlebar-style = transparent
+window-padding-x = 12
+window-padding-y = 12
+window-padding-balance = true
+
+# Thème sombre bien contrasté pour faire ressortir le texte
+theme = dark:Catppuccin Mocha,light:Catppuccin Latte
+</code></pre>
+<p>Fonctionnement de Pi:</p>
+<ul>
+<li>Une extension = un outils logique, écris en Ts qui modifie le comportement de Pi.</li>
+<li>Un agent = un fichier .md parametrant le modèle à utiliser puis son comportement, ses qualification etc. Il a un objectif global, un raisonnement décris</li>
+<li>Un skill = un fichier .md décrivant une compétence technique, un outil d’action, un comportement. Un skill est appelé par un agent</li>
+</ul>
+<h4>Extensions Pi globales installées</h4>
+<p>Pi permet l’ajout d’extension sur plusieurs niveaux. Niveau global (dans ~/.pi), qui s’appliqueront donc sur chaque session pi, et niveau local, c’est à dire au niveau du dossier ou est lancé la session pi (projet-test/.pi). Voici les extension installées au niveau global.</p>
+<p>https://github.com/hazat/pi-interactive-subagents: lancer des sous-agents</p>
+<p>https://github.com/nicobailon/pi-web-access: recherche sur le web</p>
+<p>https://github.com/deevus/pi-wayfinder: navigation structurelle du code (pour éviter que les longs codes dérivent)</p>
+<p>https://github.com/michaelmjhhhh/pi-atelier: UI améliorée</p>
+<p>https://github.com/nicobailon/pi-mcp-adapter: Utilisation de serveur MCP </p>
+<p>https://github.com/juicesharp/rpiv-ask-user-question: Pose des questions à l’utilisateur plutôt que de partir à l’aveugle</p>
+<p>https://github.com/mksglu/context-mode: Réduit la taille du contexte sans perte</p>
+<h3>Workflow général:</h3>
+<ul>
+<li>Lancer Pi via : <code>tmux new -A -s pi 'pi'</code>  ou juste <code>pi</code> selon le terminal multiplexer utilisé</li>
+<li>Installation en local (non global): <code>pi install -l [lien a installer]</code></li>
+<li>Définition d’agents locaux dans <code>mkdir ./.pi/agents</code></li>
+<li>Défininition de skills dans <code>mkdir ./.pi/skills</code></li>
+<li><strong>Template de fichier .md d’agents (à dérouler)</strong></li>
+</ul>
+<pre><code class="language-markdown">---
+name: [identifiant-de-l-agent]
+description: [Courte description du rôle et de la finalité de l'agent]
+model: [ex. gemini-2.5-pro, claude-3-7-sonnet, gpt-4o]
+thinking: [low | medium | high | off]
+tools: [liste_des_outils_separes_par_virgule] # Si non précisé, l'agent n'a pas accès aux extensions
+session-mode: [lineage-only | full | isolated]
+auto-exit: [true | false]
+system-prompt: [append | replace]
+---
+
+# Rôle &amp; Objectif Principal
+Tu es un expert en [domaine/spécialité]. Ton objectif est de [action clé : analyser / concevoir / synthétiser] afin de produire [résultat attendu].
+
+# Contexte &amp; Posture
+- **Ton :** [Direct, technique, pédagogique, formel...]
+- **Niveau d'expertise :** [Avancé, vulgarisé, orienté décisionnaire...]
+- **Langue :** Français (sauf demande contraire explicite).
+
+# Méthode &amp; Flux de Travail
+1. **Analyse :** Décomposer la demande et vérifier les prérequis ou les données d'entrée.
+2. **Exécution :** Utiliser les outils appropriés ([nom des outils]) si des faits, calculs ou sources externes sont nécessaires.
+3. **Contrôle :** Valider la cohérence et l'exactitude avant restitution.
+
+# Règles &amp; Contraintes
+- **Sources :** Toujours vérifier les faits et sourcer les affirmations critiques.
+- **Limites :** Ne pas inventer d'information en cas de doute ; expliciter les hypothèses retenues.
+- **Interdictions :** [Ex. pas de métaphores verbeuses, pas de code non testé, pas de jargon inutile...]
+
+# Format de Restitution
+- Commencer directement par le résultat ou la synthèse principale.
+- Structurer avec des listes à puces et des tableaux si nécessaire.
+- Respecter le livrable demandé : [markdown, code, JSON, rapport structuré].
+</code></pre>
+<h3>Essai d’un setup pour KiCAD:</h3>
+<p><em>Jeudi 10/09/26</em></p>
+<p>J’ai tenté de mettre en place un workflow de création de PCB avec plusieurs étapes détaillés en skills. Ce projet est disponible sur mon github:</p>
+<p><a href="https://github.com/18nelli18/PiCB">https://github.com/18nelli18/PiCB</a></p>
+<p>Le fonctionnement global du workflow est résumé sur ce diagramme: </p>
+<pre><code class="language-mermaid">---
+config:
+  layout: elk
+---
+%%{init: {&quot;flowchart&quot;: {&quot;wrappingWidth&quot;: 400}} }%%
+flowchart LR
+    Start([&quot;👤 &lt;b&gt;Démarrage&lt;/b&gt;&lt;br/&gt;Besoin utilisateur&quot;])
+
+    %% Phase 1
+    P1[&quot;&lt;b&gt;Phase 1 · Spécification&lt;/b&gt;&lt;br/&gt;pcb-brief · Orchestrateur&lt;br/&gt;📁 design/brief.md&quot;]
+
+    %% Phase 2
+    P2[&quot;&lt;b&gt;Phase 2 · Sourcing &amp; BOM&lt;/b&gt;&lt;br/&gt;pcb-bom · part-scout&lt;br/&gt;📁 design/bom.yaml&quot;]
+
+    %% Phase 3
+    P3[&quot;&lt;b&gt;Phase 3 · Datasheets&lt;/b&gt;&lt;br/&gt;pcb-datasheets · extractor&lt;br/&gt;📁 design/datasheets/&quot;]
+
+    %% Phase 4
+    P4[&quot;&lt;b&gt;Phase 4 · Librairies&lt;/b&gt;&lt;br/&gt;pcb-libs · Orchestrateur&lt;br/&gt;📁 design/lib/ (symboles, 3D)&quot;]
+
+    %% Porte 1
+    Gate1{&quot;🛡️ &lt;b&gt;pcb-gate&lt;/b&gt;&lt;br/&gt;lib_ok ?&quot;}
+
+    %% Phase 5
+    P5[&quot;&lt;b&gt;Phase 5 · Schéma KiCad&lt;/b&gt;&lt;br/&gt;pcb-schematic · Orchestrateur&lt;br/&gt;📁 *.kicad_sch &amp; sch.svg&quot;]
+
+    %% Porte 2
+    Gate2{&quot;🛡️ &lt;b&gt;pcb-gate&lt;/b&gt;&lt;br/&gt;ERC = 0 ?&quot;}
+
+    %% Phase 6
+    P6[&quot;&lt;b&gt;Phase 6 · Audit &amp; Revue&lt;/b&gt;&lt;br/&gt;pcb-review · reviewer&lt;br/&gt;📁 review.md &amp; Gerbers&quot;]
+
+    Success([&quot;🚀 &lt;b&gt;Production&lt;/b&gt;&lt;br/&gt;Fabrication PCB &amp; PCBA&quot;])
+
+    %% Séquence principale et boucles réagencées
+    Start --&gt; P1
+    P1 --&gt;|Brief validé| P2
+    P3 -.-&gt;|⚠️ Rejet| P2
+    P2 --&gt; P3
+    P3 --&gt;|Datasheets OK| P4
+    Gate1 -.-&gt;|❌ Non : lib incomplète| P4
+    P4 --&gt; Gate1
+    Gate1 --&gt;|✅ Oui| P5
+    Gate2 -.-&gt;|❌ Erreurs| P5
+    P6 -.-&gt;|🔧 Corrections| P5
+    P5 --&gt; Gate2
+    Gate2 --&gt;|✅ 0 Erreur| P6
+    P6 --&gt;|Validation finale| Success
+</code></pre>
+    </article>
+  </body>
+</html>
