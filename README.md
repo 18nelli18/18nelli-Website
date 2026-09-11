@@ -22,7 +22,6 @@ framework. On ouvre un `.html` et ça marche.
 │   │   ├── styles.css      MANIFESTE : n'importe que les fichiers ci-dessous
 │   │   ├── base.css        Reset + balises nues (h1, img, a, p) + @keyframes
 │   │   ├── layout.css      Composants partagés (titres, bouton retour, fenêtres)
-│   │   ├── screen-g4.css   Voile « dalle LCD d'iMac G4 » (chargé à part)
 │   │   └── pages/
 │   │       ├── home.css        index.html
 │   │       ├── galerie.css     photo.html + projets.html
@@ -35,9 +34,7 @@ framework. On ouvre un `.html` et ça marche.
 │   │   ├── cd-player.js        Lecteur CD de l'accueil
 │   │   ├── mp3-player.js       Lecteur + visualiseur de musique.html
 │   │   ├── prediction.js       Chatbot de prediction.html
-│   │   ├── draggable.js        Déplacement à la souris (partagé)
-│   │   ├── windows.js          Fenêtres déplaçables des albums
-│   │   └── screen-g4.js        Pose le voile LCD + bascule clavier
+│   │   └── windows.js          Fenêtres déplaçables des albums
 │   ├── img/                Images et GIFs de l'interface
 │   ├── media/
 │   │   ├── song/           Les .mp3 listés dans data/songs.json
@@ -85,39 +82,6 @@ Celui-ci ne contient aucune règle, c'est un manifeste qui fait des
 `musique.html` et `prediction.html` ont leur propre feuille chargée
 directement dans leur `<head>`, car elles redéfinissent entièrement le
 fond et la typographie. Elles ne sont volontairement pas importées.
-
----
-
-## L'effet « écran d'iMac G4 »
-
-Toutes les pages sont recouvertes d'un voile qui simule une dalle TFT
-d'iMac G4 (2002) : noirs légèrement remontés et bleutés, halo central du
-rétroéclairage, fine trame de sous-pixels R/V/B, voile diffus de dalle
-mate, bords assombris.
-
-**Touche `C`** pour l'activer / le désactiver. Le choix est retenu dans
-le navigateur (`localStorage`).
-
-Quelques partis pris, au cas où tu voudrais l'ajuster :
-
-- **Ni scanlines, ni courbure, ni scintillement.** Le G4 avait un écran
-  plat LCD, pas un tube cathodique — c'était même son argument de vente.
-  Pour un rendu CRT à l'ancienne, c'est l'iMac **G3** qu'il faut imiter.
-- **Voile diffus et non reflet net** : la dalle du G4 était mate. Le
-  verre brillant n'arrive qu'avec l'iMac alu de 2007.
-- **C'est un calque posé par-dessus, pas un `filter` sur le contenu.**
-  Un `filter` sur un ancêtre casserait les six éléments en
-  `position: fixed` du site (bouton retour, webcam, logo DVD, visionneuse
-  photo, barre d'état). C'est aussi pour ça qu'une vraie déformation
-  géométrique d'écran bombé n'est pas possible sans tout casser.
-- **Aucune animation** : rien ne bouge, donc aucun coût par image, et la
-  webcam de l'accueil garde sa fluidité.
-- L'effet s'efface tout seul si le visiteur a demandé un contraste élevé
-  ou moins de transparence dans son système, et à l'impression.
-
-Pour le retirer d'une page : supprimer les deux lignes `screen-g4` de son
-`<head>` et de sa fin de `<body>`. Pour l'enlever des articles de blog,
-penser aussi à `tools/blog-gen.sh`, qui les réinjecte à chaque génération.
 
 ---
 
@@ -183,5 +147,3 @@ node tools/check-links.mjs
 Parcourt tous les `.html` et signale les liens locaux qui ne résolvent
 pas. Les seuls signalements normaux sont les photos de `albums/*/img/`,
 absentes du dépôt par conception.
-
-Pour inspecter une page sans le voile LCD, appuyer sur `C`.
