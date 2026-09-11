@@ -852,6 +852,7 @@ for md in "${mds[@]}"; do
     <link rel="stylesheet" href="$ASSETS/vendor/animate.min.css" />
     <link rel="stylesheet" href="$ASSETS/css/styles.css" />
     <link rel="stylesheet" href="article.css" />
+    <link rel="stylesheet" href="$ASSETS/css/screen-g4.css" />
 ${mermaid_tag:+$mermaid_tag
 }    <script defer src="article.js"></script>
   </head>
@@ -869,6 +870,7 @@ ${mermaid_tag:+$mermaid_tag
       <p class="article-meta">last modified: $date_fr</p>
 $article_html
     </article>
+    <script src="$ASSETS/js/screen-g4.js"></script>
   </body>
 </html>
 HTML
