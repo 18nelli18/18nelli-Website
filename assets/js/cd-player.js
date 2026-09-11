@@ -5,13 +5,20 @@
    tente de le lancer. Les boutons ▶ / ⏸ pilotent la lecture, ⏭ tire un
    nouveau morceau au hasard.
 
+   Le lecteur est aussi déplaçable à la souris en tirant sur sa barre de
+   titre (voir assets/js/draggable.js).
+
    Le balisage attendu se trouve dans index.html (.cd-player) :
-     #audio     <audio>  élément de lecture
-     #playBtn   ▶
-     #pauseBtn  ⏸
-     #title     nom du morceau affiché
-     #artist    nom d'artiste affiché
+     .cd-player  conteneur déplaçable
+     .title-bar  poignée de déplacement
+     #audio      <audio>  élément de lecture
+     #playBtn    ▶
+     #pauseBtn   ⏸
+     #title      nom du morceau affiché
+     #artist     nom d'artiste affiché
      .controls button:last-child   ⏭
+
+   Dépend de : assets/js/draggable.js (à charger AVANT)
 
    Ce fichier remplace l'ancien assets/js/bs-init.js.
    ===================================================================== */
@@ -72,7 +79,25 @@
     if (nextBtn) nextBtn.addEventListener('click', loadRandomSong);
   }
 
-  document.addEventListener('DOMContentLoaded', bindControls);
+  /**
+   * Rend le lecteur déplaçable en tirant sur sa barre de titre.
+   * Les bornes par défaut de Draggable s'appliquent : le lecteur ne
+   * peut pas être sorti de la fenêtre.
+   */
+  function bindDrag() {
+    var player = document.querySelector('.cd-player');
+    if (!player || !window.Draggable) return;
+
+    var titleBar = player.querySelector('.title-bar');
+    if (!titleBar) return;
+
+    Draggable.make(player, titleBar);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    bindControls();
+    bindDrag();
+  });
 
   // On attend `load` (et pas DOMContentLoaded) pour laisser l'élément
   // <audio> et sa source par défaut se initialiser complètement.

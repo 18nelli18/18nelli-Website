@@ -8,10 +8,11 @@
     2. Cadre central + vignette vers prediction.html (.image-container)
     3. Bloc de liens vers les sections du site
     4. Décor : aigle, GIF, webcam, logo DVD rebondissant
-    5. Lecteur CD façon Windows 95 (.cd-player)
+    5. Lecteur CD façon Windows 95 (.cd-player), déplaçable à la souris
 
   Styles  : assets/css/styles.css  -> base + layout + pages/home.css
-  Scripts : assets/js/{mobile-redirect,camera,dvd-bounce,cd-player}.js
+  Scripts : assets/js/{mobile-redirect,camera,dvd-bounce,draggable,cd-player}.js
+            draggable.js doit rester AVANT cd-player.js
   =====================================================================
 -->
 <html lang="fr">
@@ -163,6 +164,8 @@
          ---------------------------------------------------------
          Les boutons ⏮ et ⏭ encadrent ▶/⏸ ; seul ⏭ est actif
          (tire un morceau au hasard), ⏮ reste décoratif.
+
+         Se déplace en tirant sur la barre de titre "CD Player".
          ============================================================ -->
     <div class="cd-player">
       <div class="title-bar">
@@ -189,6 +192,7 @@
     <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/camera.js"></script>
     <script src="assets/js/dvd-bounce.js"></script>
+    <script src="assets/js/draggable.js"></script>
     <script src="assets/js/cd-player.js"></script>
   </body>
 </html>

@@ -9,12 +9,12 @@
      - fermeture par la croix
      - clic sur la photo : affichage plein écran, reclic : réduction
 
-   Le déplacement se fait en `transform: translate(x, y)` (accéléré GPU)
-   et non en `left/top` : la position courante est mémorisée dans
-   `dataset.x` / `dataset.y`.
+   Le déplacement lui-même est délégué à assets/js/draggable.js, partagé
+   avec le lecteur CD de la page d'accueil.
 
    Styles associés : .window dans assets/css/layout.css
-   Utilisé par : albums/<nom>/<nom>.html
+   Dépend de     : assets/js/draggable.js (à charger AVANT)
+   Utilisé par    : albums/<nom>/<nom>.html
    ===================================================================== */
 
 (function () {
@@ -117,9 +117,7 @@
       var x0 = Math.random() * maxLeft;
       var y0 = Math.random() * maxTop;
 
-      win.dataset.x = x0;
-      win.dataset.y = y0;
-      win.style.transform = 'translate(' + x0 + 'px, ' + y0 + 'px)';
+      Draggable.setOffset(win, x0, y0);
 
       // --- Clic sur la photo : plein ecran ---------------------------
       // Ecouteur pose directement sur l'image : si l'utilisateur relache
@@ -145,53 +143,29 @@
       }
 
       // --- Premier plan ---------------------------------------------
-      // On désactive le drag natif HTML5, qui entrerait en conflit
-      // avec notre propre gestion du déplacement.
-      win.addEventListener('dragstart', function (e) { e.preventDefault(); });
-      win.addEventListener('mousedown', function () {
+      function bringToFront() {
         highestZ++;
         win.style.zIndex = highestZ;
-      });
+      }
+      win.addEventListener('mousedown', bringToFront);
 
       // --- Déplacement à la souris ----------------------------------
       var titlebar = win.querySelector('.titlebar');
       if (!titlebar) return;
 
-      var isDragging = false;
-      var offsetX = 0;
-      var offsetY = 0;
-
-      titlebar.addEventListener('mousedown', function (e) {
-        e.preventDefault();
-        document.body.style.userSelect = 'none';
-
-        // 1. passer au premier plan
-        highestZ++;
-        win.style.zIndex = highestZ;
-
-        // 2. mémoriser l'écart entre le curseur et le coin de la fenêtre
-        isDragging = true;
-        offsetX = e.clientX - parseFloat(win.dataset.x);
-        offsetY = e.clientY - parseFloat(win.dataset.y);
-      });
-
-      document.addEventListener('mousemove', function (e) {
-        if (!isDragging) return;
-        e.preventDefault();
-
-        // Contraint la fenêtre à rester entièrement visible.
-        var x = Math.max(0, Math.min(e.clientX - offsetX, viewportW - winW));
-        var y = Math.max(0, Math.min(e.clientY - offsetY, viewportH - winH));
-
-        win.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
-        win.dataset.x = x;
-        win.dataset.y = y;
-      });
-
-      document.addEventListener('mouseup', function () {
-        if (!isDragging) return;
-        isDragging = false;
-        document.body.style.userSelect = '';
+      Draggable.make(win, titlebar, {
+        onStart: bringToFront,
+        // Bornes explicites (et non celles par défaut de draggable.js) :
+        // le décalage des fenêtres se compte depuis le coin du
+        // #windows-container, on garde donc le comportement d'origine.
+        bounds: function () {
+          return {
+            minX: 0,
+            maxX: viewportW - winW,
+            minY: 0,
+            maxY: viewportH - winH,
+          };
+        },
       });
     });
   });
