@@ -43,7 +43,7 @@
     </a>
 
     <article class="article">
-      <p class="article-meta">last modified: 10/09/2026</p>
+      <p class="article-meta">last modified: 12/09/2026</p>
 <p><em>26/08/26</em></p>
 <p>Mon cerveau déjà très ramolli est fatigué de devoir réfléchir. J’aimerai qu’une IA puisse utiliser mon intelligence feignante au service de truc cool. Si l’IA avait accès à la puissance de calcul de mon cerveau elle ferait de grande chose. Malheureusement la relation avec l’IA est unilatérale. Elle a besoin que j’exploite sa puissance de calcule pour fonctionner, moi je fonctionne par défaut sans tâches à accomplir. Du coup autant essayer d’en tirer profit un peu.</p>
 <h3>Modèles testé et utilisé</h3>
@@ -205,16 +205,12 @@ Tu es un expert en [domaine/spécialité]. Ton objectif est de [action clé : an
 - Structurer avec des listes à puces et des tableaux si nécessaire.
 - Respecter le livrable demandé : [markdown, code, JSON, rapport structuré].
 </code></pre>
-<h3>Essai d’un setup pour KiCAD:</h3>
+<h3>Essai d’un setup pour KiCAD</h3>
 <p><em>Jeudi 10/09/26</em></p>
 <p>J’ai tenté de mettre en place un workflow de création de PCB avec plusieurs étapes détaillés en skills. Ce projet est disponible sur mon github:</p>
 <p><a href="https://github.com/18nelli18/PiCB">https://github.com/18nelli18/PiCB</a></p>
 <p>Le fonctionnement global du workflow est résumé sur ce diagramme: </p>
-<pre><code class="language-mermaid">---
-config:
-  layout: elk
----
-%%{init: {&quot;flowchart&quot;: {&quot;wrappingWidth&quot;: 400}} }%%
+<pre><code class="language-mermaid">%%{init: {&quot;flowchart&quot;: {&quot;wrappingWidth&quot;: 400}} }%%
 flowchart LR
     Start([&quot;👤 &lt;b&gt;Démarrage&lt;/b&gt;&lt;br/&gt;Besoin utilisateur&quot;])
 
@@ -244,21 +240,43 @@ flowchart LR
 
     Success([&quot;🚀 &lt;b&gt;Production&lt;/b&gt;&lt;br/&gt;Fabrication PCB &amp; PCBA&quot;])
 
-    %% Séquence principale et boucles réagencées
+    %% Séquence principale
     Start --&gt; P1
     P1 --&gt;|Brief validé| P2
-    P3 -.-&gt;|⚠️ Rejet| P2
     P2 --&gt; P3
     P3 --&gt;|Datasheets OK| P4
-    Gate1 -.-&gt;|❌ Non : lib incomplète| P4
     P4 --&gt; Gate1
+
     Gate1 --&gt;|✅ Oui| P5
-    Gate2 -.-&gt;|❌ Erreurs| P5
-    P6 -.-&gt;|🔧 Corrections| P5
+    Gate1 -.-&gt;|❌ Non : lib incomplète| P4
+
     P5 --&gt; Gate2
     Gate2 --&gt;|✅ 0 Erreur| P6
+    Gate2 -.-&gt;|❌ Erreurs| P5
+
+    %% Boucles de retour fonctionnelles
+    P3 -.-&gt;|⚠️ Rejet| P2
+    P6 -.-&gt;|🔧 Corrections| P5
     P6 --&gt;|Validation finale| Success
+
 </code></pre>
+<h3>Essai d’un setup pour l’apprentissage par projet:</h3>
+<p><em>Vendredi 11/09/26:</em></p>
+<p>Après le test du setup pour PCB, je suis tombé sur une vidéo qui présente un workflow d’apprentissage avec Pi: https://www.youtube.com/watch?v=kzcI5F4tGiU&amp;t=803s</p>
+<p>J’ai voulu faire mon propre setup d’apprentissage adapté à mes besoins, donc j’ai établie ce diagramme.</p>
+<div class="img-single"><img src="Setup%20IA/image.png" alt="image.png" /></div>
+
+<p>Pour gérer le tout, j’ai determinéx 5 agents différents:</p>
+<div class="img-single"><img src="Setup%20IA/image%201.png" alt="image.png" /></div>
+
+<p>Une fois le workflow établi j’ai demandé à Claude Opus de mettre en place ce setup via ce prompt:</p>
+<pre><code class="language-bash">je suis en train d'établir un setup de workflow d'apprentissage basé sur le harnais agentique pi.dev. J'ai réalisé une premiere version du digramme  du worflow (mis en piece jointe). J'aimerai que tu l'analyse pour le comprendre entierement. Puis tu listera l'ensemble des outils et extension utile pour la réalisation de ce workflow. J'aimerai que génére entierement le setup pi, avec les skills, les agents, les templates. 
+Tu peux t'inspirer de ce github https://github.com/amosblomqvist/learn qui a été un peu mon inspiration, mais surtout respecte bien les phase de mon workflow. N'hesite pas a cherche sur le web, a adapté la logique ou a la completé pour que j'ai un setup d'apprentissage parfait pour moi
+</code></pre>
+<div class="img-single"><img src="Setup%20IA/Capture_decran_2026-09-11_a_16.16.37.png" alt="Capture d’écran 2026-09-11 à 16.16.37.png" /></div>
+
+<p>Le setup est disponible sur mon github:</p>
+<p><a href="https://github.com/18nelli18/PiCB">https://github.com/18nelli18/PiCB</a></p>
     </article>
   </body>
 </html>

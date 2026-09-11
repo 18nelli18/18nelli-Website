@@ -184,7 +184,7 @@ https://github.com/mksglu/context-mode: Réduit la taille du contexte sans perte
     ```
     
 
-### Essai d’un setup pour KiCAD:
+### Essai d’un setup pour KiCAD
 
 *Jeudi 10/09/26*
 
@@ -195,10 +195,6 @@ J’ai tenté de mettre en place un workflow de création de PCB avec plusieurs 
 Le fonctionnement global du workflow est résumé sur ce diagramme: 
 
 ```mermaid
----
-config:
-  layout: elk
----
 %%{init: {"flowchart": {"wrappingWidth": 400}} }%%
 flowchart LR
     Start(["👤 <b>Démarrage</b><br/>Besoin utilisateur"])
@@ -229,18 +225,50 @@ flowchart LR
 
     Success(["🚀 <b>Production</b><br/>Fabrication PCB & PCBA"])
 
-    %% Séquence principale et boucles réagencées
+    %% Séquence principale
     Start --> P1
     P1 -->|Brief validé| P2
-    P3 -.->|⚠️ Rejet| P2
     P2 --> P3
     P3 -->|Datasheets OK| P4
-    Gate1 -.->|❌ Non : lib incomplète| P4
     P4 --> Gate1
+
     Gate1 -->|✅ Oui| P5
-    Gate2 -.->|❌ Erreurs| P5
-    P6 -.->|🔧 Corrections| P5
+    Gate1 -.->|❌ Non : lib incomplète| P4
+
     P5 --> Gate2
     Gate2 -->|✅ 0 Erreur| P6
+    Gate2 -.->|❌ Erreurs| P5
+
+    %% Boucles de retour fonctionnelles
+    P3 -.->|⚠️ Rejet| P2
+    P6 -.->|🔧 Corrections| P5
     P6 -->|Validation finale| Success
+
 ```
+
+### Essai d’un setup pour l’apprentissage par projet:
+
+*Vendredi 11/09/26:*
+
+Après le test du setup pour PCB, je suis tombé sur une vidéo qui présente un workflow d’apprentissage avec Pi: https://www.youtube.com/watch?v=kzcI5F4tGiU&t=803s
+
+J’ai voulu faire mon propre setup d’apprentissage adapté à mes besoins, donc j’ai établie ce diagramme.
+
+![image.png](Setup%20IA/image.png)
+
+Pour gérer le tout, j’ai determinéx 5 agents différents:
+
+![image.png](Setup%20IA/image%201.png)
+
+Une fois le workflow établi j’ai demandé à Claude Opus de mettre en place ce setup via ce prompt:
+
+```bash
+je suis en train d'établir un setup de workflow d'apprentissage basé sur le harnais agentique pi.dev. J'ai réalisé une premiere version du digramme  du worflow (mis en piece jointe). J'aimerai que tu l'analyse pour le comprendre entierement. Puis tu listera l'ensemble des outils et extension utile pour la réalisation de ce workflow. J'aimerai que génére entierement le setup pi, avec les skills, les agents, les templates. 
+Tu peux t'inspirer de ce github https://github.com/amosblomqvist/learn qui a été un peu mon inspiration, mais surtout respecte bien les phase de mon workflow. N'hesite pas a cherche sur le web, a adapté la logique ou a la completé pour que j'ai un setup d'apprentissage parfait pour moi
+```
+
+![Capture d’écran 2026-09-11 à 16.16.37.png](Setup%20IA/Capture_decran_2026-09-11_a_16.16.37.png)
+
+Le setup est disponible sur mon github:
+
+[https://github.com/18nelli18/PiCB](https://github.com/18nelli18/PiCB)
