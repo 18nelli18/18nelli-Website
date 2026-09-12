@@ -80,11 +80,23 @@
          Bloc positionné et filtré à la main. Les valeurs en pixels
          sont volontaires : le rendu est calé pour un grand écran,
          les visiteurs mobiles partent sur mobile.html.
+
+         OÙ SE TROUVE LE BLOC, exactement :
+           horizontal = left + margin + translate = 0 + 165 + 63 = 228px
+           vertical   = top  + margin             = -50 + 165    = 115px
+
+         (`right` et `bottom` sont ignorés par le navigateur : avec
+          `width`/`height` déjà fixées, la boîte est sur-contrainte et
+          ce sont `top`/`left` qui l'emportent. On les garde tels quels.)
+
+         Pour redéplacer le bloc, ne toucher qu'à `top` et `left` :
+         tout le contenu (bandeau rouge, liens, GIF et panneau inversé)
+         suit, puisqu'il est dans ce conteneur.
          ============================================================ -->
     <div
       style="
-        top: 100px;
-        left: 150px;
+        top: -50px;
+        left: 0px;
         right: 10px;
         bottom: 100px;
         position: absolute;
