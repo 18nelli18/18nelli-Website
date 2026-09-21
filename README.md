@@ -105,7 +105,9 @@ GitHub).
 | page retirée de Blog               | article supprimé                    |
 | page renommée                      | article déplacé vers le nouveau slug |
 
-Tout ce qui est dans Blog est public : écrire les brouillons ailleurs.
+**Blog est la seule référence** : le site contient exactement ses
+sous-pages, rien de plus. Tout ce qui est dans Blog est public (écrire les
+brouillons ailleurs), et tout ce qui n'y est pas est retiré du site.
 Seules les sous-pages **directes** de Blog sont publiées (les sous-pages
 d'un article sont ignorées).
 
@@ -207,7 +209,11 @@ Options : `--force` (tout reconvertir), `--allow-empty` (voir garde-fou).
 - Si une page échoue (image introuvable…), les autres sont quand même
   publiées et l'Action finit en rouge : GitHub t'envoie un mail.
 
-### Méthode manuelle (toujours possible)
+### Ancienne méthode (export manuel)
+
+Elle ne sert plus qu'en dépannage : un export déposé à la main dans
+`blog/_sources/` est **retiré à la synchro suivante** si sa page n'est
+pas aussi dans Blog.
 
 1. Dans Notion : **Export → Markdown & CSV**
 2. Déposer le `.md` **et son dossier d'images** dans `blog/_sources/`

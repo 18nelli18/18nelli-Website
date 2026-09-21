@@ -16,6 +16,8 @@
 //   - page modifiée dans Notion     -> article reconverti (last_edited_time)
 //   - page retirée de Blog          -> son .md et ses images sont supprimés,
 //                                      blog-gen.sh retire ensuite l'article
+//   - BLOG EST LA SEULE RÉFÉRENCE : tout ce qui, dans _sources/, ne vient
+//     pas d'une page de Blog est supprimé (export manuel, fichier égaré…).
 //   - un .md déjà présent avec le même ID de page (ancien export manuel)
 //     est ADOPTÉ tel quel, sans réécriture : l'article garde sa date. Il
 //     sera reconverti à sa prochaine modification dans Notion.
@@ -28,8 +30,6 @@
 //
 //  ÉTAT : blog/_sources/.notion-sync.json (versionné) retient, pour chaque
 //  page, sa date de modification Notion et les fichiers qu'elle possède.
-//  Seuls ces fichiers-là sont réécrits ou supprimés : un export manuel
-//  déposé à la main dans _sources/ n'est jamais touché.
 //
 //  Zéro dépendance : Node >= 18 (fetch natif).
 // =====================================================================
@@ -536,13 +536,16 @@ async function main() {
   }
   for (const b of children) {
     if (b.type === 'child_database') warn(`Base de données « ${b.child_database.title} » dans Blog : ignorée.`);
+    if (b.type === 'link_to_page') {
+      warn('Lien vers une page dans Blog : ignoré. Pour la publier, déplace la page elle-même dans Blog (••• → Déplacer vers).');
+    }
   }
   const pages = children.filter((b) => b.type === 'child_page');
   info(`${pages.length} page(s) dans Blog`);
 
-  const managed = Object.keys(state.pages).length;
-  if (!pages.length && managed && !ALLOW_EMPTY) {
-    die(`Blog est vide alors que ${managed} article(s) sont publiés : par sécurité rien n'est supprimé. `
+  const published = (await fs.readdir(SRC_DIR)).filter((f) => f.endsWith('.md')).length;
+  if (!pages.length && published && !ALLOW_EMPTY) {
+    die(`Blog est vide alors que ${published} article(s) sont publiés : par sécurité rien n'est supprimé. `
       + 'Relance avec --allow-empty si c\'est voulu.');
   }
 
@@ -607,6 +610,25 @@ async function main() {
       failures++;
       error(`Échec pour la page ${id} : ${e.message}`);
     }
+  }
+
+  // 3) Blog est la seule référence : tout le reste de _sources/ est retiré.
+  //    Un .md dont la page EST dans Blog reste, même si sa conversion vient
+  //    d'échouer : on ne supprime jamais un article qu'on n'a pas pu remplacer.
+  const keep = new Set();
+  for (const e of Object.values(state.pages)) {
+    keep.add(key(e.md));
+    if (e.dir) keep.add(key(e.dir));
+  }
+  const entries = await fs.readdir(SRC_DIR);
+  for (const name of entries) {
+    const m = name.match(/^(.*) ([0-9a-f]{32})\.md$/);
+    if (m && present.has(m[2])) keep.add(key(name)).add(key(m[1]));
+  }
+  for (const name of entries) {
+    if (name.startsWith('.') || keep.has(key(name))) continue;
+    await removeEntry(name);
+    info(`Retiré (absent de Blog) : ${name}`);
   }
 
   if (!converted && !failures) info('Tout est déjà à jour.');

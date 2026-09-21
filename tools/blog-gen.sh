@@ -13,7 +13,8 @@
 #    .github/workflows/blog-sync.yml lance tools/notion-sync.mjs puis ce
 #    script, commite et déploie. Rien à faire à la main.
 #
-#  Workflow manuel (toujours possible) :
+#  Workflow manuel (dépannage seulement : la synchro retire tout export
+#  dont la page n'est pas aussi dans Blog) :
 #    1. Notion -> "Export" -> Markdown & CSV
 #    2. tu déposes le .md ET son dossier d'images dans blog/_sources/
 #    3. tu lances :  ./tools/blog-gen.sh
