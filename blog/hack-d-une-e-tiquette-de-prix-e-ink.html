@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>Hack d’une étiquette de prix e-ink</title>
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Iceland&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Comic+Neue&amp;display=swap"
+    />
+    <link rel="stylesheet" href="../assets/vendor/animate.min.css" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="article.css" />
+    <script defer src="article.js"></script>
+  </head>
+  <body
+    style="
+      background: url('../assets/img/dmontag.png') center / contain, rgb(0, 0, 0);
+    "
+  >
+    <h1 class="photoh1">Hack d’une étiquette de prix e-ink</h1>
+    <a href="../blog.html" class="house-link">
+      <img src="../assets/img/retour.png" alt="Retour" class="house-icon" />
+    </a>
+
+    <article class="article">
+      <p class="article-meta">last modified: 21/09/2026</p>
+<p><em>Dimanche 20/09/2026</em></p>
+<p>J’ai volé une étiquette de prix à Monoprix. Je vais essayer de voir
+si c’est possible de modifier son affichage ou s’il est bloqué par un
+code propriétaire. Si j’arrive à flasher un firmware custom j’aimerai
+bien en faire un petit module.</p>
+<div class="img-single">
+<img src="Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_22.24.52.png" alt="Capture d’écran 2026-09-20 à 22.24.52.png" />
+</div>
+<p>Le démontage est assez simple il suffit de retirer le cache pile et
+la protection de la dalle e-ink.</p>
+<div class="img-row">
+<img src="Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_23.18.20.png" alt="Capture d’écran 2026-09-20 à 23.18.20.png" /><img src="Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_23.18.47.png" alt="Capture d’écran 2026-09-20 à 23.18.47.png" /><img src="Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_23.19.23.png" alt="Capture d’écran 2026-09-20 à 23.19.23.png" /><img src="Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_23.18.35.png" alt="Capture d’écran 2026-09-20 à 23.18.35.png" /><img src="Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_23.18.58.png" alt="Capture d’écran 2026-09-20 à 23.18.58.png" />
+</div>
+<p>J’ai envoyé la référence du SoC à Opus4.8 pour qu’il m’explique la
+procédure de débug avec un raspberry pico (j’en ai un qui traine autant
+l’utiliser).</p>
+<p>Le branchement à faire pour dialoguer avec la puce est le
+suivant:</p>
+<div class="img-single">
+<img src="Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_23.34.05.png" alt="Capture d’écran 2026-09-20 à 23.34.05.png" />
+</div>
+<p>Je trouve donc avec un multimètre les points de contacts nécessaires
+auquels je pourrais me souder sur le pcb, en suivant le pinout de la
+doc:</p>
+<div class="img-row">
+<img src="Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-21_a_09.50.12.png" alt="Capture d’écran 2026-09-21 à 09.50.12.png" /><img src="Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/image.png" alt="image.png" />
+</div>
+<h3 id="transformer-notre-pico-en-debugger-cc">Transformer notre Pico en
+debugger CC:</h3>
+<ol type="1">
+<li>Télécharger l’IDE arduino et arduino-pico:</li>
+</ol>
+<p><a
+href="https://github.com/earlephilhower/arduino-pico/">https://github.com/earlephilhower/arduino-pico/</a></p>
+<ol type="1">
+<li>Récupérer un fork de CCLib pour CC2510:</li>
+</ol>
+<p><code>git clone https://github.com/wavesoft/CCLib.git</code></p>
+<ol type="1">
+<li>Ouvrir le fichier ino dans Examples/CCLib_proxy et définir le
+branchement:</li>
+</ol>
+<pre class="cpp"><code>// Pinout configuration (Configured for Arduino Leonardo)
+
+int CC_RST   = 3;
+int CC_DD_I  = 6;
+int CC_DD_O  = 7;
+int CC_DC    = 4;</code></pre>
+<ol type="1">
+<li>Flasher le Pico:</li>
+</ol>
+<div class="img-row">
+<img src="Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-21_a_11.48.29.png" alt="Capture d’écran 2026-09-21 à 11.48.29.png" /><img src="Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-21_a_11.48.34.png" alt="Capture d’écran 2026-09-21 à 11.48.34.png" />
+</div>
+<ol type="1">
+<li>Tester le python:</li>
+</ol>
+<pre><code>cd ~/Downloads/CCLib/Python
+pip3 install pyserial
+python3 cc_info.py -E
+18nelli@MacBook-Pro-van-18nelli Python % python3 cc_info.py -E</code></pre>
+<blockquote>
+<p>Deux corrections dans cclib/ccproxy.py à faire: ligne 203:
+self.ser.write( bytes([cmd, c1, c2, c3]) ) ligne 399: self.ser.write(
+bytes([b &amp; 0xFF]) )</p>
+</blockquote>
+<p>Le retour obtenu donne ceci:</p>
+<div class="img-single">
+<img src="Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-21_a_11.55.49.png" alt="Capture d’écran 2026-09-21 à 11.55.49.png" />
+</div>
+<p>On apprends donc que le DEBUG_LOCKED est actif, donc impossible de
+récupérer le firmware d’origine. Mais ça n’empêche pas l’effacement et
+la réécriture pour autant.</p>
+<p>Il y a une erreur dans la taille de la flash (noté 16Kb au lieu de
+16). C’est une valeurs à modif dans cclib/chip/cc2510.py:</p>
+<pre class="python"><code>self.chipInfo = {    &#39;flash&#39; : 32,   # était 16    &#39;usb&#39;   : 0,    &#39;sram&#39;  : 2}</code></pre>
+<p>Il faut aussi adapté la division flottante de python3</p>
+<pre class="bash"><code>words_per_flash_page = self.flashPageSize // self.flashWordSize </code></pre>
+<pre class="bash"><code>routine8_1 = [
+            #see http://www.ti.com/lit/ug/swra124/swra124.pdf page 11
+            0x75, 0xAD, ((address &gt;&gt; 8) // self.flashWordSize) &amp; 0x7E,   #MOV FADDRH, #imm;
+            0x75, 0xAC, 0x00                        #MOV FADDRL, #00;
+        ]</code></pre>
+<p>et ajouter une fonction setPC:</p>
+<pre class="bash"><code>def setPC(self, address):
+            aHigh = (address &gt;&gt; 8) &amp; 0xFF
+            aLow  = address &amp; 0xFF
+            return self.instr(0x02, aHigh, aLow)   # LJMP #address</code></pre>
+<p>J’ai fais générer le code de flash à Claude:</p>
+<pre class="bash"><code>#!/usr/bin/env python3
+import sys
+from cclib import CCHEXFile, getOptions, openCCDebugger
+
+opts = getOptions(&quot;CC2510 page-based flash writer&quot;, hexIn=True)
+dbg = openCCDebugger(opts[&#39;port&#39;], enterDebug=opts[&#39;enter&#39;])
+
+PAGE = dbg.flashPageSize          # 0x400 = 1024
+FLASH = dbg.flashSize             # 32768
+
+# 1. Charger le .hex et l&#39;aplatir en une image mémoire continue
+hexFile = CCHEXFile(opts[&#39;in&#39;])
+hexFile.load()
+
+image = bytearray([0xFF] * FLASH)   # flash vierge = 0xFF
+for mb in hexFile.memBlocks:
+    for i in range(mb.size):
+        image[mb.addr + i] = mb.bytes[i]
+
+# 2. Écrire page par page, seulement les pages qui contiennent du code
+
+dbg.enter()
+dbg.debug_active = True        # &lt;-- le garde-fou attend ce flag
+dbg.show_debug_info = False      # &lt;-- ajoute cette ligne
+
+for page in range(FLASH // PAGE):
+    start = page * PAGE
+    chunk = image[start:start + PAGE]
+    if all(b == 0xFF for b in chunk):
+        continue                      # page vide -&gt; on saute
+    print(f&quot; - Page {page} @ 0x{start:04x} ...&quot;, end=&quot; &quot;, flush=True)
+    dbg.writeFlashPage(start, chunk, erase_page=True)
+    print(&quot;ok&quot;)
+
+print(&quot;Terminé.&quot;)</code></pre>
+<h3 id="programmer-la-puce">Programmer la puce</h3>
+<p>On teste d’abord un blink en C.</p>
+<pre class="c"><code>// Déclaration des registres du CC2510 (adresses tirées du datasheet TI)
+__sfr __at (0x80) P0;
+__sfr __at (0x90) P1;
+__sfr __at (0xA0) P2;
+
+__sfr __at (0xFD) P0DIR;
+__sfr __at (0xFE) P1DIR;
+__sfr __at (0xFF) P2DIR;
+
+__sfr __at (0xF3) P0SEL;
+__sfr __at (0xF4) P1SEL;
+__sfr __at (0xF5) P2SEL;
+
+void delay(void) {
+    volatile unsigned long i;
+    for (i = 0; i &lt; 60000UL; i++);
+}
+
+void main(void) {
+    P0SEL = 0x00;  P1SEL = 0x00;  P2SEL = 0x00;   // tout en GPIO
+    P0DIR = 0xFF;  P1DIR = 0xFF;  P2DIR = 0xFF;   // tout en sortie
+
+    while (1) {
+        P0 = 0xFF; P1 = 0xFF; P2 = 0xFF;
+        delay();
+        P0 = 0x00; P1 = 0x00; P2 = 0x00;
+        delay();
+    }
+}</code></pre>
+<p>Puis on compile:</p>
+<pre class="bash"><code>sdcc -mmcs51 --model-small --code-size 0x8000 --xram-size 0x1000 blink.c</code></pre>
+<p>On convertie en .hex:</p>
+<pre class="bash"><code>cp blink.ihx blink.hex</code></pre>
+<p>Puis on utilise le script d’écriture de Claude:</p>
+<pre class="bash"><code>python3 ~/Downloads/CCLib/Python/flash_page.py -i blink.hex -p /dev/cu.usbmodem101</code></pre>
+<p><a
+href="Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/20476.mp4">20476.mp4</a></p>
+<h3 id="test-de-lécriture-de-la-dalle">Test de l’écriture de la
+dalle</h3>
+<p>On d’abord utiliser le firware de angrymew pour écrire sur l’écran:
+<a href="https://github.com/angrymew/firmware-cc2510"
+class="uri">https://github.com/angrymew/firmware-cc2510</a>. J’ai
+modifié avec Claude Opus 4.8 la structure et le fichier de flash pour
+l’adapter à mon cas car le repo est prévu pour Windows. Je mettrais
+surement un .zip de mon dossier avec toute les modifications à la
+fin.</p>
+<div class="img-row">
+<img src="Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/20479.jpg" alt="20479.jpg" /><img src="Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/20485.jpg" alt="20485.jpg" />
+</div>
+<p><em>Lundi 21/09/2026</em></p>
+<p>J’ai fournis à Claude Code (model Opus5 ultracode) l’ensemble des
+modifs et des démarches qui ont été faites pour la réécriture du
+firmware, puis je lui ai demandé de me fournir un outil web complet qui
+permet de flash le SoC avec le Pico en usb, et de mettre sur l’étiquette
+une image custom. Le résultat est vraiment satisfaisant.</p>
+<p><a
+href="https://github.com/18nelli18/Monopink">https://github.com/18nelli18/Monopink</a></p>
+<div class="img-single">
+<img src="Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-21_a_15.57.25.png" alt="Capture d’écran 2026-09-21 à 15.57.25.png" />
+</div>
+<p>La prochaine étape pourrais être d’essayer d’utiliser la fonction NFC
+du SoC pour transmettre via son téléphone l’images à upload, ou bien
+d’acheter un petit module émetteur radio pour automatiser des affichage
+avec une esp32</p>
+<div class="img-single">
+<img src="Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-21_a_16.25.29.png" alt="Capture d’écran 2026-09-21 à 16.25.29.png" />
+</div>
+    </article>
+  </body>
+</html>
