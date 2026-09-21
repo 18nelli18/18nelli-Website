@@ -22,7 +22,9 @@ name: Blog Notion
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    # Toutes les 15 min, décalé des minutes rondes : GitHub y est surchargé
+    # et retarde ou saute les tâches planifiées à :00/:15/:30/:45.
+    - cron: "7-59/15 * * * *"
   workflow_dispatch:
     inputs:
       force:
