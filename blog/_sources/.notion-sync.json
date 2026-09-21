@@ -1,6 +1,18 @@
 {
   "_info": "Généré par tools/notion-sync.mjs : ne pas éditer à la main.",
   "pages": {
+    "214fcec02ad28096b9d9c64fd1147fa2": {
+      "title": "Pompe ultralight",
+      "lastEdited": "2026-09-21T20:28:00.000Z",
+      "md": "Pompe ultralight 214fcec02ad28096b9d9c64fd1147fa2.md",
+      "dir": "Pompe ultralight"
+    },
+    "34efcec02ad280129640d19d5c5a296e": {
+      "title": "WESK: Wireless Ergonomic Split Keyboard",
+      "lastEdited": "2026-09-21T20:28:00.000Z",
+      "md": "WESK Wireless Ergonomic Split Keyboard 34efcec02ad280129640d19d5c5a296e.md",
+      "dir": "WESK Wireless Ergonomic Split Keyboard"
+    },
     "37dfcec02ad2808c8dbec1ca6c1d0707": {
       "title": "Migser - mixer eurorack stéréo 6 entrées",
       "lastEdited": "2026-09-21T20:27:00.000Z",
@@ -13,6 +25,12 @@
       "md": "Cazier - Boitier Eurorack portable 389fcec02ad280d288f9df29e9e2c02e.md",
       "dir": "Cazier - Boitier Eurorack portable"
     },
+    "3c8fcec02ad28071a507f2ec3ec7fb91": {
+      "title": "Setup IA",
+      "lastEdited": "2026-09-21T20:28:00.000Z",
+      "md": "Setup IA 3c8fcec02ad28071a507f2ec3ec7fb91.md",
+      "dir": "Setup IA"
+    },
     "3d3fcec02ad28031873cf53549adc8d5": {
       "title": "Asahi sur M3",
       "lastEdited": "2026-09-21T19:35:00.000Z",
@@ -21,13 +39,13 @@
     },
     "3d5fcec02ad280698134ec3c47f44488": {
       "title": "Van miniature",
-      "lastEdited": "2026-09-21T20:27:00.000Z",
+      "lastEdited": "2026-09-21T20:28:00.000Z",
       "md": "Van miniature 3d5fcec02ad280698134ec3c47f44488.md",
       "dir": "Van miniature"
     },
     "3e1fcec02ad2804184c7ddc55d3a6ee6": {
       "title": "Hack d’une étiquette de prix e-ink",
-      "lastEdited": "2026-09-21T19:39:00.000Z",
+      "lastEdited": "2026-09-21T20:28:00.000Z",
       "md": "Hack d’une étiquette de prix e-ink 3e1fcec02ad2804184c7ddc55d3a6ee6.md",
       "dir": "Hack d’une étiquette de prix e-ink"
     }

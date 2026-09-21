@@ -41,12 +41,12 @@ si c’est possible de modifier son affichage ou s’il est bloqué par un
 code propriétaire. Si j’arrive à flasher un firmware custom j’aimerai
 bien en faire un petit module.</p>
 <div class="img-single">
-<img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_22.24.52.png" alt="Capture d’écran 2026-09-20 à 22.24.52.png" />
+<img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_22.24.52.png" alt="Capture_decran_2026-09-20_a_22.24.52.png" />
 </div>
 <p>Le démontage est assez simple il suffit de retirer le cache pile et
 la protection de la dalle e-ink.</p>
 <div class="img-row">
-<img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_23.18.20.png" alt="Capture d’écran 2026-09-20 à 23.18.20.png" /><img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_23.18.47.png" alt="Capture d’écran 2026-09-20 à 23.18.47.png" /><img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_23.19.23.png" alt="Capture d’écran 2026-09-20 à 23.19.23.png" /><img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_23.18.35.png" alt="Capture d’écran 2026-09-20 à 23.18.35.png" /><img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_23.18.58.png" alt="Capture d’écran 2026-09-20 à 23.18.58.png" />
+<img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_23.18.20.png" alt="Capture_decran_2026-09-20_a_23.18.20.png" /><img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_23.18.47.png" alt="Capture_decran_2026-09-20_a_23.18.47.png" /><img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_23.19.23.png" alt="Capture_decran_2026-09-20_a_23.19.23.png" /><img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_23.18.35.png" alt="Capture_decran_2026-09-20_a_23.18.35.png" /><img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_23.18.58.png" alt="Capture_decran_2026-09-20_a_23.18.58.png" />
 </div>
 <p>J’ai envoyé la référence du SoC à Opus4.8 pour qu’il m’explique la
 procédure de débug avec un raspberry pico (j’en ai un qui traine autant
@@ -54,13 +54,13 @@ l’utiliser).</p>
 <p>Le branchement à faire pour dialoguer avec la puce est le
 suivant:</p>
 <div class="img-single">
-<img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_23.34.05.png" alt="Capture d’écran 2026-09-20 à 23.34.05.png" />
+<img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-20_a_23.34.05.png" alt="Capture_decran_2026-09-20_a_23.34.05.png" />
 </div>
 <p>Je trouve donc avec un multimètre les points de contacts nécessaires
 auquels je pourrais me souder sur le pcb, en suivant le pinout de la
 doc:</p>
 <div class="img-row">
-<img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-21_a_09.50.12.png" alt="Capture d’écran 2026-09-21 à 09.50.12.png" /><img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/image.png" alt="image.png" />
+<img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-21_a_09.50.12.png" alt="Capture_decran_2026-09-21_a_09.50.12.png" /><img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/image.png" alt="image.png" />
 </div>
 <h3 id="transformer-notre-pico-en-debugger-cc">Transformer notre Pico en
 debugger CC:</h3>
@@ -87,7 +87,7 @@ int CC_DC    = 4;</code></pre>
 <li>Flasher le Pico:</li>
 </ol>
 <div class="img-row">
-<img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-21_a_11.48.29.png" alt="Capture d’écran 2026-09-21 à 11.48.29.png" /><img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-21_a_11.48.34.png" alt="Capture d’écran 2026-09-21 à 11.48.34.png" />
+<img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-21_a_11.48.29.png" alt="Capture_decran_2026-09-21_a_11.48.29.png" /><img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-21_a_11.48.34.png" alt="Capture_decran_2026-09-21_a_11.48.34.png" />
 </div>
 <ol type="1">
 <li>Tester le python:</li>
@@ -97,13 +97,13 @@ pip3 install pyserial
 python3 cc_info.py -E
 18nelli@MacBook-Pro-van-18nelli Python % python3 cc_info.py -E</code></pre>
 <blockquote>
-<p>Deux corrections dans cclib/ccproxy.py à faire: ligne 203:
-self.ser.write( bytes([cmd, c1, c2, c3]) ) ligne 399: self.ser.write(
-bytes([b &amp; 0xFF]) )</p>
+<p>Deux corrections dans cclib/ccproxy.py à faire:<br />
+ligne 203: self.ser.write( bytes([cmd, c1, c2, c3]) )<br />
+ligne 399: self.ser.write( bytes([b &amp; 0xFF]) )</p>
 </blockquote>
 <p>Le retour obtenu donne ceci:</p>
 <div class="img-single">
-<img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-21_a_11.55.49.png" alt="Capture d’écran 2026-09-21 à 11.55.49.png" />
+<img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-21_a_11.55.49.png" alt="Capture_decran_2026-09-21_a_11.55.49.png" />
 </div>
 <p>On apprends donc que le DEBUG_LOCKED est actif, donc impossible de
 récupérer le firmware d’origine. Mais ça n’empêche pas l’effacement et
@@ -112,19 +112,19 @@ la réécriture pour autant.</p>
 16). C’est une valeurs à modif dans cclib/chip/cc2510.py:</p>
 <pre class="python"><code>self.chipInfo = {    &#39;flash&#39; : 32,   # était 16    &#39;usb&#39;   : 0,    &#39;sram&#39;  : 2}</code></pre>
 <p>Il faut aussi adapté la division flottante de python3</p>
-<pre class="bash"><code>words_per_flash_page = self.flashPageSize // self.flashWordSize </code></pre>
-<pre class="bash"><code>routine8_1 = [
+<pre class="shell"><code>words_per_flash_page = self.flashPageSize // self.flashWordSize </code></pre>
+<pre class="shell"><code>routine8_1 = [
             #see http://www.ti.com/lit/ug/swra124/swra124.pdf page 11
             0x75, 0xAD, ((address &gt;&gt; 8) // self.flashWordSize) &amp; 0x7E,   #MOV FADDRH, #imm;
             0x75, 0xAC, 0x00                        #MOV FADDRL, #00;
         ]</code></pre>
 <p>et ajouter une fonction setPC:</p>
-<pre class="bash"><code>def setPC(self, address):
+<pre class="shell"><code>def setPC(self, address):
             aHigh = (address &gt;&gt; 8) &amp; 0xFF
             aLow  = address &amp; 0xFF
             return self.instr(0x02, aHigh, aLow)   # LJMP #address</code></pre>
 <p>J’ai fais générer le code de flash à Claude:</p>
-<pre class="bash"><code>#!/usr/bin/env python3
+<pre class="shell"><code>#!/usr/bin/env python3
 import sys
 from cclib import CCHEXFile, getOptions, openCCDebugger
 
@@ -191,20 +191,20 @@ void main(void) {
     }
 }</code></pre>
 <p>Puis on compile:</p>
-<pre class="bash"><code>sdcc -mmcs51 --model-small --code-size 0x8000 --xram-size 0x1000 blink.c</code></pre>
+<pre class="shell"><code>sdcc -mmcs51 --model-small --code-size 0x8000 --xram-size 0x1000 blink.c</code></pre>
 <p>On convertie en .hex:</p>
-<pre class="bash"><code>cp blink.ihx blink.hex</code></pre>
+<pre class="shell"><code>cp blink.ihx blink.hex</code></pre>
 <p>Puis on utilise le script d’écriture de Claude:</p>
-<pre class="bash"><code>python3 ~/Downloads/CCLib/Python/flash_page.py -i blink.hex -p /dev/cu.usbmodem101</code></pre>
+<pre class="shell"><code>python3 ~/Downloads/CCLib/Python/flash_page.py -i blink.hex -p /dev/cu.usbmodem101</code></pre>
 <p><a
 href="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/20476.mp4">20476.mp4</a></p>
 <h3 id="test-de-lécriture-de-la-dalle">Test de l’écriture de la
 dalle</h3>
 <p>On d’abord utiliser le firware de angrymew pour écrire sur l’écran:
-<a href="https://github.com/angrymew/firmware-cc2510"
-class="uri">https://github.com/angrymew/firmware-cc2510</a>. J’ai
-modifié avec Claude Opus 4.8 la structure et le fichier de flash pour
-l’adapter à mon cas car le repo est prévu pour Windows. Je mettrais
+<a
+href="https://github.com/angrymew/firmware-cc2510">https://github.com/angrymew/firmware-cc2510</a>.
+J’ai modifié avec Claude Opus 4.8 la structure et le fichier de flash
+pour l’adapter à mon cas car le repo est prévu pour Windows. Je mettrais
 surement un .zip de mon dossier avec toute les modifications à la
 fin.</p>
 <div class="img-row">
@@ -219,14 +219,14 @@ une image custom. Le résultat est vraiment satisfaisant.</p>
 <p><a
 href="https://github.com/18nelli18/Monopink">https://github.com/18nelli18/Monopink</a></p>
 <div class="img-single">
-<img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-21_a_15.57.25.png" alt="Capture d’écran 2026-09-21 à 15.57.25.png" />
+<img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-21_a_15.57.25.png" alt="Capture_decran_2026-09-21_a_15.57.25.png" />
 </div>
 <p>La prochaine étape pourrais être d’essayer d’utiliser la fonction NFC
 du SoC pour transmettre via son téléphone l’images à upload, ou bien
 d’acheter un petit module émetteur radio pour automatiser des affichage
 avec une esp32</p>
 <div class="img-single">
-<img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-21_a_16.25.29.png" alt="Capture d’écran 2026-09-21 à 16.25.29.png" />
+<img src="_sources/Hack%20d%E2%80%99une%20%C3%A9tiquette%20de%20prix%20e-ink/Capture_decran_2026-09-21_a_16.25.29.png" alt="Capture_decran_2026-09-21_a_16.25.29.png" />
 </div>
     </article>
   </body>
