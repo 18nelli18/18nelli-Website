@@ -1,6 +1,7 @@
 # Pompe ultralight
 
 <!-- date: 17/06/2025 -->
+<!-- modified: 21/09/2026 -->
 
 L’idée de ce projet est de concevoir une pompe pour matelas de randonnée, ultralight en dessous des 15 grammes et le moins cher possible.
 

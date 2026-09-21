@@ -1,6 +1,7 @@
 # Hack d’une étiquette de prix e-ink
 
 <!-- date: 20/09/2026 -->
+<!-- modified: 21/09/2026 -->
 
 *Dimanche 20/09/2026*
 

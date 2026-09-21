@@ -1,6 +1,7 @@
 # Van miniature
 
 <!-- date: 09/09/2026 -->
+<!-- modified: 21/09/2026 -->
 
 *Mercredi 09/09/26:*
 
@@ -69,17 +70,17 @@ Je vais coller sur une plaque imprimée en 3D du ruban à motif
 
 *Dimanche 20/09/2026*
 
-J’ai finalement tout fait en impression 3D, peinture et couture. Les délais de livraisons et la nouvelles taxes aliexpress ça m’a saouler. Voici quelques photo du process ainsi que le résultat!
+J’ai finalement tout fait en impression 3D, peinture et couture. Les délais de livraisons et la nouvelles taxes aliexpress ça m’a saouler. Voici quelques photos prises pendant la confection
 
 ![image 1.png](Van%20miniature/image%201.png)
-
-![image 2.png](Van%20miniature/image%202.png)
 
 ![Capture_decran_2026-09-21_a_23.07.26.png](Van%20miniature/Capture_decran_2026-09-21_a_23.07.26.png)
 
 ![Capture_decran_2026-09-21_a_23.07.49.png](Van%20miniature/Capture_decran_2026-09-21_a_23.07.49.png)
 
 ![Capture_decran_2026-09-21_a_23.08.00.png](Van%20miniature/Capture_decran_2026-09-21_a_23.08.00.png)
+
+![image 2.png](Van%20miniature/image%202.png)
 
 ![Capture_decran_2026-09-21_a_23.08.20.png](Van%20miniature/Capture_decran_2026-09-21_a_23.08.20.png)
 
