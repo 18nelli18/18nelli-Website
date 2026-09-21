@@ -1,5 +1,7 @@
 # Asahi sur M3
 
+<!-- date: 07/09/2026 -->
+
 *Lundi 7/09/26*
 
 Un tweet d’un des porteur du projet Asahi vient d’annoncer le support des mac M3:

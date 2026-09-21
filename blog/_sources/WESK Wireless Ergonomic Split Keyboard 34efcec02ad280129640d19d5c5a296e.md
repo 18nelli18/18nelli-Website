@@ -1,5 +1,7 @@
 # WESK: Wireless Ergonomic Split Keyboard
 
+<!-- date: 27/04/2026 -->
+
 ![image.png](WESK%20Wireless%20Ergonomic%20Split%20Keyboard/image.png)
 
 ### Fonctionnalités :

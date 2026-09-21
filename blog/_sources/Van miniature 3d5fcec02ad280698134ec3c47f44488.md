@@ -1,5 +1,7 @@
 # Van miniature
 
+<!-- date: 09/09/2026 -->
+
 *Mercredi 09/09/26:*
 
 C’est bientôt l’anniversaire de ma copine et j’aimerai lui fabriquer quelque chose ou j’aurai passer du temps et un peu plus personnel qu’un simple achat. Étant de simple humains de 22ans couple en 2026, on rêve évidemment d’avoir un van emménager. En attendant d’être assez riche pour ça, je vais essayer d’en faire un avec les moyens que j’ai: Aliexpress et une imprimante 3D.

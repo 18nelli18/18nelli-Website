@@ -1,5 +1,7 @@
 # Hack d’une étiquette de prix e-ink
 
+<!-- date: 20/09/2026 -->
+
 *Dimanche 20/09/2026*
 
 J’ai volé une étiquette de prix à Monoprix. Je vais essayer de voir si c’est possible de modifier son affichage ou s’il est bloqué par un code propriétaire. Si j’arrive à flasher un firmware custom j’aimerai bien en faire un petit module.

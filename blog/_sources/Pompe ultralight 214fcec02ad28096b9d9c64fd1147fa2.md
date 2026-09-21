@@ -1,5 +1,7 @@
 # Pompe ultralight
 
+<!-- date: 17/06/2025 -->
+
 L’idée de ce projet est de concevoir une pompe pour matelas de randonnée, ultralight en dessous des 15 grammes et le moins cher possible.
 
 La solution commercialisé actuelle est la padpal v5. Mais 45euro pour un moteur et une hélice flemme un peu.

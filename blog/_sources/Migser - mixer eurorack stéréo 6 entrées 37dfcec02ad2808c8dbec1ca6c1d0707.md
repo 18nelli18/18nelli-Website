@@ -1,5 +1,7 @@
 # Migser - mixer eurorack stéréo 6 entrées
 
+<!-- date: 12/06/2026 -->
+
 ![Capture_decran_2026-06-12_a_13.26.07.png](Migser%20-%20mixer%20eurorack%20st%C3%A9r%C3%A9o%206%20entr%C3%A9es/Capture_decran_2026-06-12_a_13.26.07.png)
 
 *18/06/2026*

@@ -1,5 +1,7 @@
 # Cazier - Boitier Eurorack portable
 
+<!-- date: 24/06/2026 -->
+
 ![d2dd2cf1-6c2b-4df2-a49a-d18254295a7e.png](Cazier%20-%20Boitier%20Eurorack%20portable/d2dd2cf1-6c2b-4df2-a49a-d18254295a7e.png)
 
 Dernière version à jour : [https://www.thingiverse.com/thing:7374654](https://www.thingiverse.com/thing:7374654)

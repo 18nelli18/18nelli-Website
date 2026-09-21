@@ -1,5 +1,7 @@
 # Setup IA
 
+<!-- date: 26/08/2026 -->
+
 *26/08/26*
 
 Mon cerveau déjà très ramolli est fatigué de devoir réfléchir. J’aimerai qu’une IA puisse utiliser mon intelligence feignante au service de truc cool. Si l’IA avait accès à la puissance de calcul de mon cerveau elle ferait de grande chose. Malheureusement la relation avec l’IA est unilatérale. Elle a besoin que j’exploite sa puissance de calcule pour fonctionner, moi je fonctionne par défaut sans tâches à accomplir. Du coup autant essayer d’en tirer profit un peu.
