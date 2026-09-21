@@ -357,6 +357,15 @@
           lang = cls.replace('language-', '');
         }
       });
+      // pandoc (--no-highlight) met le langage sur <pre class="bash">
+      // et non sur <code> : on le récupère, et on le recopie sur <code>
+      // pour que highlight.js colore dans le bon langage.
+      if (!lang) {
+        pre.classList.forEach(function (cls) {
+          if (!lang && cls !== 'sourceCode' && cls !== 'mermaid') lang = cls;
+        });
+        if (lang) code.classList.add('language-' + lang);
+      }
 
       // Création du conteneur Notion / GitHub
       const wrapper = document.createElement('div');

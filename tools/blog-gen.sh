@@ -452,6 +452,15 @@ if [ ! -f "$ARTICLE_JS" ]; then
           lang = cls.replace('language-', '');
         }
       });
+      // pandoc (--no-highlight) met le langage sur <pre class="bash">
+      // et non sur <code> : on le récupère, et on le recopie sur <code>
+      // pour que highlight.js colore dans le bon langage.
+      if (!lang) {
+        pre.classList.forEach(function (cls) {
+          if (!lang && cls !== 'sourceCode' && cls !== 'mermaid') lang = cls;
+        });
+        if (lang) code.classList.add('language-' + lang);
+      }
 
       // Création du conteneur Notion / GitHub
       const wrapper = document.createElement('div');
@@ -775,14 +784,18 @@ for md in "${mds[@]}"; do
   title_esc="$(printf '%s' "$title" | html_escape)"
 
   # Résolution intelligente de la date de l'article :
+  # 0) Date de création Notion posée par notion-sync.mjs sous le titre
+  #    (<!-- date: JJ/MM/AAAA -->) : elle prime sur tout le reste.
   # 1) Si le .md est suivi dans Git et n'a pas été modifié localement :
   #    a) date d'origine déjà enregistrée dans HEAD:blog.html
   #    b) sinon date du dernier commit Git
   # 2) Si le .md est nouveau ou modifié localement : date du fichier sur le disque (stat)
   mtime=""
-  date_fr=""
+  date_fr="$(sed -n 's#^<!-- date: \([0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9]\) -->$#\1#p' "$md" | head -n1)"
 
-  if git ls-files --error-unmatch "$md" >/dev/null 2>&1 && git diff --quiet "$md" 2>/dev/null; then
+  if [ -n "$date_fr" ]; then
+    :
+  elif git ls-files --error-unmatch "$md" >/dev/null 2>&1 && git diff --quiet "$md" 2>/dev/null; then
     if [ -n "$HEAD_BLOG" ]; then
       old_date="$(printf '%s\n' "$HEAD_BLOG" | sed -n "s/.*>${title_esc}<\/a>[[:space:]]*<span class=\"date\">\([0-9/]*\)<\/span>.*/\1/p" | head -n1 || true)"
       if [ -n "$old_date" ]; then
@@ -827,9 +840,9 @@ for md in "${mds[@]}"; do
     continue
   fi
 
-  # 1) retire le 1er H1   2) images + embeds Falstad   3) convertit
+  # 1) retire le 1er H1 et la ligne de date   2) images + embeds Falstad   3) convertit
   body_tmp="$(mktemp)"
-  awk 'BEGIN{d=0} /^# /{ if(!d){d=1; next} } {print}' "$md" \
+  awk 'BEGIN{d=0} /^# /{ if(!d){d=1; next} } /^<!-- date: .* -->$/{next} {print}' "$md" \
     | awk -v FALSTAD_PARAMS="$FALSTAD_PARAMS" "$PRE_AWK" > "$body_tmp"
   article_html="$(md_to_html "$body_tmp")"
   rm -f "$body_tmp"

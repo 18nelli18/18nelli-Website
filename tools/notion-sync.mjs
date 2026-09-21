@@ -25,6 +25,10 @@
 //   - --allow-empty : autorise à tout dépublier si Blog est vide (garde-fou
 //                     contre une intégration déconnectée par erreur).
 //
+//  DATE : chaque .md porte, sous son titre, la date de CRÉATION de la page
+//  Notion (<!-- date: JJ/MM/AAAA -->, heure de Paris). blog-gen.sh l'affiche
+//  et trie le sommaire avec, au lieu de la date du fichier.
+//
 //  IMAGES : les URL de fichiers Notion expirent au bout d'une heure, elles
 //  sont donc téléchargées dans blog/_sources/<Titre>/.
 //
@@ -487,6 +491,27 @@ async function chooseBase(id, title, own) {
   return base;
 }
 
+// --- Date de l'article -------------------------------------------------
+const frDate = (iso) => new Intl.DateTimeFormat('fr-FR', {
+  timeZone: 'Europe/Paris', day: '2-digit', month: '2-digit', year: 'numeric',
+}).format(new Date(iso));
+const DATE_MARK = /^<!-- date: .* -->$/m;
+const dateMark = (d) => `<!-- date: ${d} -->`;
+
+// Pose (ou corrige) la date dans un .md existant, juste sous le titre :
+// pages adoptées, ou converties avant que la date soit gérée.
+async function ensureDate(mdName, date) {
+  const mdPath = path.join(SRC_DIR, mdName);
+  const md = await fs.readFile(mdPath, 'utf8');
+  const next = DATE_MARK.test(md)
+    ? md.replace(DATE_MARK, dateMark(date))
+    : md.replace(/^(# .*\n)/m, `$1\n${dateMark(date)}\n`);
+  if (next === md) return false;
+  await fs.writeFile(mdPath, next);
+  info(`Date de création posée (${date}) : ${mdName}`);
+  return true;
+}
+
 // --- État --------------------------------------------------------------
 async function loadState() {
   try {
@@ -569,6 +594,7 @@ async function main() {
       const page = await notion(`/pages/${blk.id}`);
       const title = pageTitle(page) || blk.child_page?.title || 'Sans titre';
       const lastEdited = page.last_edited_time;
+      const created = frDate(page.created_time);
       const prev = state.pages[id];
 
       // Ancien export manuel de cette même page déjà présent dans _sources/ ?
@@ -584,6 +610,7 @@ async function main() {
         state.pages[id] = adopted;
         await saveState(state);
         info(`Export existant adopté tel quel : ${adopted.md}`);
+        await ensureDate(adopted.md, created);
         continue;
       }
 
@@ -591,7 +618,10 @@ async function main() {
       const upToDate = prev && prev.lastEdited === lastEdited
         && existsSync(path.join(SRC_DIR, prev.md))
         && (!prev.dir || existsSync(path.join(SRC_DIR, prev.dir)));
-      if (upToDate && !FORCE) continue;
+      if (upToDate && !FORCE) {
+        await ensureDate(prev.md, created);
+        continue;
+      }
 
       const oldBase = old?.md.slice(0, -` ${id}.md`.length);
       const base = await chooseBase(id, title, [oldBase, old?.dir]);
@@ -599,7 +629,7 @@ async function main() {
 
       const ctx = { dir: base, downloads: [], used: new Set() };
       const body = renderBlocks(await fetchTree(blk.id), ctx);
-      const md = `# ${title}\n\n${body}\n`;
+      const md = `# ${title}\n\n${dateMark(created)}\n\n${body}\n`;
 
       await writePage({ md, downloads: ctx.downloads, names, old });
       state.pages[id] = { title, lastEdited, md: names.md, dir: ctx.downloads.length ? names.dir : null };
