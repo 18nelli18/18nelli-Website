@@ -8,10 +8,18 @@
 #  Emplacement : tools/blog-gen.sh — à lancer depuis n'importe où, le
 #  script retrouve seul la racine du site (dossier parent de tools/).
 #
-#  Workflow :
+#  Workflow automatique (par défaut) :
+#    tu glisses ta page dans la page Notion « Blog » : la GitHub Action
+#    .github/workflows/blog-sync.yml lance tools/notion-sync.mjs puis ce
+#    script, commite et déploie. Rien à faire à la main.
+#
+#  Workflow manuel (toujours possible) :
 #    1. Notion -> "Export" -> Markdown & CSV
 #    2. tu déposes le .md ET son dossier d'images dans blog/_sources/
 #    3. tu lances :  ./tools/blog-gen.sh
+#
+#  SUPPRESSION : un blog/<slug>.html dont le .md a disparu de _sources/
+#  est supprimé (tout blog/*.html est généré par ce script).
 #
 #  BLOCS DE CODE (NOTION / GITHUB) :
 #   - blocs ```lang ... ``` indentés ou racine correctement isolés et convertis.
@@ -556,6 +564,16 @@ PY
 
 html_escape() { sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g' -e 's/"/\&quot;/g'; }
 
+# Normalise un nom en Unicode NFC. macOS renvoie certains noms de fichiers
+# décomposés (NFD : "e" + accent combinant) alors que Linux, git et le
+# markdown de Notion utilisent la forme composée (NFC) : sans ça, le slug
+# et le préfixage des images diffèrent entre ton Mac et la GitHub Action.
+if command -v perl >/dev/null 2>&1 && perl -MUnicode::Normalize -e 1 2>/dev/null; then
+  nfc() { perl -CSA -MUnicode::Normalize -e 'print NFC($ARGV[0])' -- "$1"; }
+else
+  nfc() { printf '%s' "$1"; }
+fi
+
 # Encode un nom de dossier en pourcent-encodage, comme le fait un
 # convertisseur markdown :
 #   "Setup IA"                    -> "Setup%20IA"
@@ -582,20 +600,28 @@ url_encode_path() {
 #   src="Setup%20IA/image.png"  ->  src="_sources/Setup%20IA/image.png"
 # Les chemins déjà préfixés, les URL absolues et ../assets sont ignorés
 # puisqu'ils ne commencent pas par un nom de dossier connu.
+#
+# Variantes de chaque nom de dossier, calculées une seule fois : nom brut
+# ET encodé (selon le convertisseur, pandoc ou python-markdown, l'un ou
+# l'autre apparaît dans le HTML), chacun tel quel ET en NFC (voir nfc()).
+IMG_DIR_VARIANTS=()
+for dir in "$SRC_DIR"/*/; do
+  [ -d "$dir" ] || continue
+  name="$(basename "$dir")"
+  name_nfc="$(nfc "$name")"
+  IMG_DIR_VARIANTS+=("$name" "$(url_encode_path "$name")")
+  if [ "$name_nfc" != "$name" ]; then
+    IMG_DIR_VARIANTS+=("$name_nfc" "$(url_encode_path "$name_nfc")")
+  fi
+done
+
 prefix_image_paths() {
-  local html="$1" dir name enc
-  for dir in "$SRC_DIR"/*/; do
-    [ -d "$dir" ] || continue
-    name="$(basename "$dir")"
-    enc="$(url_encode_path "$name")"
-    # On essaie le nom brut ET le nom encode : selon le convertisseur
-    # (pandoc ou python-markdown) l'un ou l'autre apparait dans le HTML.
-    for variant in "$name" "$enc"; do
-      html="${html//src=\"$variant\//src=\"$IMG_PREFIX/$variant/}"
-      html="${html//href=\"$variant\//href=\"$IMG_PREFIX/$variant/}"
-      html="${html//src=\"./$variant\//src=\"$IMG_PREFIX/$variant/}"
-      html="${html//href=\"./$variant\//href=\"$IMG_PREFIX/$variant/}"
-    done
+  local html="$1" variant
+  for variant in ${IMG_DIR_VARIANTS[@]+"${IMG_DIR_VARIANTS[@]}"}; do
+    html="${html//src=\"$variant\//src=\"$IMG_PREFIX/$variant/}"
+    html="${html//href=\"$variant\//href=\"$IMG_PREFIX/$variant/}"
+    html="${html//src=\"./$variant\//src=\"$IMG_PREFIX/$variant/}"
+    html="${html//href=\"./$variant\//href=\"$IMG_PREFIX/$variant/}"
   done
   printf '%s' "$html"
 }
@@ -738,7 +764,7 @@ count_gen=0
 count_skip=0
 
 for md in "${mds[@]}"; do
-  base="$(basename "$md")"; base="${base%.md}"
+  base="$(nfc "$(basename "$md")")"; base="${base%.md}"
   slug="$(make_slug "$base")"; [ -n "$slug" ] || slug="article"
   html_name="$slug.html"
   html_path="$BLOG_DIR/$html_name"
@@ -877,6 +903,19 @@ HTML
   count_gen=$((count_gen + 1))
 done
 
+# --- Suppression des articles orphelins ------------------------------
+# Tout blog/*.html est généré ici : un .html sans .md correspondant vient
+# d'un article retiré (ou renommé) et ne doit plus être publié.
+count_del=0
+for html in "$BLOG_DIR"/*.html; do
+  html_name="$(basename "$html")"
+  if ! cut -f3 "$index_tmp" | grep -qxF "$html_name"; then
+    rm -f "$html"
+    info "Article supprime (plus de source) : blog/$html_name"
+    count_del=$((count_del + 1))
+  fi
+done
+
 # --- Mise à jour de blog.html ----------------------------------------
 if ! grep -q 'blog/article.css' "$INDEX_FILE"; then
   rewrite "$INDEX_FILE" '
@@ -913,4 +952,5 @@ if [ "$count_gen" -gt 0 ]; then
 else
   info "Tous les articles sont deja a jour ($count_skip/$count_total)."
 fi
+[ "$count_del" -eq 0 ] || info "$count_del article(s) supprime(s)."
 printf '%sTermine.%s\n' "$c_ok" "$c_rst"

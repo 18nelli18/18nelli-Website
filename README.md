@@ -57,8 +57,13 @@ framework. On ouvre un `.html` et ça marche.
 │
 ├── projets/<nom>/          Mini-projets autonomes (HTML+CSS+JS chacun)
 │
+├── .github/workflows/
+│   └── blog-sync.yml       Notion -> blog -> commit -> déploiement (auto)
+│
 └── tools/
+    ├── notion-sync.mjs     Page Notion « Blog » -> blog/_sources/
     ├── blog-gen.sh         Markdown Notion -> articles HTML + sommaire
+    ├── replace.sh          Copie de référence du script de déploiement serveur
     ├── gen.sh              Dossier d'images -> blocs HTML de galerie
     └── check-links.mjs     Vérifie que tous les liens locaux résolvent
 ```
@@ -87,6 +92,123 @@ fond et la typographie. Elles ne sont volontairement pas importées.
 
 ## Ajouter un article de blog
 
+**Glisser la page dans la page Notion « Blog ».** C'est tout : dans les
+15 minutes, la GitHub Action `blog-sync.yml` la récupère, la convertit,
+commite et déploie. Pour publier tout de suite : onglet **Actions** du
+dépôt → **Blog Notion** → **Run workflow** (marche aussi depuis l'appli
+GitHub).
+
+| Dans Notion                        | Sur le site                         |
+| ---------------------------------- | ----------------------------------- |
+| page glissée dans Blog             | article publié                      |
+| page modifiée (déjà dans Blog)     | article mis à jour                  |
+| page retirée de Blog               | article supprimé                    |
+| page renommée                      | article déplacé vers le nouveau slug |
+
+Tout ce qui est dans Blog est public : écrire les brouillons ailleurs.
+Seules les sous-pages **directes** de Blog sont publiées (les sous-pages
+d'un article sont ignorées).
+
+Chaque push sur `main` déclenche aussi le déploiement : plus besoin de
+lancer `replace.sh` à la main.
+
+### Comment ça marche
+
+1. `tools/notion-sync.mjs` lit les sous-pages de Blog via l'API Notion et
+   écrit dans `blog/_sources/` un `.md` + un dossier d'images **au même
+   format que l'export « Markdown & CSV »**. Les images sont téléchargées
+   (leurs URL Notion expirent au bout d'une heure). Seules les pages
+   modifiées depuis la dernière synchro sont reconverties (état dans
+   `blog/_sources/.notion-sync.json`).
+2. `tools/blog-gen.sh` génère le HTML (voir plus bas).
+3. L'Action commite, pousse, puis lance `replace.sh` sur le serveur en SSH.
+
+Un ancien export manuel dont la page est glissée dans Blog est **adopté
+tel quel** (même URL, même date) ; il sera reconverti à sa prochaine
+modification dans Notion.
+
+Garde-fou : si Blog apparaît vide alors que des articles sont publiés
+(intégration déconnectée par erreur…), la synchro refuse de tout
+supprimer. Si c'est voulu, la lancer une fois à la main avec
+`--allow-empty` (voir « En local » ci-dessous).
+
+### Mise en place (une seule fois)
+
+**1. Notion**
+- Sur <https://www.notion.so/profile/integrations> : **Nouvelle
+  intégration** → type **Interne** → capacités : **Lire le contenu**
+  uniquement. Copier le token (`ntn_…`).
+- Créer la page **Blog**, puis `•••` → **Connexions** → ajouter
+  l'intégration. Les sous-pages héritent de l'accès.
+- Copier le lien de la page Blog (`•••` → **Copier le lien**).
+
+**2. Secrets GitHub** (chaque commande demande la valeur à coller) :
+
+```bash
+gh secret set NOTION_TOKEN
+```
+
+```bash
+gh secret set NOTION_BLOG_PAGE_ID
+```
+
+**3. Déploiement automatique** : une clé SSH dédiée, bridée côté serveur
+pour ne pouvoir lancer **que** `replace.sh` (même volée, elle ne donne
+aucun shell).
+
+```bash
+ssh-keygen -t ed25519 -N "" -C github-deploy -f ~/.ssh/18nelli_deploy
+```
+
+```bash
+echo "restrict,command=\"/root/replace.sh\" $(cat ~/.ssh/18nelli_deploy.pub)" | ssh root@SERVEUR 'cat >> ~/.ssh/authorized_keys'
+```
+
+```bash
+gh secret set DEPLOY_HOST --body "SERVEUR"
+```
+
+```bash
+gh secret set DEPLOY_SSH_KEY < ~/.ssh/18nelli_deploy
+```
+
+```bash
+ssh-keyscan SERVEUR 2>/dev/null | gh secret set DEPLOY_KNOWN_HOSTS
+```
+
+(`SERVEUR` = IP ou nom de domaine. Port SSH autre que 22 : ajouter
+`-p PORT` à `ssh-keyscan` et un secret `DEPLOY_PORT`.)
+
+**4. Mettre à jour `replace.sh` sur le serveur** : la version de
+`tools/replace.sh` supprime aussi du site les articles retirés (miroir
+de `blog/` uniquement, les photos des albums ne sont pas touchées).
+
+```bash
+scp tools/replace.sh root@SERVEUR:/root/replace.sh
+```
+
+**5. Migrer les anciens articles** : glisser leurs pages Notion dans Blog.
+
+### En local
+
+```bash
+NOTION_TOKEN=ntn_xxx NOTION_BLOG_PAGE_ID=<lien de Blog> node tools/notion-sync.mjs && ./tools/blog-gen.sh
+```
+
+Options : `--force` (tout reconvertir), `--allow-empty` (voir garde-fou).
+
+### Bon à savoir
+
+- GitHub **met en pause les tâches planifiées** d'un dépôt public après
+  60 jours sans activité (un mail prévient) : un clic dans l'onglet
+  Actions les réactive.
+- Blocs Notion non gérés (sous-pages, bases de données, table des
+  matières…) : ignorés, avec un avertissement dans le log de l'Action.
+- Si une page échoue (image introuvable…), les autres sont quand même
+  publiées et l'Action finit en rouge : GitHub t'envoie un mail.
+
+### Méthode manuelle (toujours possible)
+
 1. Dans Notion : **Export → Markdown & CSV**
 2. Déposer le `.md` **et son dossier d'images** dans `blog/_sources/`
 3. Lancer :
@@ -95,8 +217,11 @@ fond et la typographie. Elles ne sont volontairement pas importées.
 ./tools/blog-gen.sh
 ```
 
+### blog-gen.sh
+
 Le script écrit `blog/<slug>.html` et met à jour la liste dans
-`blog.html` (entre les marqueurs `BLOG:START` / `BLOG:END`).
+`blog.html` (entre les marqueurs `BLOG:START` / `BLOG:END`). Un
+`blog/*.html` dont le `.md` a disparu est supprimé.
 
 **Il est incrémental** : un article dont le `.md` n'a pas bougé n'est pas
 régénéré. Pour tout reconstruire : `./tools/blog-gen.sh --force`.

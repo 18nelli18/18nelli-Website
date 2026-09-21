@@ -1,0 +1,140 @@
+# =====================================================================
+#  blog-sync.yml — 18nelli
+#  Page Notion « Blog » -> blog/_sources/ -> blog-gen.sh -> commit -> serveur
+#
+#  Quand :
+#   - toutes les 15 min (GitHub peut retarder de quelques minutes) ;
+#   - à la demande : onglet Actions -> « Blog Notion » -> Run workflow ;
+#   - à chaque push sur main (tes modifs manuelles sont déployées aussi).
+#
+#  Secrets (Settings -> Secrets and variables -> Actions) :
+#   NOTION_TOKEN         token de l'intégration Notion
+#   NOTION_BLOG_PAGE_ID  ID ou URL de la page Blog
+#   DEPLOY_HOST          IP ou nom du serveur
+#   DEPLOY_SSH_KEY       clé privée dédiée (voir README, « Déploiement »)
+#   DEPLOY_KNOWN_HOSTS   empreinte du serveur (ssh-keyscan)
+#   DEPLOY_USER          optionnel, root par défaut
+#   DEPLOY_PORT          optionnel, 22 par défaut
+#  Sans les secrets DEPLOY_*, tout marche sauf le déploiement : il reste
+#  alors à lancer replace.sh à la main.
+# =====================================================================
+name: Blog Notion
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Tout reconvertir depuis Notion (--force)"
+        type: boolean
+        default: false
+      deploy:
+        description: "Déployer même si rien n'a changé"
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+
+# Une seule exécution à la fois, jamais annulée en plein commit.
+concurrency:
+  group: blog-sync
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  # Dates des articles à l'heure française (le runner est en UTC).
+  TZ: Europe/Paris
+  # Même version que sur le Mac : sinon le HTML généré diffère légèrement.
+  PANDOC_VERSION: "3.11"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # Historique complet : blog-gen.sh s'en sert pour dater les articles.
+          fetch-depth: 0
+
+      - name: Installer pandoc ${{ env.PANDOC_VERSION }}
+        run: |
+          curl -fsSL -o /tmp/pandoc.deb \
+            "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-1-amd64.deb"
+          sudo dpkg -i /tmp/pandoc.deb
+          pandoc --version | head -1
+
+      # Sur un clone frais tous les fichiers ont la même date : on vieillit
+      # les sources pour que blog-gen.sh ne régénère que celles que la
+      # synchro vient de réécrire.
+      - name: Vieillir les sources existantes
+        run: find blog/_sources -type f -exec touch -t 200001010000 {} +
+
+      - name: Synchro Notion -> blog/_sources
+        id: sync
+        # Une page en échec ne doit pas bloquer la publication des autres :
+        # l'échec est signalé en fin de job.
+        continue-on-error: true
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_BLOG_PAGE_ID: ${{ secrets.NOTION_BLOG_PAGE_ID }}
+          FORCE: ${{ inputs.force && '--force' || '' }}
+        run: node tools/notion-sync.mjs $FORCE
+
+      - name: Générer les articles
+        run: ./tools/blog-gen.sh
+
+      - name: Commit & push
+        id: commit
+        run: |
+          git add -A blog blog.html
+          if git diff --cached --quiet; then
+            echo "Rien de nouveau à publier."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "blog: synchro Notion"
+          # Si tu as poussé entre-temps : on se remet par-dessus et on réessaie.
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              echo "changed=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            git pull --rebase origin main
+          done
+          echo "::error::Push impossible après 3 essais."
+          exit 1
+
+      - name: Déployer sur le serveur
+        if: steps.commit.outputs.changed == 'true' || github.event_name == 'push' || inputs.deploy
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          if [ -z "$DEPLOY_HOST" ] || [ -z "$DEPLOY_SSH_KEY" ] || [ -z "$DEPLOY_KNOWN_HOSTS" ]; then
+            echo "::warning::Secrets DEPLOY_* absents : déploiement ignoré, lance replace.sh à la main."
+            exit 0
+          fi
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          # La clé est bridée côté serveur (command="/root/replace.sh") :
+          # la connexion lance replace.sh et rien d'autre.
+          ssh -i ~/.ssh/deploy_key -p "${DEPLOY_PORT:-22}" \
+            -o BatchMode=yes -o StrictHostKeyChecking=yes \
+            "${DEPLOY_USER:-root}@${DEPLOY_HOST}"
+
+      - name: Signaler un échec de la synchro Notion
+        if: steps.sync.outcome == 'failure'
+        run: |
+          echo "::error::La synchro Notion a échoué (voir l'étape « Synchro Notion »). Les pages qui ont réussi ont quand même été publiées."
+          exit 1
