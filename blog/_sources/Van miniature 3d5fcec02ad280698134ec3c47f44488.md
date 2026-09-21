@@ -70,3 +70,23 @@ Je vais coller sur une plaque imprimée en 3D du ruban à motif
 *Dimanche 20/09/2026*
 
 J’ai finalement tout fait en impression 3D, peinture et couture. Les délais de livraisons et la nouvelles taxes aliexpress ça m’a saouler. Voici quelques photo du process ainsi que le résultat!
+
+![image 1.png](Van%20miniature/image%201.png)
+
+![image 2.png](Van%20miniature/image%202.png)
+
+![Capture_decran_2026-09-21_a_23.07.26.png](Van%20miniature/Capture_decran_2026-09-21_a_23.07.26.png)
+
+![Capture_decran_2026-09-21_a_23.07.49.png](Van%20miniature/Capture_decran_2026-09-21_a_23.07.49.png)
+
+![Capture_decran_2026-09-21_a_23.08.00.png](Van%20miniature/Capture_decran_2026-09-21_a_23.08.00.png)
+
+![Capture_decran_2026-09-21_a_23.08.20.png](Van%20miniature/Capture_decran_2026-09-21_a_23.08.20.png)
+
+Et le résultat final:
+
+![image 3.png](Van%20miniature/image%203.png)
+
+![image 4.png](Van%20miniature/image%204.png)
+
+![image 5.png](Van%20miniature/image%205.png)
