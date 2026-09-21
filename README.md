@@ -123,8 +123,10 @@ lancer `replace.sh` à la main.
    (leurs URL Notion expirent au bout d'une heure). Seules les pages
    modifiées depuis la dernière synchro sont reconverties (état dans
    `blog/_sources/.notion-sync.json`).
-   La date affichée d'un article est la **date de création de sa page
-   Notion** (écrite sous le titre du `.md` : `<!-- date: JJ/MM/AAAA -->`).
+   Dates : le sommaire affiche la **création de la page Notion**, et
+   « last modified: » en tête d'article sa **dernière modification**
+   (écrites sous le titre du `.md` : `<!-- date: … -->` et
+   `<!-- modified: … -->`).
 2. `tools/blog-gen.sh` génère le HTML (voir plus bas).
 3. L'Action commite, pousse, puis lance `replace.sh` sur le serveur en SSH.
 

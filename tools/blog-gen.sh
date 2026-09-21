@@ -820,6 +820,12 @@ for md in "${mds[@]}"; do
     date_fr="$(date -d "@$mtime" '+%d/%m/%Y' 2>/dev/null || date -r "$mtime" '+%d/%m/%Y')"
   fi
 
+  # « last modified: » en tête de l'article : dernière modif Notion posée
+  # par notion-sync.mjs (<!-- modified: JJ/MM/AAAA -->), sinon la date
+  # de l'article. Le sommaire, lui, garde date_fr (création).
+  meta_date="$(sed -n 's#^<!-- modified: \([0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9]\) -->$#\1#p' "$md" | head -n1)"
+  [ -n "$meta_date" ] || meta_date="$date_fr"
+
   # Cle de tri = date AFFICHEE (JJ/MM/AAAA -> AAAAMMJJ), pas la date de
   # commit : le sommaire doit suivre l'ordre que voit le lecteur.
   # A date egale, on departage sur le titre (ordre alphabetique inverse) :
@@ -834,15 +840,15 @@ for md in "${mds[@]}"; do
   count_total=$((count_total + 1))
 
   # Si le HTML existe déjà, est plus récent que le .md et porte la bonne date : on saute
-  if [ "$FORCE_REBUILD" -eq 0 ] && [ -f "$html_path" ] && [ "$html_path" -nt "$md" ] && grep -q "last modified: $date_fr" "$html_path" 2>/dev/null; then
+  if [ "$FORCE_REBUILD" -eq 0 ] && [ -f "$html_path" ] && [ "$html_path" -nt "$md" ] && grep -q "last modified: $meta_date" "$html_path" 2>/dev/null; then
     info "Article a jour (ignore) : blog/$html_name"
     count_skip=$((count_skip + 1))
     continue
   fi
 
-  # 1) retire le 1er H1 et la ligne de date   2) images + embeds Falstad   3) convertit
+  # 1) retire le 1er H1 et les lignes de dates   2) images + embeds Falstad   3) convertit
   body_tmp="$(mktemp)"
-  awk 'BEGIN{d=0} /^# /{ if(!d){d=1; next} } /^<!-- date: .* -->$/{next} {print}' "$md" \
+  awk 'BEGIN{d=0} /^# /{ if(!d){d=1; next} } /^<!-- (date|modified): .* -->$/{next} {print}' "$md" \
     | awk -v FALSTAD_PARAMS="$FALSTAD_PARAMS" "$PRE_AWK" > "$body_tmp"
   article_html="$(md_to_html "$body_tmp")"
   rm -f "$body_tmp"
@@ -906,7 +912,7 @@ ${mermaid_tag:+$mermaid_tag
     </a>
 
     <article class="article">
-      <p class="article-meta">last modified: $date_fr</p>
+      <p class="article-meta">last modified: $meta_date</p>
 $article_html
     </article>
   </body>
