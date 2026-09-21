@@ -38,6 +38,11 @@
 #   - clic sur n'importe quelle image pour l'afficher en grand,
 #     puis reclic (ou Échap) pour la re-réduire.
 #
+#  VIDÉOS :
+#   - un lien seul sur sa ligne vers un fichier vidéo (.mp4, .mov, .webm…)
+#     devient un lecteur vidéo ; vers YouTube ou Vimeo, un lecteur intégré.
+#     (Un lien au milieu d'une phrase reste un lien.)
+#
 #  EMBED FALSTAD :
 #   - un lien Falstad seul sur sa ligne dans le .md
 #     [https://www.falstad.com/circuit/circuitjs.html?ctz=...](...même url...)
@@ -692,6 +697,35 @@ function falstad(url,   sep,src){
   return "<div class=\"embed-falstad\"><iframe src=\"" escurl(src) "\" loading=\"lazy\" allowfullscreen></iframe>" \
          "<a class=\"embed-link\" href=\"" escurl(url) "\" target=\"_blank\" rel=\"noopener\">Ouvrir dans Falstad &#8599;</a></div>"
 }
+function video_file(url){
+  return "<div class=\"embed-video\"><video controls preload=\"metadata\" playsinline src=\"" esc(url) "\"></video></div>"
+}
+function video_embed(src, url, label){
+  return "<div class=\"embed-video embed-video-iframe\"><iframe src=\"" escurl(src) "\" loading=\"lazy\" allowfullscreen" \
+         " allow=\"accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\"" \
+         " referrerpolicy=\"strict-origin-when-cross-origin\" title=\"Vidéo " label "\"></iframe>" \
+         "<a class=\"embed-link\" href=\"" escurl(url) "\" target=\"_blank\" rel=\"noopener\">Ouvrir sur " label " &#8599;</a></div>"
+}
+# URL d'intégration d'une vidéo YouTube / Vimeo, "" sinon.
+# (Regex sans intervalles {n} ni match() à 3 arguments : portables sur
+#  l'awk de macOS comme sur celui d'Ubuntu.)
+function video_iframe_src(url,   id, s, t){
+  if (url ~ /^https?:\/\/((www|m)\.)?youtube\.com\// || url ~ /^https?:\/\/youtu\.be\//){
+    id=""
+    if (match(url, /[?&]v=[A-Za-z0-9_-]+/))      id=substr(url, RSTART+3, RLENGTH-3)
+    else if (match(url, /youtu\.be\/[A-Za-z0-9_-]+/)) id=substr(url, RSTART+9, RLENGTH-9)
+    else if (match(url, /\/(shorts|embed|live)\/[A-Za-z0-9_-]+/)){ s=substr(url, RSTART, RLENGTH); sub(/.*\//, "", s); id=s }
+    if (id == "") return ""
+    s="https://www.youtube-nocookie.com/embed/" id
+    if (match(url, /[?&](t|start)=[0-9]+/)){ t=substr(url, RSTART, RLENGTH); sub(/.*=/, "", t); s=s "?start=" t }
+    return s
+  }
+  if (match(url, /^https?:\/\/(www\.)?vimeo\.com\/[0-9]+/)){
+    s=substr(url, RSTART, RLENGTH); sub(/.*\//, "", s)
+    return "https://player.vimeo.com/video/" s
+  }
+  return ""
+}
 {
   line=$0
   # 0) Blocs de code (fences ```) :
@@ -734,6 +768,23 @@ function falstad(url,   sep,src){
     url=line; sub(/^\[.*\]\(/,"",url); sub(/\)[[:space:]]*$/,"",url)
     print ""; print falstad(url); print ""
     next
+  }
+  # 1b) Lien seul vers une vidéo : fichier (.mp4, .mov…) -> lecteur vidéo,
+  #     YouTube / Vimeo -> lecteur intégré. Sinon, la ligne suit son cours.
+  if (line ~ /^\[[^]]*\]\([^)]*\)[[:space:]]*$/){
+    url=line; sub(/^\[[^]]*\]\(/,"",url); sub(/\)[[:space:]]*$/,"",url)
+    low=tolower(url); sub(/[?#].*$/,"",low)
+    if (low ~ /\.(mp4|m4v|mov|webm|ogv)$/){
+      if(n>0) flush()
+      print ""; print video_file(url); print ""
+      next
+    }
+    vsrc=video_iframe_src(url)
+    if (vsrc != ""){
+      if(n>0) flush()
+      print ""; print video_embed(vsrc, url, (vsrc ~ /vimeo/) ? "Vimeo" : "YouTube"); print ""
+      next
+    }
   }
   # 2) Image seule sur sa ligne
   if (line ~ /^!\[[^]]*\]\([^)]*\)[[:space:]]*$/){
