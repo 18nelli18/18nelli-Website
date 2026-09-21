@@ -3,7 +3,9 @@
 #  Page Notion « Blog » -> blog/_sources/ -> blog-gen.sh -> commit -> serveur
 #
 #  Quand :
-#   - toutes les 15 min (GitHub peut retarder de quelques minutes) ;
+#   - toutes les 5 min, lancé par le cron du serveur (tools/blog-trigger.sh) :
+#     l'horloge de GitHub (schedule, plus bas) est trop irrégulière et ne
+#     sert plus que de secours ;
 #   - à la demande : onglet Actions -> « Blog Notion » -> Run workflow ;
 #   - à chaque push sur main (tes modifs manuelles sont déployées aussi).
 #

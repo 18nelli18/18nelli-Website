@@ -93,8 +93,9 @@ fond et la typographie. Elles ne sont volontairement pas importées.
 ## Ajouter un article de blog
 
 **Glisser la page dans la page Notion « Blog ».** C'est tout : dans les
-15 minutes, la GitHub Action `blog-sync.yml` la récupère, la convertit,
-commite et déploie. Pour publier tout de suite : onglet **Actions** du
+5 minutes, la GitHub Action `blog-sync.yml` la récupère, la convertit,
+commite et déploie (c'est le cron du serveur qui la lance, voir étape 6
+de la mise en place). Pour publier tout de suite : onglet **Actions** du
 dépôt → **Blog Notion** → **Run workflow** (marche aussi depuis l'appli
 GitHub).
 
@@ -193,6 +194,30 @@ scp tools/replace.sh root@SERVEUR:/root/replace.sh
 
 **5. Migrer les anciens articles** : glisser leurs pages Notion dans Blog.
 
+**6. Déclencheur sur le serveur** : les tâches planifiées de GitHub
+(`schedule`) se lancent très irrégulièrement, parfois jamais. Le serveur
+lance donc lui-même la synchro toutes les 5 min via
+`tools/blog-trigger.sh`. Il lui faut un token GitHub **fine-grained** :
+<https://github.com/settings/personal-access-tokens/new> → Repository
+access : *Only select repositories* → `18nelli-Website` → Permissions →
+*Actions* : **Read and write**. Puis, depuis le Mac :
+
+```bash
+read -rs "TOKEN?Token GitHub : " && echo "$TOKEN" | ssh root@SERVEUR 'umask 077; cat > /root/.github-blog-token' && unset TOKEN
+```
+
+```bash
+scp tools/blog-trigger.sh root@SERVEUR:/root/blog-trigger.sh
+```
+
+```bash
+ssh root@SERVEUR 'chmod 700 /root/blog-trigger.sh && (crontab -l 2>/dev/null | grep -v blog-trigger; echo "*/5 * * * * /root/blog-trigger.sh >> /var/log/blog-trigger.log 2>&1") | crontab - && /root/blog-trigger.sh'
+```
+
+La dernière commande doit afficher « ✅ Synchro Notion déclenchée ». Les
+erreurs éventuelles (token expiré…) sont notées dans
+`/var/log/blog-trigger.log` sur le serveur.
+
 ### En local
 
 ```bash
@@ -203,9 +228,9 @@ Options : `--force` (tout reconvertir), `--allow-empty` (voir garde-fou).
 
 ### Bon à savoir
 
-- GitHub **met en pause les tâches planifiées** d'un dépôt public après
-  60 jours sans activité (un mail prévient) : un clic dans l'onglet
-  Actions les réactive.
+- Le token du déclencheur a une date d'expiration : GitHub envoie un
+  mail avant. Il suffit d'en créer un nouveau et de relancer la
+  première commande de l'étape 6.
 - Blocs Notion non gérés (sous-pages, bases de données, table des
   matières…) : ignorés, avec un avertissement dans le log de l'Action.
 - Si une page échoue (image introuvable…), les autres sont quand même
