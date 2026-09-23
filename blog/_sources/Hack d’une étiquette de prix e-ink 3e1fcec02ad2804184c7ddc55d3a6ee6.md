@@ -1,7 +1,7 @@
 # Hack d’une étiquette de prix e-ink
 
 <!-- date: 20/09/2026 -->
-<!-- modified: 21/09/2026 -->
+<!-- modified: 23/09/2026 -->
 
 *Dimanche 20/09/2026*
 
@@ -214,7 +214,7 @@ On d’abord utiliser le firware de angrymew pour écrire sur l’écran: [https
 
 *Lundi 21/09/2026*
 
-J’ai fournis à Claude Code (model Opus5 ultracode) l’ensemble des modifs et des démarches qui ont été faites pour la réécriture du firmware, puis je lui ai demandé de me fournir un outil web complet qui permet de flash le SoC avec le Pico en usb, et de mettre sur l’étiquette une image custom. Le résultat est vraiment satisfaisant.
+J’ai fournis à Claude Code (model Opus5 ultracode) l’ensemble des modifs et des démarches qui ont été faites pour la réécriture du firmware, puis je lui ai demandé de me fournir un outil web complet qui permet de flash le SoC avec le Pico en usb, et de mettre sur l’étiquette une image custom. Le résultat est vraiment satisfaisant. Il intégre une page NFC qui permet depuis un téléphone de flasher une image personnaliser sans devoir souder
 
 [https://github.com/18nelli18/Monopink](https://github.com/18nelli18/Monopink)
 
