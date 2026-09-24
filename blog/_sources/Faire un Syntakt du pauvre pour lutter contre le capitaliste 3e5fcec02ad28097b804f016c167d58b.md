@@ -15,4 +15,8 @@ J’ai d’abord regardé si depuis 2 ans, il n’y avait pas eu de nouvelles so
 
 Donc si on résume, pour 640euro de différences, on gagne juste un plus grands nombres de piste et des effets un peu cool. C’est du gros scam et ça me frustre. Soit le model cycles à des limitations matérielles, et n’a pas une puce assez puissante pour fournir 6 pistes, soit Elektron on fait exprès de bridé la machine pour qu’on paye leur grosse brique noire 3x plus cher (j’ai une intuition). Surtout qu’en plus, le model cycles peut marcher sur batterie externe, prends moins de place dans un sac à dos et est bcp moins lourd.
 
-DONC, on est à l’ère de l’IA, je pense qu’il faut en profiter.
+DONC, on est à l’ère de l’IA, je pense qu’il faut en profiter pour libérer le hardware des capitalistes de merdes qui veulent nous faire acheter des trucs en boucles
+
+J’ai trouvé sur github ce projet qui propose exactement ce que je veux, mais pour le model: samples. Ce ne sont pas exactement les mêmes machines, mais c’est quasi sur que c’est la même architecture interne, avec un firmware différents, car je penses que leurs bas prix est en partie dû à leurs productions quasi identiques (moins de différences matérielles = moins de coût en grande production) .
+
+[https://github.com/scottmetoyer/ms-multi-output](https://github.com/scottmetoyer/ms-multi-output)
