@@ -38,3 +38,13 @@ Il me reste donc plus qu’a acheter un model cycles, à surexploiter claude cod
 Sur [ce topic](https://www.elektronauts.com/t/model-cycles-q-a-with-ess/122712/122?page=6) du forum d’Elektron, on apprends que le processeur de la série Elektron Model est un Coldfire MCF5441:
 
 ![Capture_decran_2026-09-24_a_23.42.59.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/Capture_decran_2026-09-24_a_23.42.59.png)
+
+### Processus avec Claude Opus 5.5
+
+J’ai d’abord donnée la page du forum Elektron concernant le Model:Cycles à claudes, et demandé de produire un fichier md qui regroupe les informations techniques utiles pour ce projet:
+
+```
+j'aimerai développé un mod pour la machine elektron model cycles, permettant dans un premier tant d'avoir via usb 6 piste au lieu des 2. 
+Pour l'instant ne t'occupe pas de la réalisation. Dans un premier temps j'aimerai que tu analyse l'entiereté des réponse de ce fil forum : https://www.elektronauts.com/t/model-cycles-q-a-with-ess/122712
+Analyse toute les réponse, et constitue un fichier "dossier-technique.md" qui regroupe toute les informations techniques utile pour ce projet. Tu rédigera ce doc en français, mais tu mettera a chaque fois en dessous la citation reel de laquelle tu a tirer cette info.
+```
