@@ -33,9 +33,9 @@ Claude estime la probabilité de réussite de 70 à 80%. Moi je dit 100% y’a a
 
 Il me reste donc plus qu’a acheter un model cycles, à surexploiter claude code jusqu’a avoir un truc qui marche. En attendant je vais essayer d’apprendre un peu comment tout marche pour ne pas tout faire à l’aveugle.
 
-### Le processeur
+### Coup d’oeil sur le processeur
 
-Sur [ce topic](https://www.elektronauts.com/t/model-cycles-q-a-with-ess/122712/122?page=6) du forum d’Elektron, on apprends que le processeur de la série Elektron Model est un **Coldfire MCF5441**:
+Sur [ce topic](https://www.elektronauts.com/t/model-cycles-q-a-with-ess/122712/122?page=6) du forum d’Elektron, on apprends que le processeur de la série Elektron Model est de la gamme **Coldfire MCF5441**:
 
 ![Capture_decran_2026-09-24_a_23.42.59.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/Capture_decran_2026-09-24_a_23.42.59.png)
 
@@ -43,7 +43,7 @@ Voici le block-diagram de ce processeur, trouvé sur le [site officiel de NXP](h
 
 ![image.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/image.png)
 
-Quelques détails sur les différents blocs de la puce:
+Quelques détails sur le role des différents blocs de la puce:
 
 - **V4m ColdFire Core** : CPU principale
 - **MMU** (Memory Management Unit): Gestionnaire de mémoire
