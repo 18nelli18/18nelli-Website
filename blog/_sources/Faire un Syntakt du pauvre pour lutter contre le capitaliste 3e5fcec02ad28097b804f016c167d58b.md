@@ -118,3 +118,4 @@ A partir de ces 3 dépot, génere toi des fichier de note .md avec des informati
 - [ ]  Control en midi usb (clock, start stop)
 - [ ]  Arpégiateur pour le mode chromatique
 - [ ]  Scale pour le mode chromatique
+- [ ]  Mode polyphonique
