@@ -13,4 +13,6 @@ J’ai d’abord regardé si depuis 2 ans, il n’y avait pas eu de nouvelles so
 
 ![Capture_decran_2026-09-24_a_22.57.51.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/Capture_decran_2026-09-24_a_22.57.51.png)
 
-Donc si on résume, pour 640euro de différences, on gagne juste un plus grands nombres de piste et des effets un peu cool.
+Donc si on résume, pour 640euro de différences, on gagne juste un plus grands nombres de piste et des effets un peu cool. C’est du gros scam et ça me frustre. Soit le model cycles à des limitations matérielles, et n’a pas une puce assez puissante pour fournir 6 pistes, soit Elektron on fait exprès de bridé la machine pour qu’on paye leur grosse brique noire 3x plus cher (j’ai une intuition). Sur
+
+DONC, on est à l’ère de l’IA, je pense qu’il faut en profiter. On
