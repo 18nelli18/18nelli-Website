@@ -112,4 +112,6 @@ A partir de ces 3 dépot, génere toi des fichier de note .md avec des informati
 - [ ]  Sortie multipiste 6 canaux
 - [ ]  Sortie multipiste 12 canaux (pour garder le pan stéréo de chaque piste)
 - [ ]  Possibilité de modifier les algo d’effet
-- [ ]  Ajout d’un moteur Sample qui permet de charger des sample commen sur un model sample
+- [ ]  Ajout d’un moteur Sample qui permet de charger des sample comme sur un model sample
+- [ ]  Amélioration des LFO: deux LFOs complets et synchronisables, assignables à quasiment n'importe quel paramètre logiciel ou effet (comme sut le syntakt)
+- [ ]  Polyrythmie pure (modification de d
