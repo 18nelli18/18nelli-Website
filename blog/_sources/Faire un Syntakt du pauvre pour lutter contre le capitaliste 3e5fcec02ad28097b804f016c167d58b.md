@@ -89,3 +89,20 @@ Analyse toute les réponse, et constitue un fichier "dossier-technique.md" qui r
 Voici le document produit:
 
 [dossier-technique.md](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/dossier-technique.md)
+
+Puis j’ai demandé qu’ils se fasse d’autre fichier de notes à partir des dépot git des solutions existantes:
+
+```
+Voici un repo github qui a reussi à implémenter le multi output pour un model : sample:
+
+https://github.com/scottmetoyer/ms-multi-output
+
+Et voici un repo d'analyse du firmware :
+https://github.com/bryantysinger/elektron-models-teardown
+
+et voici un outil en C pour explorer les firmware elektron:
+https://github.com/mischa85/elektron-firmware-tool
+
+
+A partir de ces 3 dépot, génere toi des fichier de note .md avec des information techniques, des bout de code / des indication qui vont t'aider dans le développement de ce projet
+```
