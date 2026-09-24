@@ -59,7 +59,22 @@ Le processeur est de la famille des m68k:
 
 ![Capture_decran_2026-09-25_a_00.27.18.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/Capture_decran_2026-09-25_a_00.27.18.png)
 
-L’assembleur m68k est réputé pour être assez lisible facilement, donc l’envie me prendra peut être de lire un peu de code. J’ai trouvé
+L’assembleur m68k est réputé pour être assez lisible facilement, donc l’envie me prendra peut être de lire un peu de code. J’ai trouvé [ce cours](http://lsc.univ-evry.fr/~hoppenot/enseignement/cours/68000/assemble.pdf) sur l’assembleur mk68k, en français.
+
+Le format d’une instruction est le suivant:
+
+```
+Étiquette |_| Mnémonique.format |_| source, destination |_| commentaires
+```
+
+- Étiquette : Facultative, permet de repérer une instruction dans un programme.
+- Mnémonique : Nom de l'instruction
+- Format : Taille des données manipulées.
+    - .B byte octet
+    - .W word mot
+    - .L long word mot long
+- Source : Donnée de départ
+- Destination : Endroit d'arrivée
 
 ### Processus avec Claude Opus 5.5
 

@@ -132,7 +132,24 @@ premier code à executer au boot</li>
 <img src="_sources/Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/Capture_decran_2026-09-25_a_00.27.18.png" alt="Capture_decran_2026-09-25_a_00.27.18.png" />
 </div>
 <p>L’assembleur m68k est réputé pour être assez lisible facilement, donc
-l’envie me prendra peut être de lire un peu de code. J’ai trouvé</p>
+l’envie me prendra peut être de lire un peu de code. J’ai trouvé <a
+href="http://lsc.univ-evry.fr/~hoppenot/enseignement/cours/68000/assemble.pdf">ce
+cours</a> sur l’assembleur mk68k, en français.</p>
+<p>Le format d’une instruction est le suivant:</p>
+<pre><code>Étiquette |_| Mnémonique.format |_| source, destination |_| commentaires</code></pre>
+<ul>
+<li>Étiquette : Facultative, permet de repérer une instruction dans un
+programme.</li>
+<li>Mnémonique : Nom de l’instruction</li>
+<li>Format : Taille des données manipulées.
+<ul>
+<li>.B byte octet</li>
+<li>.W word mot</li>
+<li>.L long word mot long</li>
+</ul></li>
+<li>Source : Donnée de départ</li>
+<li>Destination : Endroit d’arrivée</li>
+</ul>
 <h3 id="processus-avec-claude-opus-5.5">Processus avec Claude Opus
 5.5</h3>
 <p>J’ai d’abord donnée la page du forum Elektron concernant le
