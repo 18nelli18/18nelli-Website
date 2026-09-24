@@ -39,16 +39,22 @@ Sur [ce topic](https://www.elektronauts.com/t/model-cycles-q-a-with-ess/122712/1
 
 ![Capture_decran_2026-09-24_a_23.42.59.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/Capture_decran_2026-09-24_a_23.42.59.png)
 
-Voici le block-diagram de ce processeur, trouvé sur le [site officiel de NXP](https://www.nxp.com/products/MCF5441X)-
+Voici le block-diagram de ce processeur, trouvé sur le [site officiel de NXP](https://www.nxp.com/products/MCF5441X)
 
 ![image.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/image.png)
 
-- V4m ColdFire Core : CPU principale
-- MMU (Memory Management Unit): Gestionnaire de mémoire
-- EMAC (Enhanced Multiply-Accumulate): Bloc de calcul optimisé pour des opérations mathématiques lourdes utiles en traitement du signal et filtrage.
-- 8K I-Cache / 8K D-Cache: Mémoire cache d’instruction et de donnée
-- 64K SRAM: Mémoire vive
-- 8-bit DDR
+Quelques détails sur les différents blocs de la puce:
+
+- **V4m ColdFire Core** : CPU principale
+- **MMU** (Memory Management Unit): Gestionnaire de mémoire
+- **EMAC** (Enhanced Multiply-Accumulate): Bloc de calcul optimisé pour des opérations mathématiques lourdes utiles en traitement du signal et filtrage.
+- **8K I-Cache / 8K D-Cache**: Mémoire cache d’instruction et de donnée
+- **64K SRAM**: Mémoire vive
+- **8-bit DDR1/2 SDRAM** : contrôleur qui permet de relier de la RAM externe
+- NAND Flash Controller : interface pour relié une mémoire flash
+- SDIO : interface pour relié une carte SD
+- Serial Boot Facility : Bloc qui démarre la puce et démarre le premier code à executer au boot
+- 64-ch. DMA : 64 canaux de transport mémoire ↔ périphériques
 
 ### Processus avec Claude Opus 5.5
 

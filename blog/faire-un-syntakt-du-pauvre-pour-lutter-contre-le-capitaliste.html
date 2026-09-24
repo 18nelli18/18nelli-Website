@@ -106,20 +106,28 @@ Elektron Model est un <strong>Coldfire MCF5441</strong>:</p>
 </div>
 <p>Voici le block-diagram de ce processeur, trouvé sur le <a
 href="https://www.nxp.com/products/MCF5441X">site officiel de
-NXP</a>-</p>
+NXP</a></p>
 <div class="img-single">
 <img src="_sources/Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/image.png" alt="image.png" />
 </div>
+<p>Quelques détails sur les différents blocs de la puce:</p>
 <ul>
-<li>V4m ColdFire Core : CPU principale</li>
-<li>MMU (Memory Management Unit): Gestionnaire de mémoire</li>
-<li>EMAC (Enhanced Multiply-Accumulate): Bloc de calcul optimisé pour
-des opérations mathématiques lourdes utiles en traitement du signal et
-filtrage.</li>
-<li>8K I-Cache / 8K D-Cache: Mémoire cache d’instruction et de
-donnée</li>
-<li>64K SRAM: Mémoire vive</li>
-<li>8-bit DDR</li>
+<li><strong>V4m ColdFire Core</strong> : CPU principale</li>
+<li><strong>MMU</strong> (Memory Management Unit): Gestionnaire de
+mémoire</li>
+<li><strong>EMAC</strong> (Enhanced Multiply-Accumulate): Bloc de calcul
+optimisé pour des opérations mathématiques lourdes utiles en traitement
+du signal et filtrage.</li>
+<li><strong>8K I-Cache / 8K D-Cache</strong>: Mémoire cache
+d’instruction et de donnée</li>
+<li><strong>64K SRAM</strong>: Mémoire vive</li>
+<li><strong>8-bit DDR1/2 SDRAM</strong> : contrôleur qui permet de
+relier de la RAM externe</li>
+<li>NAND Flash Controller : interface pour relié une mémoire flash</li>
+<li>SDIO : interface pour relié une carte SD</li>
+<li>Serial Boot Facility : Bloc qui démarre la puce et démarre le
+premier code à executer au boot</li>
+<li>64-ch. DMA : 64 canaux de transport mémoire ↔︎ périphériques</li>
 </ul>
 <h3 id="processus-avec-claude-opus-5.5">Processus avec Claude Opus
 5.5</h3>
