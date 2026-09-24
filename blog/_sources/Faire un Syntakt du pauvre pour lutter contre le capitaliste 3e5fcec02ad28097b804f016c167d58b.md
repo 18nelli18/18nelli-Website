@@ -116,3 +116,5 @@ A partir de ces 3 dépot, génere toi des fichier de note .md avec des informati
 - [ ]  Amélioration des LFO: deux LFOs complets et synchronisables, assignables à quasiment n'importe quel paramètre logiciel ou effet (comme sut le syntakt)
 - [ ]  Polyrythmie pure (modification de la time signature par piste)
 - [ ]  Control en midi usb (clock, start stop)
+- [ ]  Arpégiateur pour le mode chromatique
+- [ ]  Scale pour le mode chromatique
