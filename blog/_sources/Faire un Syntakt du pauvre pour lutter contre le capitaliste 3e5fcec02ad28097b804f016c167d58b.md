@@ -48,7 +48,6 @@ Quelques détails sur les différents blocs de la puce:
 - **V4m ColdFire Core** : CPU principale
 - **MMU** (Memory Management Unit): Gestionnaire de mémoire
 - **EMAC** (Enhanced Multiply-Accumulate): Bloc de calcul optimisé pour des opérations mathématiques lourdes utiles en traitement du signal et filtrage.
-- **8K I-Cache / 8K D-Cache**: Mémoire cache d’instruction et de donnée
 - **64K SRAM**: Mémoire vive
 - **8-bit DDR1/2 SDRAM** : contrôleur qui permet de relier de la RAM externe
 - NAND Flash Controller : interface pour relié une mémoire flash
