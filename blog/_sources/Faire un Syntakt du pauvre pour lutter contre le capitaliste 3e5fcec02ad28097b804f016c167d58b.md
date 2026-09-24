@@ -23,6 +23,12 @@ J’ai trouvé sur github ce projet qui propose exactement ce que je veux, mais 
 
 Depuis quelques jours il est indiqué que le firmware est compatible avec le model cycles également, mais n’a jamais été testé. Peu importe, la bonne nouvelle c’est que des gens ont réussi à écrire un outil custom fonctionnel, et ça ça ouvre toute les portes.
 
-Il fonctionne en récupérant l’audio des différentes pistes juste avant la sommation en mix.
+Il fonctionne en récupérant l’audio des différentes pistes juste avant la sommation en mix. Ce qui veut dire qu’on perds le delay et la reverb ce qui ne me pose pas vraiment de problème.
 
 ![Capture_decran_2026-09-24_a_23.24.35.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/Capture_decran_2026-09-24_a_23.24.35.png)
+
+Claude estime la probabilité de réussite de 70 à 80%. Moi je dit 100% y’a aucun monde ou Elektron à mis un budget de fou dans la sécurisation de leur produit bas de gamme.
+
+![Capture_decran_2026-09-24_a_23.32.34.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/Capture_decran_2026-09-24_a_23.32.34.png)
+
+Il me reste donc plus qu’a acheter un model cycles, à surexploiter claude code jusqu’a avoir un truc qui marche.
