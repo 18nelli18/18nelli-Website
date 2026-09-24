@@ -106,3 +106,9 @@ https://github.com/mischa85/elektron-firmware-tool
 
 A partir de ces 3 dépot, génere toi des fichier de note .md avec des information techniques, des bout de code / des indication qui vont t'aider dans le développement de ce projet
 ```
+
+### Idée de fonctionnalités à implémenter:
+
+- [ ]  Sortie multipiste 6 canaux
+- [ ]  Sortie multipiste 12 canaux (pour garder le pan stéréo de chaque piste)
+- [ ]  Ajouter
