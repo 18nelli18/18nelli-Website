@@ -1,7 +1,7 @@
 # Faire un Syntakt du pauvre pour lutter contre le capitaliste
 
 <!-- date: 24/09/2026 -->
-<!-- modified: 24/09/2026 -->
+<!-- modified: 25/09/2026 -->
 
 *Jeudi 24/09/2026*
 
@@ -39,13 +39,16 @@ Sur [ce topic](https://www.elektronauts.com/t/model-cycles-q-a-with-ess/122712/1
 
 ![Capture_decran_2026-09-24_a_23.42.59.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/Capture_decran_2026-09-24_a_23.42.59.png)
 
-Voici le block-diagram de ce processeur, trouvé sur le [site officiel de NXP](https://www.nxp.com/products/MCF5441X)
+Voici le block-diagram de ce processeur, trouvé sur le [site officiel de NXP](https://www.nxp.com/products/MCF5441X)-
 
 ![image.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/image.png)
 
-#### V4m ColdFire Core
-
-![Capture_decran_2026-09-24_a_23.54.59.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/Capture_decran_2026-09-24_a_23.54.59.png)
+- V4m ColdFire Core : CPU principale
+- MMU (Memory Management Unit): Gestionnaire de mémoire
+- EMAC (Enhanced Multiply-Accumulate): Bloc de calcul optimisé pour des opérations mathématiques lourdes utiles en traitement du signal et filtrage.
+- 8K I-Cache / 8K D-Cache: Mémoire cache d’instruction et de donnée
+- 64K SRAM: Mémoire vive
+- 8-bit DDR
 
 ### Processus avec Claude Opus 5.5
 
