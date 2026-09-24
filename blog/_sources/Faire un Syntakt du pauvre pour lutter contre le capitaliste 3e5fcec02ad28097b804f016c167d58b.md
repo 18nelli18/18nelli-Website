@@ -21,7 +21,7 @@ J’ai trouvé sur github ce projet qui propose exactement ce que je veux, mais 
 
 [https://github.com/scottmetoyer/ms-multi-output](https://github.com/scottmetoyer/ms-multi-output)
 
-Depuis quelques jours il est indiqué que le firmware est compatible avec le model cycles également, mais n’a jamais été testé. Peu importe, la bonne nouvelle c’est que des gens ont réussi à écrire un outil custom fonctionnel, et ça ça ouvre toute les portes.
+Depuis quelques jours il est indiqué que le firmware est compatible avec le model cycles également, mais n’a jamais été testé. Peu importe, la bonne nouvelle c’est que des gens ont réussi à écrire un outil custom fonctionnel, et ça ça ouvre toute les portes. La personne à même réussi à transformer son model:samples en model:cycles
 
 Il fonctionne en récupérant l’audio des différentes pistes juste avant la sommation en mix. Ce qui veut dire qu’on perds le delay et la reverb ce qui ne me pose pas vraiment de problème.
 
@@ -33,7 +33,7 @@ Claude estime la probabilité de réussite de 70 à 80%. Moi je dit 100% y’a a
 
 Il me reste donc plus qu’a acheter un model cycles, à surexploiter claude code jusqu’a avoir un truc qui marche. En attendant je vais essayer d’apprendre un peu comment tout marche pour ne pas tout faire à l’aveugle.
 
-### Recherche perso
+### Recherche perso:
 
 Sur [ce topic](https://www.elektronauts.com/t/model-cycles-q-a-with-ess/122712/122?page=6) du forum d’Elektron, on apprends que le processeur de la série Elektron Model est de la gamme **Coldfire MCF5441**:
 
