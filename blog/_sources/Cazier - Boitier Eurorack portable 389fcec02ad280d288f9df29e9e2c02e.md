@@ -1,7 +1,7 @@
 # Cazier - Boitier Eurorack portable
 
 <!-- date: 24/06/2026 -->
-<!-- modified: 21/09/2026 -->
+<!-- modified: 27/09/2026 -->
 
 ![d2dd2cf1-6c2b-4df2-a49a-d18254295a7e.png](Cazier%20-%20Boitier%20Eurorack%20portable/d2dd2cf1-6c2b-4df2-a49a-d18254295a7e.png)
 
@@ -126,3 +126,9 @@ Je dois ajouter des trous pour que je puisse visser les pieces entre elle. Je pr
 ### Fabrication CNC
 
 Taille nécéssaire de planche pour faire les 2 plaques des côté : 300mm x 150mm
+
+### Premier prototype
+
+*Dimanche 27/09/2026*
+
+Comme mon employeur a décidé de repoussé chaque semaine ma date de recrute, j’ai beaucoup de temps libre donc j’ai pu imprimer en 3D les pièces. J’ai eu quelques raté mais dans l’ensemble ça c’est très bien imprimé. J’ai tout imprimer debout avec support.
