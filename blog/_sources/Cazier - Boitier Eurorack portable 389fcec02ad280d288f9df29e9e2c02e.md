@@ -135,6 +135,6 @@ Comme mon employeur a décidé de repoussé chaque semaine ma date de recrute, j
 
 ![image 5.png](Cazier%20-%20Boitier%20Eurorack%20portable/image%205.png)
 
-J’ai trouvé ce kit de vis m3 pas trop cher sur amazon.
+J’ai trouvé ce kit de vis m3 pas trop cher sur Amazon.
 
 ![Capture_decran_2026-09-27_a_19.11.46.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-27_a_19.11.46.png)
