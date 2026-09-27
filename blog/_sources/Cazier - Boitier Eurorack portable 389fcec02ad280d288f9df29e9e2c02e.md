@@ -141,6 +141,6 @@ J’ai trouvé ce kit de vis m3 pas trop cher sur Amazon. Elle sont pas de giga 
 
 Le format est validé. C’est la taille parfaite pour moi. Par trop grand mais pas trop petit non plus.
 
-La prochaine étape c’est de mettre la bande fileté M3 dans les rails. J’en ai trouvé pour vraiment pas cher sur RS, mais y’a des frais de service qui alourdissent un peu la commande. Ça reste raisonnable, mais relou de payer + de frais que
+La prochaine étape c’est de mettre la bande fileté M3 dans les rails. J’en ai trouvé pour vraiment pas cher sur RS, mais y’a des frais de service qui alourdissent un peu la commande. Ça reste raisonnable, mais relou de payer + de frais que de produit.
 
 ![Capture_decran_2026-09-27_a_20.06.55.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-27_a_20.06.55.png)
