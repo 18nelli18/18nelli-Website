@@ -131,4 +131,10 @@ Taille nécéssaire de planche pour faire les 2 plaques des côté : 300mm x 150
 
 *Dimanche 27/09/2026*
 
-Comme mon employeur a décidé de repoussé chaque semaine ma date de recrute, j’ai beaucoup de temps libre donc j’ai pu imprimer en 3D les pièces. J’ai eu quelques raté mais dans l’ensemble ça c’est très bien imprimé. J’ai tout imprimer debout avec support.
+Comme mon employeur a décidé de repoussé chaque semaine ma date de recrute, j’ai beaucoup de temps libre donc j’ai pu imprimer en 3D les pièces. J’ai eu quelques raté mais dans l’ensemble ça c’est très bien imprimé. J’ai tout imprimer en PETG, debout avec support, à 15% d’infill en gyroïde. Voici le résultat:
+
+![image 5.png](Cazier%20-%20Boitier%20Eurorack%20portable/image%205.png)
+
+J’ai trouvé ce kit de vis m3 pas trop cher sur amazon.
+
+![Capture_decran_2026-09-27_a_19.11.46.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-27_a_19.11.46.png)
