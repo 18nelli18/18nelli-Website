@@ -1,7 +1,7 @@
 # Cazier - Boitier Eurorack portable
 
 <!-- date: 24/06/2026 -->
-<!-- modified: 27/09/2026 -->
+<!-- modified: 28/09/2026 -->
 
 ![d2dd2cf1-6c2b-4df2-a49a-d18254295a7e.png](Cazier%20-%20Boitier%20Eurorack%20portable/d2dd2cf1-6c2b-4df2-a49a-d18254295a7e.png)
 
@@ -144,3 +144,7 @@ Le format est validé. C’est la taille parfaite pour moi. Par trop grand mais 
 La prochaine étape c’est de mettre la bande fileté M3 dans les rails. J’en ai trouvé pour vraiment pas cher sur RS, mais y’a des frais de service qui alourdissent un peu la commande. Ça reste raisonnable, mais relou de payer + de frais que de produit.
 
 ![Capture_decran_2026-09-27_a_20.06.55.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-27_a_20.06.55.png)
+
+J’aimerai aussi faire fabriquer les plaques latérales et du font usinée en aluminium. Y’a plusieurs options. Soit commander sur JLCCNC, soit commander des plaques
+
+![Capture_decran_2026-09-28_a_13.14.43.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-28_a_13.14.43.png)
