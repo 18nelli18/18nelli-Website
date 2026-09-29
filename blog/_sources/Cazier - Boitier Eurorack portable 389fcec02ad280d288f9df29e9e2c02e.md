@@ -161,6 +161,12 @@ Un dernier point auquel je n’avais pas du tout réfléchis, c’est la répart
 
 J’aimerai aussi avoir de quoi fabriquer moi-même mes câbles eurorack.
 
-- Cable plat 28AWG 1.27mm 16p
+- [Cable plat 28AWG 1.27mm 16pin](https://fr.aliexpress.com/item/1005002991206934.html?pdp_ext_f=%7B%22order%22%3A%22291%22%2C%22fromPage%22%3A%22search%22%7D)
+- [Connecteur FC-16P IDC 2.54](https://fr.aliexpress.com/w/wholesale-FC%2525252d16P-IDC-female-2.54mm.html)
+- [Connecteur mâle IDC 2.54](https://fr.aliexpress.com/item/1005006195584769.html?pdp_ext_f=%7B%22order%22%3A%22161%22%2C%22fromPage%22%3A%22search%22%7D)
 
 ![Capture_decran_2026-09-29_a_13.14.55.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-29_a_13.14.55.png)
+
+![Capture_decran_2026-09-29_a_13.17.16.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-29_a_13.17.16.png)
+
+![Capture_decran_2026-09-29_a_13.19.23.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-29_a_13.19.23.png)
