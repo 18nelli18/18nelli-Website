@@ -1,7 +1,7 @@
 # Faire un Syntakt du pauvre pour lutter contre le capitaliste
 
 <!-- date: 24/09/2026 -->
-<!-- modified: 25/09/2026 -->
+<!-- modified: 29/09/2026 -->
 
 *lien du dépot GitHub de ce projet:*
 
@@ -113,7 +113,7 @@ A partir de ces 3 dépot, génere toi des fichier de note .md avec des informati
 
 ### Idée de fonctionnalités à implémenter:
 
-- [ ]  Sortie multipiste 6 canaux
+- [x]  Sortie multipiste 6 canaux
 - [ ]  Sortie multipiste 12 canaux (pour garder le pan stéréo de chaque piste)
 - [ ]  Possibilité de modifier les algo d’effet
 - [ ]  Ajout d’un moteur Sample qui permet de charger des sample comme sur un model sample
@@ -123,3 +123,13 @@ A partir de ces 3 dépot, génere toi des fichier de note .md avec des informati
 - [ ]  Arpégiateur pour le mode chromatique
 - [ ]  Scale pour le mode chromatique
 - [ ]  Mode polyphonique
+
+### Premier test:
+
+*Mardi 29 septembre*
+
+J’ai reçu le model cycles aujourd’hui. J’ai flasher par usb via le flasher web et ça fonctionne à fond!!!! J’ai bien 6 piste indépendantes dispo sur ableton.
+
+![Capture_decran_2026-09-29_a_14.57.09.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/Capture_decran_2026-09-29_a_14.57.09.png)
+
+Je
