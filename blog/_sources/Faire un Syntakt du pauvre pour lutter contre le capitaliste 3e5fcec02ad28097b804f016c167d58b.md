@@ -138,5 +138,3 @@ J’ai reçu le model cycles aujourd’hui. J’ai flasher par usb via le flashe
 ![Capture_decran_2026-09-29_a_14.57.09.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/Capture_decran_2026-09-29_a_14.57.09.png)
 
 J’ai fait un post reddit sur le subreddit r/Elektron: [https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcstfbz/?screen_view_count=2](https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcstfbz/?screen_view_count=2)
-
-J’ai eu plein de retour et d’idée à ajouter.
