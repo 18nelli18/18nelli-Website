@@ -1,7 +1,7 @@
 # Faire un Syntakt du pauvre pour lutter contre le capitaliste
 
 <!-- date: 24/09/2026 -->
-<!-- modified: 29/09/2026 -->
+<!-- modified: 30/09/2026 -->
 
 *lien du dépot GitHub de ce projet:*
 
@@ -115,6 +115,7 @@ A partir de ces 3 dépot, génere toi des fichier de note .md avec des informati
 
 - [x]  Sortie multipiste 6 canaux
 - [x]  Passage à l’os model sample
+- [ ]  Assignation du LFO en bougant le potard voulu
 - [ ]  Sortie multipiste 12 canaux (pour garder le pan stéréo de chaque piste)
 - [ ]  Possibilité de modifier les algo d’effet
 - [ ]  Ajout d’un moteur Sample qui permet de charger des sample comme sur un model sample
