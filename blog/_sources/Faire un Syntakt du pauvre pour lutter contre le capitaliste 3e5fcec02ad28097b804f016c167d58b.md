@@ -129,6 +129,8 @@ A partir de ces 3 dépot, génere toi des fichier de note .md avec des informati
     - [x]  Mode silencieux [https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcstfbz/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button](https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcstfbz/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
     - [x]  Mode machine sample: [https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcsfty9/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button](https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcsfty9/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
     - [ ]  Machine du Syntakt: [https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcsl3lv/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button](https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcsl3lv/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
+        - [x]  SD Vintage
+        - [ ]  
     - [x]  Aperçu trig: [https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcsp79z/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button](https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcsp79z/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
 
 ### Premier test:
