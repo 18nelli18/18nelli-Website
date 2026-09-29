@@ -171,4 +171,4 @@ J’aimerai aussi avoir de quoi fabriquer moi-même mes câbles eurorack.
 
 ![Capture_decran_2026-09-29_a_13.19.23.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-29_a_13.19.23.png)
 
-Avec la nouvelle taxe de l’UE sur les colis chinois, ça me revient à environ 20euros. C’est pas mal mais qd même un peu cher. J’acheterais tout ça plus tard
+Avec la nouvelle taxe de l’UE sur les colis chinois, ça me revient à environ 20euros. C’est pas mal mais qd même un peu cher. J’achèterais tout ça plus tard
