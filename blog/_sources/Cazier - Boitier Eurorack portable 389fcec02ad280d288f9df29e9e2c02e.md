@@ -133,11 +133,9 @@ Taille nécéssaire de planche pour faire les 2 plaques des côté : 300mm x 150
 
 Comme mon employeur a décidé de repoussé chaque semaine ma date de recrute, j’ai beaucoup de temps libre donc j’ai pu imprimer en 3D les pièces. J’ai eu quelques raté mais dans l’ensemble ça c’est très bien imprimé. J’ai tout imprimer en PETG, debout avec support, à 15% d’infill en gyroïde. Voici le résultat:
 
-![image 5.png](Cazier%20-%20Boitier%20Eurorack%20portable/image%205.png)
+![PXL_20260928_202615412.jpg](Cazier%20-%20Boitier%20Eurorack%20portable/PXL_20260928_202615412.jpg)
 
-J’ai trouvé ce kit de vis m3 pas trop cher sur Amazon. Elle sont pas de giga bonne qualité mais c’était celles qui était livrée le plus vite.
-
-![Capture_decran_2026-09-27_a_19.11.46.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-27_a_19.11.46.png)
+[J’ai trouvé un kit de vis m3 pas trop cher sur Amazon](https://www.amazon.fr/dp/B0DQ19XG23?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1). Elle sont pas de giga bonne qualité mais c’était celles qui était livrée le plus vite.
 
 Le format est validé. C’est la taille parfaite pour moi. Par trop grand mais pas trop petit non plus.
 
@@ -147,6 +145,8 @@ La prochaine étape c’est de mettre la bande fileté M3 dans les rails. J’en
 
 J’aimerai aussi faire fabriquer les plaques latérales en aluminium. Y’a plusieurs options. Soit commander sur JLCCNC, soit commander des plaques d’alu brut de 150 par 285 et empreinter une CNC pour les découper.
 
-Le prix sur JLCCNC est vraiment bas, environ 27euro.
+Le prix sur JLCCNC est vraiment bas, environ 27euro. C’est commandé!
 
 ![Capture_decran_2026-09-28_a_14.06.00.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-28_a_14.06.00.png)
+
+Un dernier point auquel je n’avais pas du tout réfléchis, c’est la répartition du poids et la stabilité une fois les modules montés dessus. Actuellement, en plastique la case tient debout, ma on sens que le poids est mis sur la face avant.
