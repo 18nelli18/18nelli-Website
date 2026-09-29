@@ -154,3 +154,13 @@ Par curiosité j’ai regardé combien ça couterai de faire le rail central, ma
 ![Capture_decran_2026-09-29_a_12.53.51.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-29_a_12.53.51.png)
 
 Un dernier point auquel je n’avais pas du tout réfléchis, c’est la répartition du poids et la stabilité une fois les modules montés dessus. Actuellement, en plastique la case tient debout, ma on sens que le poids est mis sur la face avant. En aluminium je pense que le soucis se posera moins, car la plaque de fond de 8mm d’épaisseur contrebalancera un peu. Dans tout les cas ça pourrait être cool de modéliser des pieds adapté.
+
+### Quête secondaire: faire ses propre câble d’alimentation
+
+*Mardi 29/09/26*
+
+J’aimerai aussi avoir de quoi fabriquer moi-même mes câbles eurorack.
+
+- Cable plat 28AWG 1.27mm 16p
+
+![Capture_decran_2026-09-29_a_13.14.55.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-29_a_13.14.55.png)
