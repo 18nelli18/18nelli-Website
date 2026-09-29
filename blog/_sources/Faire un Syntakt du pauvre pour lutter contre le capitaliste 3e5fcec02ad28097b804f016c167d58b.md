@@ -37,7 +37,7 @@ Claude estime la probabilité de réussite de 70 à 80%. Moi je dit 100% y’a a
 
 Il me reste donc plus qu’a acheter un model cycles, à surexploiter claude code jusqu’a avoir un truc qui marche. En attendant je vais essayer d’apprendre un peu comment tout marche pour ne pas tout faire à l’aveugle.
 
-### Recherche perso:
+### Recherche perso:x
 
 Sur [ce topic](https://www.elektronauts.com/t/model-cycles-q-a-with-ess/122712/122?page=6) du forum d’Elektron, on apprends que le processeur de la série Elektron Model est de la gamme **Coldfire MCF5441**:
 
