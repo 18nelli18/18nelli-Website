@@ -1,7 +1,7 @@
 # Cazier - Boitier Eurorack portable
 
 <!-- date: 24/06/2026 -->
-<!-- modified: 28/09/2026 -->
+<!-- modified: 29/09/2026 -->
 
 ![d2dd2cf1-6c2b-4df2-a49a-d18254295a7e.png](Cazier%20-%20Boitier%20Eurorack%20portable/d2dd2cf1-6c2b-4df2-a49a-d18254295a7e.png)
 
@@ -147,6 +147,6 @@ La prochaine étape c’est de mettre la bande fileté M3 dans les rails. J’en
 
 J’aimerai aussi faire fabriquer les plaques latérales en aluminium. Y’a plusieurs options. Soit commander sur JLCCNC, soit commander des plaques d’alu brut de 150 par 285 et empreinter une CNC pour les découper.
 
-Le prix sur JLCCNC est vraiment bas, environ 25euro.
+Le prix sur JLCCNC est vraiment bas, environ 27euro.
 
 ![Capture_decran_2026-09-28_a_14.06.00.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-28_a_14.06.00.png)
