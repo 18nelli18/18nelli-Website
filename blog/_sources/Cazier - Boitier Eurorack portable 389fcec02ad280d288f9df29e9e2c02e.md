@@ -149,7 +149,7 @@ Le prix sur JLCCNC est vraiment bas, environ 27euro. C’est commandé!
 
 ![Capture_decran_2026-09-28_a_14.06.00.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-28_a_14.06.00.png)
 
-Par curiosité j’ai regardé combien ça couterai de faire le rail central, mais c’est trop cher pour moi. Mais ça sera intéressant de faire le calcul entre
+Par curiosité j’ai regardé combien ça couterai de faire le rail central, mais c’est trop cher pour moi. Mais ça serai intéressant de faire le calcul entre un case du marché de la même taille, en aluminium.
 
 ![Capture_decran_2026-09-29_a_12.53.51.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-29_a_12.53.51.png)
 
