@@ -143,10 +143,14 @@ La prochaine étape c’est de mettre la bande fileté M3 dans les rails. J’en
 
 ![Capture_decran_2026-09-27_a_20.06.55.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-27_a_20.06.55.png)
 
-J’aimerai aussi faire fabriquer les plaques latérales en aluminium. Y’a plusieurs options. Soit commander sur JLCCNC, soit commander des plaques d’alu brut de 150 par 285 et empreinter une CNC pour les découper.
+J’aimerai aussi faire fabriquer les plaques latérales en aluminium. Y’a plusieurs options. Soit commander sur JLCCNC Tolerie, soit commander des plaques d’alu brut de 150 par 285 et empreinter une CNC pour les découper.
 
 Le prix sur JLCCNC est vraiment bas, environ 27euro. C’est commandé!
 
 ![Capture_decran_2026-09-28_a_14.06.00.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-28_a_14.06.00.png)
+
+Par curiosité j’ai regardé combien ça couterai de faire le rail central, mais c’est trop cher pour moi. Mais ça sera intéressant de faire le calcul entre
+
+![Capture_decran_2026-09-29_a_12.53.51.png](Cazier%20-%20Boitier%20Eurorack%20portable/Capture_decran_2026-09-29_a_12.53.51.png)
 
 Un dernier point auquel je n’avais pas du tout réfléchis, c’est la répartition du poids et la stabilité une fois les modules montés dessus. Actuellement, en plastique la case tient debout, ma on sens que le poids est mis sur la face avant. En aluminium je pense que le soucis se posera moins, car la plaque de fond de 8mm d’épaisseur contrebalancera un peu. Dans tout les cas ça pourrait être cool de modéliser des pieds adapté.
