@@ -136,7 +136,7 @@ J’ai fait un post reddit sur le subreddit r/Elektron: [https://www.reddit.com/
 - [ ]  Scale pour le mode chromatique
 - [ ]  Mode polyphonique
 - [ ]  SUGGESTION REDDIT:
-    - [ ]  Régler le bug
+    - [ ]  Régler le bug des potard lent avec tout les truc activé
     - [x]  Mode silencieux [https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcstfbz/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button](https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcstfbz/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
     - [x]  Mode machine sample: [https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcsfty9/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button](https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcsfty9/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
     - [ ]  Machine du Syntakt: [https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcsl3lv/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button](https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcsl3lv/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
