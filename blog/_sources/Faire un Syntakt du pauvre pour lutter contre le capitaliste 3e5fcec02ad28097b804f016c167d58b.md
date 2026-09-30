@@ -111,6 +111,16 @@ https://github.com/mischa85/elektron-firmware-tool
 A partir de ces 3 dépot, génere toi des fichier de note .md avec des information techniques, des bout de code / des indication qui vont t'aider dans le développement de ce projet
 ```
 
+### Premier test:
+
+*Mardi 29 septembre*
+
+J’ai reçu le model cycles aujourd’hui. J’ai flasher par usb via le flasher web et ça fonctionne à fond!!!! J’ai bien 6 piste indépendantes dispo sur ableton.
+
+![Capture_decran_2026-09-29_a_14.57.09.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/Capture_decran_2026-09-29_a_14.57.09.png)
+
+J’ai fait un post reddit sur le subreddit r/Elektron: [https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcstfbz/?screen_view_count=2](https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcstfbz/?screen_view_count=2)
+
 ### Idée de fonctionnalités à implémenter:
 
 - [x]  Sortie multipiste 6 canaux
@@ -126,19 +136,10 @@ A partir de ces 3 dépot, génere toi des fichier de note .md avec des informati
 - [ ]  Scale pour le mode chromatique
 - [ ]  Mode polyphonique
 - [ ]  SUGGESTION REDDIT:
+    - [ ]  Régler le bug
     - [x]  Mode silencieux [https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcstfbz/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button](https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcstfbz/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
     - [x]  Mode machine sample: [https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcsfty9/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button](https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcsfty9/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
     - [ ]  Machine du Syntakt: [https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcsl3lv/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button](https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcsl3lv/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
         - [x]  SD Vintage
         - [ ]  
     - [x]  Aperçu trig: [https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcsp79z/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button](https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcsp79z/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
-
-### Premier test:
-
-*Mardi 29 septembre*
-
-J’ai reçu le model cycles aujourd’hui. J’ai flasher par usb via le flasher web et ça fonctionne à fond!!!! J’ai bien 6 piste indépendantes dispo sur ableton.
-
-![Capture_decran_2026-09-29_a_14.57.09.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/Capture_decran_2026-09-29_a_14.57.09.png)
-
-J’ai fait un post reddit sur le subreddit r/Elektron: [https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcstfbz/?screen_view_count=2](https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcstfbz/?screen_view_count=2)
