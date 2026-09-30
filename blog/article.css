@@ -48,6 +48,21 @@
   background: #ff0000;
 }
 
+/* lien externe mort, remplacé par sa copie Internet Archive (article.js) */
+.article a.lien-archive {
+  text-decoration-style: dashed;
+}
+.lien-archive-tag {
+  margin-left: 0.35em;
+  padding: 0 0.35em;
+  border: 1px solid #ff0000;
+  font-family: "Iceland", monospace;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: help;
+}
+
 /* base commune des images : bordure rouge, hauteur auto, cliquable pour agrandir */
 .article img {
   position: static;

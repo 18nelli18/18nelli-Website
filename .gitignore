@@ -14,6 +14,11 @@
 .idea/
 *.swp
 
+# --- Archive des liens ------------------------------------------------
+# Écrit par tools/archive-links.mjs (cron du serveur), jamais versionné :
+# s'il l'était, chaque déploiement remplacerait la version du serveur.
+/data/link-archive.json
+
 # --- Photos des albums ------------------------------------------------
 # Trop lourdes pour git : elles sont uploadées directement sur le
 # serveur. Seules les vignettes ico.png sont versionnées.

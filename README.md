@@ -42,7 +42,8 @@ framework. On ouvre un `.html` et ça marche.
 │   └── vendor/             Code tiers (Bootstrap, animate.css)
 │
 ├── data/
-│   └── songs.json          Liste des morceaux (accueil + musique.html)
+│   ├── songs.json          Liste des morceaux (accueil + musique.html)
+│   └── link-archive.json   Liens externes MORTS + leur copie (écrit par le serveur, non versionné)
 │
 ├── albums/<nom>/
 │   ├── <nom>.html          Galerie (blocs générés par tools/gen.sh)
@@ -64,6 +65,7 @@ framework. On ouvre un `.html` et ça marche.
     ├── notion-sync.mjs     Page Notion « Blog » -> blog/_sources/
     ├── blog-gen.sh         Markdown Notion -> articles HTML + sommaire
     ├── replace.sh          Copie de référence du script de déploiement serveur
+    ├── archive-links.mjs   Archive les liens externes (Internet Archive + copies privées)
     ├── gen.sh              Dossier d'images -> blocs HTML de galerie
     └── check-links.mjs     Vérifie que tous les liens locaux résolvent
 ```
@@ -295,6 +297,146 @@ les uploader séparément sur le serveur.
 Déposer le `.mp3` dans `assets/media/song/`, puis ajouter son nom de
 fichier dans `data/songs.json`. Il apparaîtra dans `musique.html` et dans
 la rotation aléatoire du lecteur CD de l'accueil.
+
+---
+
+## Archiver les liens externes
+
+Le site cite beaucoup de choses qui ne sont pas à lui : fiches AliExpress,
+dépôts GitHub, vidéos YouTube, datasheets PDF… Dans dix ans, une bonne part
+aura disparu. `tools/archive-links.mjs` en garde une trace, chaque nuit.
+
+Pour chaque lien externe des pages du site (liens, iframes, et URLs écrites
+dans le texte ou les blocs de code) il :
+
+| Étape                                     | Où ça va                                    |
+| ----------------------------------------- | ------------------------------------------- |
+| vérifie que le lien répond encore         | rien n'est stocké, sauf son état            |
+| demande une copie à l'**Internet Archive** | archive.org, **publique**                   |
+| garde une **copie locale**                | dossier d'archive du serveur, **privée**    |
+| publie les liens morts et leur copie      | `data/link-archive.json`, lu par `blog/article.js` |
+
+La copie locale contient, selon le lien : le HTML de la page et son texte, le
+fichier tel quel (PDF, script…), le code source d'un dépôt GitHub, la fiche
+et la miniature d'une vidéo YouTube (et la vidéo elle-même si `yt-dlp` est
+installé sur le serveur).
+
+**Quand un lien est mort**, l'article renvoie automatiquement le lecteur vers
+la copie de l'Internet Archive, avec une pastille « archive » à côté. Un
+lien n'est déclaré mort qu'après **3 constats « introuvable »** (404/410 ou
+domaine disparu) espacés d'au moins un jour. Un site qui refuse les robots
+(403, 429, délai dépassé…) reste « non vérifiable », jamais « mort ». Si le
+réseau du serveur est malade (beaucoup de liens « disparus » d'un coup), les
+constats du passage sont ignorés.
+
+Les copies locales sont **privées** : ce sont des reproductions de sites
+tiers, le site ne publie que des liens vers l'Internet Archive. Le dossier
+d'archive doit rester hors du site (le script refuse un dossier situé
+dedans) et rien n'y est jamais supprimé automatiquement.
+
+### Essayer (aucun risque)
+
+```bash
+node tools/archive-links.mjs --scan
+```
+
+Liste les liens trouvés, sans aucun accès réseau.
+
+```bash
+node tools/archive-links.mjs --dry-run
+```
+
+Vérifie les liens et regarde chez l'Internet Archive ce qui existe déjà, mais
+ne demande aucune capture et n'écrit rien sur le disque : affiche ce qu'un vrai
+passage ferait.
+
+### Mise en place sur le serveur (une seule fois)
+
+`replace.sh` copie tout le dépôt dans `/var/www/18nelli` : le script arrive
+donc tout seul avec le prochain déploiement, il n'y a rien à copier. Il lui
+faut Node 18 ou plus sur le serveur. Depuis le Mac :
+
+**1. Vérifier Node** (doit afficher v18 ou plus) :
+
+```bash
+ssh root@87.106.217.25 'node --version'
+```
+
+S'il est absent : `ssh root@87.106.217.25 'apt-get update && apt-get install -y nodejs'`,
+puis relancer la commande ci-dessus.
+
+**2. Premier passage.** Long (compte environ une heure : l'Internet Archive est
+lente) : il tourne en arrière-plan sur le serveur et écrit dans un journal.
+
+```bash
+ssh root@87.106.217.25 'mkdir -p /var/lib/18nelli-link-archive && chmod 700 /var/lib/18nelli-link-archive && nohup node /var/www/18nelli/tools/archive-links.mjs --archive-dir /var/lib/18nelli-link-archive --max-saves 100 >> /var/log/link-archive.log 2>&1 < /dev/null &'
+```
+
+Pour suivre l'avancement (Ctrl-C quitte le suivi, pas le passage) :
+
+```bash
+ssh root@87.106.217.25 'tail -f /var/log/link-archive.log'
+```
+
+**3. Passage automatique chaque nuit** (04h17), sans doublon si le précédent
+n'est pas fini :
+
+```bash
+ssh root@87.106.217.25 '(crontab -l 2>/dev/null | grep -v archive-links; echo "17 4 * * * flock -n /tmp/link-archive.lock node /var/www/18nelli/tools/archive-links.mjs --archive-dir /var/lib/18nelli-link-archive >> /var/log/link-archive.log 2>&1") | crontab -'
+```
+
+Chaque nuit, le script ne traite que ce qui est nouveau ou à revérifier ; les
+demandes à l'Internet Archive sont plafonnées à 20 par passage (`--max-saves`),
+le reste attend la nuit suivante.
+
+### Consulter l'archive
+
+Sur le serveur, `/var/lib/18nelli-link-archive/` contient `index.html` (le
+rapport : état de chaque lien, copie Internet Archive, copies locales) et
+`copies/`. Pour tout rapatrier sur le Mac (c'est aussi ta sauvegarde, à
+refaire quand tu veux) :
+
+```bash
+rsync -av root@87.106.217.25:/var/lib/18nelli-link-archive/ ~/Documents/PiDir/18nelli-link-archive/
+```
+
+Puis ouvrir `~/Documents/PiDir/18nelli-link-archive/index.html` : tout marche
+hors-ligne, le dossier se garde tel quel sur n'importe quel disque. Pour lire
+une page, préférer son `text.txt` : `page.html` est le HTML brut du site
+d'origine, l'ouvrir exécute ses scripts.
+
+### Bon à savoir
+
+- **Le journal** (`/var/log/link-archive.log`) affiche `💀 LIEN MORT` à chaque
+  nouveau lien mort, et signale ceux qui n'ont aucune copie nulle part.
+- **Lien « vivant » mais en réalité disparu** (une fiche AliExpress qui répond
+  200 avec « produit indisponible » : le script ne peut pas le deviner) :
+  le marquer à la main, `alive` pour l'inverse, `auto` pour redonner la main au
+  script.
+
+  ```bash
+  ssh root@87.106.217.25 'node /var/www/18nelli/tools/archive-links.mjs --archive-dir /var/lib/18nelli-link-archive --mark "https://fr.aliexpress.com/item/32896689725.html" dead'
+  ```
+
+- **Pages très dynamiques** (AliExpress, Printables…) : la copie locale est
+  « pauvre » (peu de texte, repérée dans le rapport). La copie Internet
+  Archive reste alors la référence.
+- **Vidéos YouTube** : sans `yt-dlp`, on garde la fiche (titre, chaîne,
+  miniature) et la copie Internet Archive de la page, pas le film. Pour
+  garder aussi la vidéo (720p max, 800 Mo max), installer le binaire officiel
+  de `yt-dlp` sur le serveur :
+
+  ```bash
+  ssh root@87.106.217.25 'curl -fsSL https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux -o /usr/local/bin/yt-dlp && chmod a+rx /usr/local/bin/yt-dlp && yt-dlp --version'
+  ```
+
+  YouTube change souvent : `ssh root@87.106.217.25 'yt-dlp -U'` de temps en
+  temps. Avec `ffmpeg` (`apt-get install -y ffmpeg`), la qualité est meilleure.
+  Les vidéos déjà vues sans `yt-dlp` sont reprises toutes seules au passage suivant.
+- **Ce qui n'est pas archivé** : les dépendances du site (polices Google,
+  Mermaid et highlight.js chargés depuis jsDelivr) ne sont pas des liens de
+  contenu. `--scan` liste celles qui figurent dans les pages.
+- Toutes les options : `node tools/archive-links.mjs --help`.
 
 ---
 

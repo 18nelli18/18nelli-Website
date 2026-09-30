@@ -2,10 +2,14 @@
 //  article.js — 18nelli
 //  - Zoom / Lightbox des images au clic (agrandir / re-réduire)
 //  - Rendu des diagrammes Mermaid (dark theme)
+//  - Liens morts -> copie archivée (Internet Archive)
 // =====================================================================
 
 (function () {
   'use strict';
+
+  // Adresse de ce script, pour retrouver ../data/ d'où que l'article soit servi.
+  const SCRIPT_SRC = document.currentScript && document.currentScript.src;
 
   // --- 1. ZOOM / LIGHTBOX DES IMAGES ---------------------------------
   function initImageZoom() {
@@ -428,15 +432,64 @@
     }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () {
-      initImageZoom();
-      initMermaid();
-      initCodeBlocks();
-    });
-  } else {
+  // --- 4. LIENS MORTS -> COPIE ARCHIVÉE -----------------------------
+  // tools/archive-links.mjs (lancé chaque nuit par le serveur) publie
+  // data/link-archive.json : les liens externes MORTS y figurent avec leur
+  // copie de l'Internet Archive. Un lien mort est redirigé vers cette copie,
+  // et marqué « archive » pour que le lecteur sache où il atterrit.
+  // Fichier absent (site ouvert en local...) ou vide : rien ne change.
+  function initArchivedLinks() {
+    const links = document.querySelectorAll('.article a[href^="http"]');
+    if (!links.length) return;
+
+    const dataUrl = new URL('../data/link-archive.json', SCRIPT_SRC || location.href).href;
+    fetch(dataUrl, { cache: 'no-cache' })
+      .then(function (res) { return res.ok ? res.json() : null; })
+      .then(function (data) {
+        const dead = data && data.dead;
+        if (!dead) return;
+
+        links.forEach(function (a) {
+          let key;
+          try {
+            // Même clé que l'archiveur : URL normalisée, sans le #fragment.
+            const u = new URL(a.href);
+            u.hash = '';
+            key = u.href;
+          } catch (e) {
+            return;
+          }
+          const hit = Object.prototype.hasOwnProperty.call(dead, key) ? dead[key] : null;
+          // Seules des copies de l'Internet Archive sont acceptées comme destination.
+          if (!hit || !/^https:\/\/web\.archive\.org\/web\//.test(hit.archive)) return;
+
+          const date = String(hit.date || '').split('-').reverse().join('/');
+          const note = 'Le lien d’origine est mort — copie du ' + date + ' (Internet Archive)';
+          a.dataset.originalHref = a.href;
+          a.href = hit.archive;
+          a.classList.add('lien-archive');
+          a.title = note;
+
+          const tag = document.createElement('span');
+          tag.className = 'lien-archive-tag';
+          tag.textContent = 'archive';
+          tag.title = note;
+          a.after(tag);
+        });
+      })
+      .catch(function () { /* pas d'archive disponible : les liens restent tels quels */ });
+  }
+
+  function init() {
     initImageZoom();
     initMermaid();
     initCodeBlocks();
+    initArchivedLinks();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 })();
