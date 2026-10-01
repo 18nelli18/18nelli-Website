@@ -132,7 +132,6 @@ J’ai fait un post reddit sur le subreddit r/Elektron: [https://www.reddit.com/
 - [ ]  Ajouter une animation personnalisée au démarrage
 - [ ]  Ajouter dans les parametre la possibilité de bloqué le pitch en chromatique
 - [ ]  Assignation du LFO en bougant le potard voulu
-- [ ]  Sortie multipiste 12 canaux (pour garder le pan stéréo de chaque piste)
 - [ ]  Possibilité de modifier les algo d’effet
 - [ ]  Ajout d’un moteur Sample qui permet de charger des sample comme sur un model sample
 - [ ]  Amélioration des LFO: deux LFOs complets et synchronisables, assignables à quasiment n'importe quel paramètre logiciel ou effet (comme sut le syntakt)
