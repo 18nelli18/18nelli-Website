@@ -136,9 +136,11 @@ J’ai fait un post reddit sur le subreddit r/Elektron: [https://www.reddit.com/
 - [ ]  Amélioration des LFO: deux LFOs complets et synchronisables, assignables à quasiment n'importe quel paramètre logiciel ou effet (comme sut le syntakt)
 - [ ]  Polyrythmie pure (modification de la time signature par piste)
 - [x]  Control en midi usb (clock, start stop)
-- [ ]  Arpégiateur pour le mode chromatique
+- [x]  Arpégiateur pour le mode chromatique
+- [ ]  Mode d’arpégiateur latch (maintenu)
 - [ ]  Scale pour le mode chromatique
 - [ ]  Mode polyphonique
 - [ ]  Resoudre ce bug : [https://www.reddit.com/r/Elektron/comments/1wvb5jc/comment/pdd4whb/](https://www.reddit.com/r/Elektron/comments/1wvb5jc/comment/pdd4whb/)
 - [ ]  Améliorer le model sample vers model cycle et vice versa
-- [ ]  D
+- [ ]  Dépasser les 300Bpm
+- [ ]  
