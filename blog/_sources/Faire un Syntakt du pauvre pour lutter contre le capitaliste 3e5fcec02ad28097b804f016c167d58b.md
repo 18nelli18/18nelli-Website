@@ -1,7 +1,7 @@
 # Faire un Syntakt du pauvre pour lutter contre le capitaliste
 
 <!-- date: 24/09/2026 -->
-<!-- modified: 03/10/2026 -->
+<!-- modified: 04/10/2026 -->
 
 *lien du dépot GitHub de ce projet:*
 
@@ -144,3 +144,4 @@ J’ai fait un post reddit sur le subreddit r/Elektron: [https://www.reddit.com/
 - [ ]  Améliorer le model sample vers model cycle et vice versa
 - [ ]  Dépasser les 300Bpm
 - [ ]  Ajouter une preview dans sample
+- [ ]  Usb multitrack + TG Cycles makes glitches after 15-20 mins usage, specially when make some tracks muted.
