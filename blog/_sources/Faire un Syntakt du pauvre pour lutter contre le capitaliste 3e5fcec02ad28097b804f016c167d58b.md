@@ -143,4 +143,4 @@ J’ai fait un post reddit sur le subreddit r/Elektron: [https://www.reddit.com/
 - [ ]  Resoudre ce bug : [https://www.reddit.com/r/Elektron/comments/1wvb5jc/comment/pdd4whb/](https://www.reddit.com/r/Elektron/comments/1wvb5jc/comment/pdd4whb/)
 - [ ]  Améliorer le model sample vers model cycle et vice versa
 - [ ]  Dépasser les 300Bpm
-- [ ]  
+- [ ]  Ajouter une preview dans sample
