@@ -1,7 +1,7 @@
 # Faire un Syntakt du pauvre pour lutter contre le capitaliste
 
 <!-- date: 24/09/2026 -->
-<!-- modified: 04/10/2026 -->
+<!-- modified: 05/10/2026 -->
 
 *lien du dépot GitHub de ce projet:*
 
@@ -125,6 +125,14 @@ J’ai reçu le model cycles aujourd’hui. J’ai flasher par usb via le flashe
 
 J’ai fait un post reddit sur le subreddit r/Elektron: [https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcstfbz/?screen_view_count=2](https://www.reddit.com/r/Elektron/comments/1wt9n2v/comment/pcstfbz/?screen_view_count=2)
 
+### Truc à faire en prioritée:
+
+- [ ]  Décomposer le mod TG (avoir une liste a cocher et proposer a l’user d’en séléctionner uniquement quelque une)
+- [ ]  Procédure de model sample vers model cycles
+- [ ]  Faire la video de présentation
+- [ ]  Mettre à jour le readme (ex scale deja implémené dans model-tg)
+- [ ]  
+
 ### Idée de fonctionnalités à implémenter:
 
 - [x]  Sortie multipiste 6 canaux
@@ -137,9 +145,10 @@ J’ai fait un post reddit sur le subreddit r/Elektron: [https://www.reddit.com/
 - [ ]  Polyrythmie pure (modification de la time signature par piste)
 - [x]  Control en midi usb (clock, start stop)
 - [x]  Arpégiateur pour le mode chromatique
-- [ ]  Mode d’arpégiateur latch (maintenu)
-- [ ]  Scale pour le mode chromatique
+- [x]  Mode d’arpégiateur latch (maintenu)
+- [x]  Scale pour le mode chromatique
 - [ ]  Mode polyphonique
+- [ ]  Enregistrement STEP BY STEP
 - [ ]  Resoudre ce bug : [https://www.reddit.com/r/Elektron/comments/1wvb5jc/comment/pdd4whb/](https://www.reddit.com/r/Elektron/comments/1wvb5jc/comment/pdd4whb/)
 - [ ]  Améliorer le model sample vers model cycle et vice versa
 - [ ]  Dépasser les 300Bpm
