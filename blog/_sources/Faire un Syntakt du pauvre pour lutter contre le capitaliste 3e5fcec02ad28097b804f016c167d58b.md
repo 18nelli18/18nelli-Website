@@ -130,7 +130,7 @@ J’ai fait un post reddit sur le subreddit r/Elektron: [https://www.reddit.com/
 - [ ]  Décomposer le mod TG (avoir une liste a cocher et proposer a l’user d’en séléctionner uniquement quelque une)
 - [ ]  Procédure de model sample vers model cycles
 - [ ]  Faire la video de présentation
-- [ ]  Mettre à jour le readme (ex scale deja implémené dans model-tg)
+- [x]  Mettre à jour le readme (ex scale deja implémené dans model-tg)
 - [ ]  
 
 ### Idée de fonctionnalités à implémenter:
