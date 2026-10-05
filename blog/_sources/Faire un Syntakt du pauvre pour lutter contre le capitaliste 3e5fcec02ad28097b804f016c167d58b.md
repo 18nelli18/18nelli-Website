@@ -134,25 +134,4 @@ J’ai fait un post reddit sur le subreddit r/Elektron: [https://www.reddit.com/
 - [x]  Mettre à jour le readme (ex scale deja implémené dans model-tg)
 - [x]  Organiser le projet (discord + agent + coderabbit)
 
-### Idée de fonctionnalités à implémenter:
-
-- [x]  Sortie multipiste 6 canaux
-- [x]  Passage à l’os model sample
-- [x]  Ajouter une animation personnalisée au démarrage
-- [x]  Ajouter dans les parametre la possibilité de bloqué le pitch en chromatique
-- [ ]  Possibilité de modifier les algo d’effet
-- [x]  Ajout d’un moteur Sample qui permet de charger des sample comme sur un model sample
-- [ ]  Amélioration des LFO: deux LFOs complets et synchronisables, assignables à quasiment n'importe quel paramètre logiciel ou effet (comme sut le syntakt)
-- [x]  Control en midi usb (clock, start stop)
-- [x]  Arpégiateur pour le mode chromatique
-- [x]  Mode d’arpégiateur latch (maintenu)
-- [x]  Scale pour le mode chromatique
-- [ ]  Mode polyphonique
-- [x]  Enregistrement STEP BY STEP
-- [ ]  Resoudre ce bug : [https://www.reddit.com/r/Elektron/comments/1wvb5jc/comment/pdd4whb/](https://www.reddit.com/r/Elektron/comments/1wvb5jc/comment/pdd4whb/)
-- [ ]  Améliorer le model sample vers model cycle et vice versa
-- [ ]  Dépasser les 300Bpm
-- [ ]  Ajouter une preview dans sample
-- [ ]  Usb multitrack + TG Cycles makes glitches after 15-20 mins usage, specially when make some tracks muted.
-- [ ]  You fixed it. Thank you.  
-    Another big issue imo is that you can’t press the note on the device and have that remembered by the pad or then place it on the sequencer via a step. It always places C down, then you have to hold the step and tweak it with the ‘Level /Data’ knob or alternatively the ‘PITCH’ knob. Really it should keep the ‘note’ data and assign it to the pad via the ‘Level / Data’ knob on a per-track basis. This is the most broken thing on the device now imo, you basically need a midi keyboard to get around it. Note that the new preview feature (via page) mitigates a lot of frustration here, but it’s still an odd feature to be missing. Worth also noting the new FX page is great, but I can’t test the active sound (without playing a loop), so it’s hard to know what it does to a sound, it would be good to have last sound/track played by pressing Page. Thank you so much
+### Maintenir une communauté
