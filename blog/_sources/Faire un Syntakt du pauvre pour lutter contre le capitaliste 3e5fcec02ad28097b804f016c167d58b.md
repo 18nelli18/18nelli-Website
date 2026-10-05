@@ -138,4 +138,5 @@ J’ai fait un post reddit sur le subreddit r/Elektron: [https://www.reddit.com/
 
 *Mardi 6/09/2026*
 
-Ça fait quelques jours que le projet es
+Ça fait quelques jours que le projet existe de manière assez stable et se répands dans les petites communautés et forum Elektron. J’ai reçu un engouement assez inattendu de la part de tout ces gens et je suis vraiment content que ça puisse re-susciter de l’intérêt pour le model:cycles. Mais face à autant de retour, de test, de suggestions de modification, de questions etc j’ai un peu été débordé, et il fallait que je puisse centralisé tout ça sur un seul et même espaces. J’ai donc crée un Discord. Je pense que tout le projet va se jouer là-bas. J’ai un lien direct avec ceux qui utilise mon mods et ils ont la possibilité de recevoir des notifications d’updates, de proposer des fonctionnalités et de discuter entre eux.  
+J’ai setup Claude pour qu’il puisse faire une veille des features, bug, test report qui sont publié sur les canaux forum de discord.
