@@ -143,7 +143,6 @@ J’ai fait un post reddit sur le subreddit r/Elektron: [https://www.reddit.com/
 - [ ]  Possibilité de modifier les algo d’effet
 - [x]  Ajout d’un moteur Sample qui permet de charger des sample comme sur un model sample
 - [ ]  Amélioration des LFO: deux LFOs complets et synchronisables, assignables à quasiment n'importe quel paramètre logiciel ou effet (comme sut le syntakt)
-- [ ]  Polyrythmie pure (modification de la time signature par piste)
 - [x]  Control en midi usb (clock, start stop)
 - [x]  Arpégiateur pour le mode chromatique
 - [x]  Mode d’arpégiateur latch (maintenu)
