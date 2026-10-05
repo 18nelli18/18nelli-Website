@@ -135,3 +135,7 @@ J’ai fait un post reddit sur le subreddit r/Elektron: [https://www.reddit.com/
 - [x]  Organiser le projet (discord + agent + coderabbit)
 
 ### Maintenir une communauté
+
+*Mardi 6/09/2026*
+
+Ça fait quelques jours que le projet es
