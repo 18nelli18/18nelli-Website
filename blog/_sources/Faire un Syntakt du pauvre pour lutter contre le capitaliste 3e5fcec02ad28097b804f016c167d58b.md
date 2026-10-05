@@ -128,7 +128,7 @@ J’ai fait un post reddit sur le subreddit r/Elektron: [https://www.reddit.com/
 ### Truc à faire en prioritée:
 
 - [ ]  Décomposer le mod TG (avoir une liste a cocher et proposer a l’user d’en séléctionner uniquement quelque une)
-- [ ]  Rebuild en mieux model-tg
+    - [ ]  ou Rebuild en mieux model-tg
 - [ ]  Procédure de model sample vers model cycles
 - [ ]  Faire la video de présentation
 - [x]  Mettre à jour le readme (ex scale deja implémené dans model-tg)
