@@ -132,7 +132,7 @@ J’ai fait un post reddit sur le subreddit r/Elektron: [https://www.reddit.com/
 - [ ]  Procédure de model sample vers model cycles
 - [ ]  Faire la video de présentation
 - [x]  Mettre à jour le readme (ex scale deja implémené dans model-tg)
-- [ ]  Organiser le projet (discord + agent + coderabbit)
+- [x]  Organiser le projet (discord + agent + coderabbit)
 
 ### Idée de fonctionnalités à implémenter:
 
