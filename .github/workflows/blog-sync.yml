@@ -56,7 +56,9 @@ env:
 
 jobs:
   sync:
-    runs-on: ubuntu-latest
+    # Version figée : ubuntu-latest change de version sans prévenir
+    # (Ubuntu 26 en octobre 2026) et pandoc est installé pour celle-ci.
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
