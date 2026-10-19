@@ -155,4 +155,4 @@ Un journaliste du média TheVerge m’a posé quelque questions pour la publicat
 
 ![image 1.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/image%201.png)
 
-Je suis tou
+Je suis toujours en gamberge sur que faire de ce projet. Je pense que tant que j’ai du temps, des idée et des tokens claude à dépenser je vais continuer à le faire évoluer. J’aimerai vraiment avoir une version solide, qui puisse être techniquement la dernière version sans que ça pose problème
