@@ -1,7 +1,7 @@
 # Faire un Syntakt du pauvre pour lutter contre le capitaliste
 
 <!-- date: 24/09/2026 -->
-<!-- modified: 06/10/2026 -->
+<!-- modified: 19/10/2026 -->
 
 *lien du dépot GitHub de ce projet:*
 
@@ -144,3 +144,15 @@ J’ai setup Claude pour qu’il puisse faire une veille des features, bug, test
 Actuellement on est environ 150 sur le serveur ce qui est très bien sachant que je l’ai lancé hier soir. Je suis en train de préparé une vidéo qui teste un peu tout ces mods, je penses que ça permettra à certaines personnes de rejoindre le projet!
 
 ![Capture_decran_2026-10-06_a_00.22.03.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/Capture_decran_2026-10-06_a_00.22.03.png)
+
+### La télé!!!
+
+*Lundi 19 octobre 2026*
+
+Un journaliste du média TheVerge m’a posé quelque questions pour la publication d’un article qui parle de toute cette vagues de firmware vibecodé. L’article est dispo ici:
+
+[https://www.theverge.com/gadgets/1013493/vibe-coding-ai-music-gear-hacking-custom-firmware](https://www.theverge.com/gadgets/1013493/vibe-coding-ai-music-gear-hacking-custom-firmware)
+
+![image 1.png](Faire%20un%20Syntakt%20du%20pauvre%20pour%20lutter%20contre%20le%20capitaliste/image%201.png)
+
+Je suis tou
