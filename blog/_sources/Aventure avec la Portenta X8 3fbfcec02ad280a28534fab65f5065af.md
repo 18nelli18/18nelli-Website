@@ -1,7 +1,7 @@
 # Aventure avec la Portenta X8
 
 <!-- date: 16/10/2026 -->
-<!-- modified: 29/10/2026 -->
+<!-- modified: 30/10/2026 -->
 
 Dans le cadre de mon alternance je dois concevoir un système embarqué pour interfacer plusieurs machine médicales, capteurs bio etc pour pouvoir centralisé les mesures d’une opérations sensible. Le projet est pas dingue en gros c’est faire un hub. MAIS ça reste une occasion de passer du temps à manipuler du materiel nouveau.
 
@@ -163,6 +163,8 @@ Je vais détailler ici mes notes de conceptions sur la carrier board que je comp
 
 J’ai besoin d’un port Ethernet 1000Base-T pour avoir du GbE. Je veux aussi que tout le système soit alimenté en PoE. Je pars sur le **V8BR-1AX1-GH** qui est un connecteur MagJack (donc les transfo d’isolation sont intégrés dans la prise) vertical et compatible PoE.
 
+#### Centertaps
+
 Dans le schéma de la carrier board max d’arduino, les center-taps sont non connecté. Ils laissent la possibilité de les connectés au 3V3 car les Portenta précédentes ont un PHY qui le demande.
 
 ![Capture_decran_2026-10-29_a_23.33.28.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-29_a_23.33.28.png)
@@ -174,3 +176,5 @@ Pour vérifier comment bien connecter les CT, on peut regarder la docs du PHY du
 Le brochage recommandé dans la doc du KSZ9031RNXIA indique que les CT ne doivent être reliés à aucune source d’alimentation et recommande de les découplé à la masse:
 
 ![Capture_decran_2026-10-29_a_23.42.33.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-29_a_23.42.33.png)
+
+#### Récupération du PoE
