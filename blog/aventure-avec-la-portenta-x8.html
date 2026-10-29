@@ -196,7 +196,8 @@ aussi que tout le système soit alimenté en PoE. Je pars sur le
 transfo d’isolation sont intégrés dans la prise) vertical et compatible
 PoE.</p>
 <p>Dans le schéma de la carrier board max d’arduino, les center-taps
-sont non connecté.</p>
+sont non connecté. Ils laissent la possibilité de les connectés au 3V3
+car les Portenta précédentes ont un PHY qui le demande.</p>
 <div class="img-single">
 <img src="_sources/Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-29_a_23.33.28.png" alt="Capture_decran_2026-10-29_a_23.33.28.png" />
 </div>
@@ -208,7 +209,7 @@ Portenta X8). Sa ref est documenté dans la datasheet de la PX8:</p>
 </div>
 <p>Le brochage recommandé dans la doc du KSZ9031RNXIA indique que les CT
 ne doivent être reliés à aucune source d’alimentation et recommande de
-les découplé à la masse.</p>
+les découplé à la masse:</p>
 <div class="img-single">
 <img src="_sources/Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-29_a_23.42.33.png" alt="Capture_decran_2026-10-29_a_23.42.33.png" />
 </div>
