@@ -178,3 +178,7 @@ Le brochage recommandé dans la doc du KSZ9031RNXIA indique que les CT ne doiven
 ![Capture_decran_2026-10-29_a_23.42.33.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-29_a_23.42.33.png)
 
 #### Récupération du PoE
+
+La carte sera entièrement alimenté via le PoE. La PX8 fonctionne en 5V, donc le AG9905-MTB est adapté. Pour le redressement je met 2 MB10S car ils sont en stock partout et que j’en ai déjà utilisé.
+
+![image.png](Aventure%20avec%20la%20Portenta%20X8/image.png)
