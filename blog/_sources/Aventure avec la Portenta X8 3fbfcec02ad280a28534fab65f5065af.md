@@ -161,4 +161,4 @@ Je vais détailler ici mes notes de conceptions sur la carrier board que je comp
 
 ### Port ethernet
 
-J’ai besoin d’un port Ethernt 1000Base-T pour avoir du GbE
+J’ai besoin d’un port Ethernet 1000Base-T pour avoir du GbE. Je veux aussi que tout le système soit alimenté en PoE. Je pars sur le **V8BR-1AX1-GH** qui est un connecteur MagJack (donc les transfo d’isolation sont intégrés dans la prise) vertical et compatible PoE.
