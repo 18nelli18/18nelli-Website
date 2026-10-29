@@ -162,3 +162,7 @@ Je vais détailler ici mes notes de conceptions sur la carrier board que je comp
 ### Port ethernet
 
 J’ai besoin d’un port Ethernet 1000Base-T pour avoir du GbE. Je veux aussi que tout le système soit alimenté en PoE. Je pars sur le **V8BR-1AX1-GH** qui est un connecteur MagJack (donc les transfo d’isolation sont intégrés dans la prise) vertical et compatible PoE.
+
+Dans le schéma de la carrier board max d’arduino, les center-taps sont non connecté.
+
+![Capture_decran_2026-10-29_a_23.33.28.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-29_a_23.33.28.png)
