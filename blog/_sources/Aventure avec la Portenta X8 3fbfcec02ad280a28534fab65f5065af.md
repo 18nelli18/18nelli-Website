@@ -166,3 +166,5 @@ J’ai besoin d’un port Ethernet 1000Base-T pour avoir du GbE. Je veux aussi q
 Dans le schéma de la carrier board max d’arduino, les center-taps sont non connecté.
 
 ![Capture_decran_2026-10-29_a_23.33.28.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-29_a_23.33.28.png)
+
+Pour vérifier comment bien connecter les CT, on peut regarder la docs du PHY du NXP® [i.MX](http://i.mx/) 8M Mini (le coeur de la Portenta X8).
