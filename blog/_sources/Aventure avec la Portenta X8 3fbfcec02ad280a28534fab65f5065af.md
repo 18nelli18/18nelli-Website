@@ -1,7 +1,7 @@
 # Aventure avec la Portenta X8
 
 <!-- date: 16/10/2026 -->
-<!-- modified: 17/10/2026 -->
+<!-- modified: 29/10/2026 -->
 
 Dans le cadre de mon alternance je dois concevoir un système embarqué pour interfacer plusieurs machine médicales, capteurs bio etc pour pouvoir centralisé les mesures d’une opérations sensible. Le projet est pas dingue en gros c’est faire un hub. MAIS ça reste une occasion de passer du temps à manipuler du materiel nouveau.
 
@@ -152,3 +152,13 @@ sudo docker run -d --name ssh-server --restart unless-stopped \
   -v /run/dbus:/run/dbus:ro \
   ssh-server
 ```
+
+## Conception d’une carrier board
+
+*29/10/2026*
+
+Je vais détailler ici mes notes de conceptions sur la carrier board que je compte faire.
+
+### Port ethernet
+
+J’ai besoin d’un port Ethernt 1000Base-T pour avoir du GbE
