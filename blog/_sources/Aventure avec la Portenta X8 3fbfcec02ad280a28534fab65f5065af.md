@@ -177,7 +177,11 @@ Le brochage recommandé dans la doc du KSZ9031RNXIA indique que les CT ne doiven
 
 ![Capture_decran_2026-10-29_a_23.42.33.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-29_a_23.42.33.png)
 
-Pour ce qui concerne les LED, elle nécessite, en plus des résistance de protection classique, des résistance de pull up/down qui serve
+Pour ce qui concerne les LED, elle nécessite, en plus des résistance de protection classique, des résistance de pull up/down:
+
+![Capture_decran_2026-10-30_a_02.12.54.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-30_a_02.12.54.png)
+
+La LED1 est active sur l’état bas. Quand ETH\_LED1 (pilotée par le PHY) vaut 3V3, la tension dans la LED s’annule (3V3 contre 3V3).  Quand ETH\_LED1 vaut 0V, le 3V3 circule dans la résistance R1 puis allume en 1.8V la LED. Pour la LED2 c’est l’inverse.
 
 #### Récupération du PoE
 
