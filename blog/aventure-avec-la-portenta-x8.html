@@ -214,6 +214,8 @@ les découplé à la masse:</p>
 <div class="img-single">
 <img src="_sources/Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-29_a_23.42.33.png" alt="Capture_decran_2026-10-29_a_23.42.33.png" />
 </div>
+<p>Pour ce qui concerne les LED, elle nécessite, en plus des résistance
+de protection classique, des résistance de pull up/down qui serve</p>
 <h4 id="récupération-du-poe">Récupération du PoE</h4>
 <p>La carte sera entièrement alimenté via le PoE. La PX8 fonctionne en
 5V, donc le AG9905-MTB est adapté. Pour le redressement je met 2 MB10S
@@ -225,7 +227,10 @@ cramé ma carte.</p>
 </div>
 <p>Le schema du block PoE:</p>
 <ul>
-<li>récupère le signal PoE via les broche VC12 VC36 et VC45 V</li>
+<li>récupère le signal PoE via les broche VC12 VC36 et VC45 VC78 et le
+redresse via 2 MB10S</li>
+<li>convertit ce signal en 5V, avec une diode de protection contre la
+surtension (D1) en entrée du PD (AG9905)</li>
 </ul>
 <div class="img-single">
 <img src="_sources/Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-30_a_02.04.10.png" alt="Capture_decran_2026-10-30_a_02.04.10.png" />
