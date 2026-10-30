@@ -200,6 +200,6 @@ La carte sera entièrement alimenté via le PoE. La PX8 fonctionne en 5V, donc l
 Le schema du block PoE:
 
 - récupère le signal PoE via les broche VC12 VC36 et VC45 VC78 et le redresse via 2 MB10S
-- convertit ce signal en 5V, avec une diode de protection contre la surtension (D1) en entrée du PD (AG9905)
+- convertit ce signal en 5V, avec une diode de protection contre la surtension (D1) en entrée du PD (AG9905)c
 
 ![Capture_decran_2026-10-30_a_02.04.10.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-30_a_02.04.10.png)
