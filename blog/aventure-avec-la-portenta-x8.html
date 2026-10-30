@@ -189,7 +189,7 @@ board</h2>
 <p><em>29/10/2026</em></p>
 <p>Je vais détailler ici mes notes de conceptions sur la carrier board
 que je compte faire.</p>
-<h3 id="port-ethernet">Port ethernet</h3>
+<h3 id="connecteur-rj45">Connecteur RJ45</h3>
 <p>J’ai besoin d’un port Ethernet 1000Base-T pour avoir du GbE. Je veux
 aussi que tout le système soit alimenté en PoE. Je pars sur le
 <strong>V8BR-1AX1-GH</strong> qui est un connecteur MagJack (donc les
@@ -224,6 +224,10 @@ l’état des broche LED pour démarrer:</p>
 PHY) vaut 3V3, la tension dans la LED s’annule (3V3 contre 3V3). Quand
 ETH_LED1 vaut 0V, le 3V3 circule dans la résistance R1 puis allume en
 1.8V la LED. Pour la LED2 c’est l’inverse.</p>
+<p>Voici à quoi ressemble le câblage final du connecteur:</p>
+<div class="img-single">
+<img src="_sources/Aventure%20avec%20la%20Portenta%20X8/74fd65b5-282a-412f-a2dc-e163574d0b88.png" alt="74fd65b5-282a-412f-a2dc-e163574d0b88.png" />
+</div>
 <h4 id="récupération-du-poe">Récupération du PoE</h4>
 <p>La carte sera entièrement alimenté via le PoE. La PX8 fonctionne en
 5V, donc le AG9905-MTB est adapté. Pour le redressement je met 2 MB10S

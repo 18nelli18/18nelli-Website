@@ -159,7 +159,7 @@ sudo docker run -d --name ssh-server --restart unless-stopped \
 
 Je vais détailler ici mes notes de conceptions sur la carrier board que je compte faire.
 
-### Port ethernet
+### Connecteur RJ45
 
 J’ai besoin d’un port Ethernet 1000Base-T pour avoir du GbE. Je veux aussi que tout le système soit alimenté en PoE. Je pars sur le **V8BR-1AX1-GH** qui est un connecteur MagJack (donc les transfo d’isolation sont intégrés dans la prise) vertical et compatible PoE.
 
@@ -182,6 +182,10 @@ Pour ce qui concerne les LED, elle nécessite, en plus des résistance de protec
 ![Capture_decran_2026-10-30_a_02.12.54.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-30_a_02.12.54.png)
 
 La LED1 est active sur l’état bas. Quand ETH\_LED1 (pilotée par le PHY) vaut 3V3, la tension dans la LED s’annule (3V3 contre 3V3).  Quand ETH\_LED1 vaut 0V, le 3V3 circule dans la résistance R1 puis allume en 1.8V la LED. Pour la LED2 c’est l’inverse.
+
+Voici à quoi ressemble le câblage final du connecteur:
+
+![74fd65b5-282a-412f-a2dc-e163574d0b88.png](Aventure%20avec%20la%20Portenta%20X8/74fd65b5-282a-412f-a2dc-e163574d0b88.png)
 
 #### Récupération du PoE
 
