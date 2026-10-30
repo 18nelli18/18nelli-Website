@@ -177,7 +177,7 @@ Le brochage recommandé dans la doc du KSZ9031RNXIA indique que les CT ne doiven
 
 ![Capture_decran_2026-10-29_a_23.42.33.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-29_a_23.42.33.png)
 
-Pour ce qui concerne les LED, elle nécessite, en plus des résistance de protection classique, des résistance de pull up/down:
+Pour ce qui concerne les LED, elle nécessite, en plus des résistance de protection classique, des résistance de pull up/down car le PHY lis l’état des broche LED pour démarrer:
 
 ![Capture_decran_2026-10-30_a_02.12.54.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-30_a_02.12.54.png)
 
