@@ -186,3 +186,9 @@ La carte sera entièrement alimenté via le PoE. La PX8 fonctionne en 5V, donc l
 ![image 1.png](Aventure%20avec%20la%20Portenta%20X8/image%201.png)
 
 ![image 2.png](Aventure%20avec%20la%20Portenta%20X8/image%202.png)
+
+Le schema du block PoE:
+
+- récupère le signal PoE via les broche VC12 VC36 et VC45 V
+
+![Capture_decran_2026-10-30_a_02.04.10.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-30_a_02.04.10.png)
