@@ -1,7 +1,7 @@
 # Aventure avec la Portenta X8
 
 <!-- date: 16/10/2026 -->
-<!-- modified: 30/10/2026 -->
+<!-- modified: 31/10/2026 -->
 
 Dans le cadre de mon alternance je dois concevoir un système embarqué pour interfacer plusieurs machine médicales, capteurs bio etc pour pouvoir centralisé les mesures d’une opérations sensible. Le projet est pas dingue en gros c’est faire un hub. MAIS ça reste une occasion de passer du temps à manipuler du materiel nouveau.
 
@@ -177,7 +177,7 @@ Le brochage recommandé dans la doc du KSZ9031RNXIA indique que les CT ne doiven
 
 ![Capture_decran_2026-10-29_a_23.42.33.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-29_a_23.42.33.png)
 
-Pour ce qui concerne les LED, elle nécessite, en plus des résistance de protection classique, des résistance de pull up/down car le PHY lis l’état des broche LED pour démarrer:
+Pour ce qui concerne les LED, elle nécessite, en plus des résistance de protection classique, des résistance de pull up/down car le PHY lis l’état des broche LED pour démarrer. Je reprends exactement le même montage que sur la Carreer Board Max:
 
 ![Capture_decran_2026-10-30_a_02.12.54.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-30_a_02.12.54.png)
 
