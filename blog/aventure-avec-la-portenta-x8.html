@@ -189,7 +189,7 @@ board</h2>
 <p><em>29/10/2026</em></p>
 <p>Je vais détailler ici mes notes de conceptions sur la carrier board
 que je compte faire.</p>
-<h3 id="connecteur-rj45">Connecteur RJ45</h3>
+<h3 id="ethernet-poe">Ethernet PoE</h3>
 <p>J’ai besoin d’un port Ethernet 1000Base-T pour avoir du GbE. Je veux
 aussi que tout le système soit alimenté en PoE. Je pars sur le
 <strong>V8BR-1AX1-GH</strong> qui est un connecteur MagJack (donc les
@@ -220,7 +220,7 @@ l’état des broche LED pour démarrer. La LED1 est active sur l’état bas.
 Quand ETH_LED1 (pilotée par le PHY) vaut 3V3, la tension dans la LED
 s’annule (3V3 contre 3V3). Si ETH_LED1 vaut 0V, le 3V3 circule dans la
 résistance R1 puis allume en 1.8V la LED. Pour la LED2 c’est l’inverse.
-Je reprends exactement le même montage que sur la Carrier Board Max</p>
+Je reprends exactement le même montage que sur la Carrier Board Max:</p>
 <div class="img-row">
 <img src="_sources/Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-30_a_02.12.54.png" alt="Capture_decran_2026-10-30_a_02.12.54.png" /><img src="_sources/Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-31_a_13.06.41.png" alt="Capture_decran_2026-10-31_a_13.06.41.png" />
 </div>
@@ -242,11 +242,12 @@ cramé ma carte.</p>
 <li>récupère le signal PoE via les broche VC12 VC36 et VC45 VC78 et le
 redresse via 2 MB10S</li>
 <li>convertit ce signal en 5V, avec une diode de protection contre la
-surtension (D1) en entrée du PD (AG9905)c</li>
+surtension (D1) en entrée du PD (AG9905), qui alimente la PX8</li>
 </ul>
 <div class="img-single">
 <img src="_sources/Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-30_a_02.04.10.png" alt="Capture_decran_2026-10-30_a_02.04.10.png" />
 </div>
+<h3 id="connecteur-rj45">Connecteur RJ45</h3>
     </article>
   </body>
 </html>

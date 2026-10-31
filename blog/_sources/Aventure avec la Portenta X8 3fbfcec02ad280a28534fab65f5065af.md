@@ -159,7 +159,7 @@ sudo docker run -d --name ssh-server --restart unless-stopped \
 
 Je vais détailler ici mes notes de conceptions sur la carrier board que je compte faire.
 
-### Connecteur RJ45
+### Ethernet PoE
 
 J’ai besoin d’un port Ethernet 1000Base-T pour avoir du GbE. Je veux aussi que tout le système soit alimenté en PoE. Je pars sur le **V8BR-1AX1-GH** qui est un connecteur MagJack (donc les transfo d’isolation sont intégrés dans la prise) vertical et compatible PoE.
 
@@ -177,7 +177,7 @@ Le brochage recommandé dans la doc du KSZ9031RNXIA indique que les CT ne doiven
 
 ![Capture_decran_2026-10-29_a_23.42.33.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-29_a_23.42.33.png)
 
-Pour ce qui concerne les LED, elle nécessite, en plus des résistance de protection classique, des résistance de pull up/down car le PHY lis l’état des broche LED pour démarrer. La LED1 est active sur l’état bas. Quand ETH\_LED1 (pilotée par le PHY) vaut 3V3, la tension dans la LED s’annule (3V3 contre 3V3). Si ETH\_LED1 vaut 0V, le 3V3 circule dans la résistance R1 puis allume en 1.8V la LED. Pour la LED2 c’est l’inverse. Je reprends exactement le même montage que sur la Carrier Board Max
+Pour ce qui concerne les LED, elle nécessite, en plus des résistance de protection classique, des résistance de pull up/down car le PHY lis l’état des broche LED pour démarrer. La LED1 est active sur l’état bas. Quand ETH\_LED1 (pilotée par le PHY) vaut 3V3, la tension dans la LED s’annule (3V3 contre 3V3). Si ETH\_LED1 vaut 0V, le 3V3 circule dans la résistance R1 puis allume en 1.8V la LED. Pour la LED2 c’est l’inverse. Je reprends exactement le même montage que sur la Carrier Board Max:
 
 ![Capture_decran_2026-10-30_a_02.12.54.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-30_a_02.12.54.png)
 
@@ -200,6 +200,8 @@ La carte sera entièrement alimenté via le PoE. La PX8 fonctionne en 5V, donc l
 Le schema du block PoE:
 
 - récupère le signal PoE via les broche VC12 VC36 et VC45 VC78 et le redresse via 2 MB10S
-- convertit ce signal en 5V, avec une diode de protection contre la surtension (D1) en entrée du PD (AG9905)c
+- convertit ce signal en 5V, avec une diode de protection contre la surtension (D1) en entrée du PD (AG9905), qui alimente la PX8
 
 ![Capture_decran_2026-10-30_a_02.04.10.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-30_a_02.04.10.png)
+
+### Connecteur RJ45
