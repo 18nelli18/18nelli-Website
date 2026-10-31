@@ -204,4 +204,4 @@ Le schema du block PoE:
 
 ![Capture_decran_2026-10-30_a_02.04.10.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-30_a_02.04.10.png)
 
-### Connecteur RJ45
+### UBS2
