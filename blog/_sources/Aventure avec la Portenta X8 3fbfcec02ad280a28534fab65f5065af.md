@@ -204,4 +204,6 @@ Le schema du block PoE:
 
 ![Capture_decran_2026-10-30_a_02.04.10.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-30_a_02.04.10.png)
 
-### UBS2
+### Port USB
+
+Pour l’USB de la carte, je souhaite mettre un port micro-usb.
