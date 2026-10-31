@@ -216,15 +216,14 @@ les découplé à la masse:</p>
 </div>
 <p>Pour ce qui concerne les LED, elle nécessite, en plus des résistance
 de protection classique, des résistance de pull up/down car le PHY lis
-l’état des broche LED pour démarrer. Je reprends exactement le même
-montage que sur la Carreer Board Max:</p>
-<div class="img-single">
-<img src="_sources/Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-30_a_02.12.54.png" alt="Capture_decran_2026-10-30_a_02.12.54.png" />
+l’état des broche LED pour démarrer. La LED1 est active sur l’état bas.
+Quand ETH_LED1 (pilotée par le PHY) vaut 3V3, la tension dans la LED
+s’annule (3V3 contre 3V3). Si ETH_LED1 vaut 0V, le 3V3 circule dans la
+résistance R1 puis allume en 1.8V la LED. Pour la LED2 c’est l’inverse.
+Je reprends exactement le même montage que sur la Carrier Board Max</p>
+<div class="img-row">
+<img src="_sources/Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-30_a_02.12.54.png" alt="Capture_decran_2026-10-30_a_02.12.54.png" /><img src="_sources/Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-31_a_13.06.41.png" alt="Capture_decran_2026-10-31_a_13.06.41.png" />
 </div>
-<p>La LED1 est active sur l’état bas. Quand ETH_LED1 (pilotée par le
-PHY) vaut 3V3, la tension dans la LED s’annule (3V3 contre 3V3). Quand
-ETH_LED1 vaut 0V, le 3V3 circule dans la résistance R1 puis allume en
-1.8V la LED. Pour la LED2 c’est l’inverse.</p>
 <p>Voici à quoi ressemble le câblage final du connecteur:</p>
 <div class="img-single">
 <img src="_sources/Aventure%20avec%20la%20Portenta%20X8/74fd65b5-282a-412f-a2dc-e163574d0b88.png" alt="74fd65b5-282a-412f-a2dc-e163574d0b88.png" />
