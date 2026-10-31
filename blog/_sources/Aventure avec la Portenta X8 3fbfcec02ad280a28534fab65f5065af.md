@@ -206,8 +206,12 @@ Le schema du block PoE:
 
 ### Port USB
 
-Pour l’USB de la carte, je souhaite mettre un port micro-usb en branchement par le haut, comme pour le RJ45. J’en ai trouvé chez Molex qui conviendrait bien. Pour la protection contre les décharge l’ESD USBLC6-2SC6Y sera bien.
+Pour l’USB de la carte, je souhaite mettre un port micro-usb en branchement par le haut, comme pour le RJ45. J’en ai trouvé chez Molex qui conviendrait bien. J’utilise l’ESD USBLC6-2SC6Y pour la protection contre les décharge,
 
 ![Capture_decran_2026-10-31_a_17.05.55.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-31_a_17.05.55.png)
 
 ![Capture_decran_2026-10-31_a_17.09.13.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-31_a_17.09.13.png)
+
+Le schéma est super simple, on met les 2 VBUS au VBUS\_USB de la PX8, les D+ et D- du connecteur à la protection ESD et les sortie USB depuis
+
+![Capture_decran_2026-10-31_a_17.11.13.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-31_a_17.11.13.png)
