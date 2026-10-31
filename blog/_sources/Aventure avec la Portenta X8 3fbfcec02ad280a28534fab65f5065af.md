@@ -206,4 +206,8 @@ Le schema du block PoE:
 
 ### Port USB
 
-Pour l’USB de la carte, je souhaite mettre un port micro-usb.
+Pour l’USB de la carte, je souhaite mettre un port micro-usb en branchement par le haut, comme pour le RJ45. J’en ai trouvé chez Molex qui conviendrait bien. Pour la protection contre les décharge l’ESD USBLC6-2SC6Y sera bien.
+
+![Capture_decran_2026-10-31_a_17.05.55.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-31_a_17.05.55.png)
+
+![Capture_decran_2026-10-31_a_17.09.13.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-31_a_17.09.13.png)
