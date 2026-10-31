@@ -212,6 +212,6 @@ Pour l’USB de la carte, je souhaite mettre un port micro-usb en branchement pa
 
 ![Capture_decran_2026-10-31_a_17.09.13.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-31_a_17.09.13.png)
 
-Le schéma est super simple, on met les 2 VBUS au VBUS\_USB de la PX8, les D+ et D- du connecteur à la protection ESD et les sortie USB depuis
+Le schéma est super simple, on met les 2 VBUS au VBUS\_USB de la PX8, les D+ et D- du connecteur en entrée de la protection ESD et la sortie vers les pin USB de la
 
 ![Capture_decran_2026-10-31_a_17.11.13.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-31_a_17.11.13.png)
