@@ -225,3 +225,5 @@ La carte que je fais doit comporter une interface pour brancher une nappe de cam
 La caméra passe par en MIPI CSI-2, qui transit les données haute vitesse sur des paires différentielles. On doit donc brancher CAM\_D0 +/-, CAM\_D1 +/-  (les paires diff), et la clock CAM\_CLK à l’interface MIPI CSI de la PX8. En plus de ces broche la camera utilise de l’i2c pour échanger avec la PX8 (déclanchement d’image, paramètre de résolution, etc). On peut rattacher l’I2C SCL et SDC à n’importe quelle interface de la PX8, mais par défaut l’OS Yocto fournis par Arduino définie la camera sur l’i2c2, donc autant faire pareil ça nous evite de devoir modifier l’OS et de le recompiler.
 
 ![Capture_decran_2026-11-01_a_14.34.26.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-01_a_14.34.26.png)
+
+![Capture_decran_2026-11-01_a_14.46.16.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-01_a_14.46.16.png)
