@@ -234,6 +234,6 @@ Une interface série qui permet d’accéder à la console linux de la carte est
 
 ![Capture_decran_2026-11-01_a_16.57.33.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-01_a_16.57.33.png)
 
-J’aimerai exposé la console en USB-C
+J’aimerai exposé la console en USB-C plutôt que des pin rx/tx
 
 FTDI FT230X
