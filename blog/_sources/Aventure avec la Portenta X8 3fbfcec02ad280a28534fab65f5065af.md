@@ -222,4 +222,4 @@ La carte que je fais doit comporter une interface pour brancher une nappe de cam
 
 ![image 3.png](Aventure%20avec%20la%20Portenta%20X8/image%203.png)
 
-La caméra passe par en MIPI CSI-2.
+La caméra passe par en MIPI CSI-2, qui transit les données haute vitesse sur des paires différentielles. On doit donc brancher CAM\_D0 +/-, CAM\_D1 +/-  (les paires diff), et la clock CAM\_CLK à l’interface MIPI CSI de la PX8. En plus de ces broche la camera utilise de l’i2c pour échanger avec la PX8 (déclanchement d’image etc). On peut rattacher l’I2C SCL et SDC

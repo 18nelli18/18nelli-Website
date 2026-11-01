@@ -267,7 +267,12 @@ nappe de camera type Raspberry Pi Cam.</p>
 <div class="img-single">
 <img src="_sources/Aventure%20avec%20la%20Portenta%20X8/image%203.png" alt="image 3.png" />
 </div>
-<p>La caméra passe par en MIPI CSI-2.</p>
+<p>La caméra passe par en MIPI CSI-2, qui transit les données haute
+vitesse sur des paires différentielles. On doit donc brancher CAM_D0
++/-, CAM_D1 +/- (les paires diff), et la clock CAM_CLK à l’interface
+MIPI CSI de la PX8. En plus de ces broche la camera utilise de l’i2c
+pour échanger avec la PX8 (déclanchement d’image etc). On peut rattacher
+l’I2C SCL et SDC</p>
     </article>
   </body>
 </html>
