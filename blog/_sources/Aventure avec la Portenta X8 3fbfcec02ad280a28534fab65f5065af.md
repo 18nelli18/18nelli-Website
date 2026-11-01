@@ -227,3 +227,9 @@ La caméra passe par en MIPI CSI-2, qui transit les données haute vitesse sur d
 ![Capture_decran_2026-11-01_a_14.34.26.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-01_a_14.34.26.png)
 
 ![Capture_decran_2026-11-01_a_14.46.16.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-01_a_14.46.16.png)
+
+### Console sur UART
+
+Une interface série qui permet d’accéder à la console linux de la carte est exposée sur l’UART4 de la PX8. Avoir accès à cette interface sera utile en cas de problème avec l’ethernet.
+
+![Capture_decran_2026-11-01_a_16.57.33.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-01_a_16.57.33.png)
