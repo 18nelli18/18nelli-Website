@@ -1,7 +1,7 @@
 # Aventure avec la Portenta X8
 
 <!-- date: 16/10/2026 -->
-<!-- modified: 01/11/2026 -->
+<!-- modified: 02/11/2026 -->
 
 Dans le cadre de mon alternance je dois concevoir un système embarqué pour interfacer plusieurs machine médicales, capteurs bio etc pour pouvoir centralisé les mesures d’une opérations sensible. Le projet est pas dingue en gros c’est faire un hub. MAIS ça reste une occasion de passer du temps à manipuler du materiel nouveau.
 
@@ -261,4 +261,6 @@ Les broches d’un connecteurs SD sont donc:
 - VDD: l’alim en 3V3
 - VSS: la masse
 
-Lors d’une session via l’interface SD, la PX8 démarre sont horloge à une vitesse lente (400kHz), puis envoie des commandes d’identification sur la SD pour déterminer la capacité, la vitesse etc. Si la vitesse 50MHz est possible l’horloge de la PX8 est modifée.
+Lors d’une session via l’interface SD, la PX8 démarre sont horloge à une vitesse lente (400kHz), puis envoie des commandes d’identification sur la SD pour déterminer la capacité, la vitesse etc. Si la vitesse 50MHz est possible l’horloge de la PX8 est modifié. L’état flottant de CMD et DAT avant la négociation avec la PX8 impose des résistance de tirage, mais elle
+
+![Capture_decran_2026-11-02_a_00.01.01.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-02_a_00.01.01.png)
