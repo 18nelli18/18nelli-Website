@@ -251,10 +251,14 @@ Pour pouvoir extraire des données facilement en cas de panne de la PX8, j’aim
 Le SD est un bus synchrone. Il est cadencé sur une horloge fournis par la PX8 et des données transit à chaque front sur 2 canaux différents:
 
 - BUS CMD : la PX8 donne des instructions à la SD (lire le bloc 392 etc), qui lui réponds.
-- DAT\[0-3\] : la ou les données passent, en paquet de 4 bits (1 par canal DAT). Peut aussi répondre à la PX8 un état “occupé”
+- DAT\[0-3\] : la ou les données passent, en paquet de 4 bits (1 par canal DAT). Peut aussi répondre à la PX8 un état “occupé” via le DAT0 et un état “disponible” via DAT3
 
 Les broches d’un connecteurs SD sont donc:
 
 - CLK : l’horloge de l’interface; PX8→SD
 - CMD : canal de commandes; PX8↔SD
-- DAT0, DAT1,DAT2,DAT3 :
+- DAT0, DAT1, DAT2, DAT3 : canaux de transit des données; PX8↔SD
+- VDD: l’alim en 3V3
+- VSS: la masse
+
+Lors d’une session via l’interface SD, la PX8 démarre sont horloge à une vitesse lente (400kHz), puis envoie des commandes d’identification sur la SD pour déterminer la capacité, la vitesse etc. Si la vitesse 50MHz est possible l’horloge de la PX8 est modifée.

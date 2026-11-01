@@ -311,14 +311,21 @@ différents:</p>
 <li>BUS CMD : la PX8 donne des instructions à la SD (lire le bloc 392
 etc), qui lui réponds.</li>
 <li>DAT[0-3] : la ou les données passent, en paquet de 4 bits (1 par
-canal DAT). Peut aussi répondre à la PX8 un état “occupé”</li>
+canal DAT). Peut aussi répondre à la PX8 un état “occupé” via le DAT0 et
+un état “disponible” via DAT3</li>
 </ul>
 <p>Les broches d’un connecteurs SD sont donc:</p>
 <ul>
 <li>CLK : l’horloge de l’interface; PX8→SD</li>
 <li>CMD : canal de commandes; PX8↔︎SD</li>
-<li>DAT0, DAT1,DAT2,DAT3 :</li>
+<li>DAT0, DAT1, DAT2, DAT3 : canaux de transit des données; PX8↔︎SD</li>
+<li>VDD: l’alim en 3V3</li>
+<li>VSS: la masse</li>
 </ul>
+<p>Lors d’une session via l’interface SD, la PX8 démarre sont horloge à
+une vitesse lente (400kHz), puis envoie des commandes d’identification
+sur la SD pour déterminer la capacité, la vitesse etc. Si la vitesse
+50MHz est possible l’horloge de la PX8 est modifée.</p>
     </article>
   </body>
 </html>
