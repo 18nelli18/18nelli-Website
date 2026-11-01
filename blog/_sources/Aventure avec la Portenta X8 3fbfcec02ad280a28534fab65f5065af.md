@@ -238,4 +238,4 @@ J’aimerai exposé la console en USB-C plutôt que des pin physique rx/tx, car 
 
 ![image 4.png](Aventure%20avec%20la%20Portenta%20X8/image%204.png)
 
-J’utilise un port USB-C 15 broches USB2.
+J’utilise un port USB-C 15 broches pour l’USB2. Le schéma est donc quasi identique à la doc:
