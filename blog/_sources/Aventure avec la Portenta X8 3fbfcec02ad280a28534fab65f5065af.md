@@ -1,7 +1,7 @@
 # Aventure avec la Portenta X8
 
 <!-- date: 16/10/2026 -->
-<!-- modified: 31/10/2026 -->
+<!-- modified: 01/11/2026 -->
 
 Dans le cadre de mon alternance je dois concevoir un système embarqué pour interfacer plusieurs machine médicales, capteurs bio etc pour pouvoir centralisé les mesures d’une opérations sensible. Le projet est pas dingue en gros c’est faire un hub. MAIS ça reste une occasion de passer du temps à manipuler du materiel nouveau.
 
@@ -215,3 +215,11 @@ Pour l’USB de la carte, je souhaite mettre un port micro-usb en branchement pa
 Le schéma est super simple, on met les 2 VBUS au VBUS\_USB de la PX8, les D+ et D- du connecteur en entrée de la protection ESD et la sortie vers les pin USB de la PX8
 
 ![Capture_decran_2026-10-31_a_17.29.48.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-31_a_17.29.48.png)
+
+### Connecteur Camera
+
+La carte que je fais doit comporter une interface pour brancher une nappe de camera type Raspberry Pi Cam.
+
+![image 3.png](Aventure%20avec%20la%20Portenta%20X8/image%203.png)
+
+La caméra passe par en MIPI CSI-2.
