@@ -305,7 +305,20 @@ PX8, j’aimerai rajouter un port micro SD. C’est la première fois que
 j’interface de l’SD donc c’est l’occasion pour moi de comprendre comment
 ça fonctionne.</p>
 <p>Le SD est un bus synchrone. Il est cadencé sur une horloge fournis
-par la PX8 et des données transit à chaque front sur</p>
+par la PX8 et des données transit à chaque front sur 2 canaux
+différents:</p>
+<ul>
+<li>BUS CMD : la PX8 donne des instructions à la SD (lire le bloc 392
+etc), qui lui réponds.</li>
+<li>DAT[0-3] : la ou les données passent, en paquet de 4 bits (1 par
+canal DAT). Peut aussi répondre à la PX8 un état “occupé”</li>
+</ul>
+<p>Les broches d’un connecteurs SD sont donc:</p>
+<ul>
+<li>CLK : l’horloge de l’interface; PX8→SD</li>
+<li>CMD : canal de commandes; PX8↔︎SD</li>
+<li>DAT0, DAT1,DAT2,DAT3 :</li>
+</ul>
     </article>
   </body>
 </html>

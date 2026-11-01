@@ -248,4 +248,13 @@ J’utilise un port USB-C 15 broches pour l’USB2. Le schéma est donc quasi id
 
 Pour pouvoir extraire des données facilement en cas de panne de la PX8, j’aimerai rajouter un port micro SD. C’est la première fois que j’interface de l’SD donc c’est l’occasion pour moi de comprendre comment ça fonctionne.
 
-Le SD est un bus synchrone. Il est cadencé sur une horloge fournis par la PX8 et des données transit à chaque front sur
+Le SD est un bus synchrone. Il est cadencé sur une horloge fournis par la PX8 et des données transit à chaque front sur 2 canaux différents:
+
+- BUS CMD : la PX8 donne des instructions à la SD (lire le bloc 392 etc), qui lui réponds.
+- DAT\[0-3\] : la ou les données passent, en paquet de 4 bits (1 par canal DAT). Peut aussi répondre à la PX8 un état “occupé”
+
+Les broches d’un connecteurs SD sont donc:
+
+- CLK : l’horloge de l’interface; PX8→SD
+- CMD : canal de commandes; PX8↔SD
+- DAT0, DAT1,DAT2,DAT3 :
