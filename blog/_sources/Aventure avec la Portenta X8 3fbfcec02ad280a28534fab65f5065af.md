@@ -243,3 +243,9 @@ J’aimerai exposé la console en USB-C plutôt que des pin physique rx/tx, car 
 J’utilise un port USB-C 15 broches pour l’USB2. Le schéma est donc quasi identique à la doc, avec la même protection ESD que le port micro USB précédent:
 
 ![Capture_decran_2026-11-01_a_21.10.23.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-01_a_21.10.23.png)
+
+### Micro SD
+
+Pour pouvoir extraire des données facilement en cas de panne de la PX8, j’aimerai rajouter un port micro SD. C’est la première fois que j’interface de l’SD donc c’est l’occasion pour moi de comprendre comment ça fonctionne.
+
+Le SD est un bus synchrone. Il est cadencé sur une horloge fournis par la PX8 et des données transit à chaque front sur
