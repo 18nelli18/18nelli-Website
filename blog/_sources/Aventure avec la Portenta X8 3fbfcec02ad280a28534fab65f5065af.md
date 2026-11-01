@@ -237,3 +237,7 @@ Une interface série qui permet d’accéder à la console linux de la carte est
 J’aimerai exposé la console en USB-C plutôt que des pin physique rx/tx, car on a pas tous sur nous des adaptateurs TTY vers USB. La puce FTDI FT230X permet justement de convertir en USB les signaux UART. La doc nous donne ce montage pour utiliser la puce, alimenté via usb:
 
 ![image 4.png](Aventure%20avec%20la%20Portenta%20X8/image%204.png)
+
+J’utilise un port USB-C 15 broches. Voici le routage classique du connecteur:
+
+![Capture_decran_2026-11-01_a_19.01.38.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-01_a_19.01.38.png)
