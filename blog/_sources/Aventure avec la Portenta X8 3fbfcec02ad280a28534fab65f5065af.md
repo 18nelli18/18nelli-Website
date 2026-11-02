@@ -279,9 +279,9 @@ Explication des pins:
     ![Capture_decran_2026-11-03_a_00.16.20.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-03_a_00.16.20.png)
 
 - PGNDA PGNDB EP et GND sont à la masse. EP est le pad sous la puce pour dissiper la chaleur
-- AOUT1 et A
+- AOUT1 et AOUT2 sont les sortie des deux bornes du moteur.
 - AIN1 AIN2 sont les entrée de commande du moteur. Elles reçoit de la PX8 un signal PWM qui contrôle la vitesse et la polarité du moteur selon ce tableau:
 
     ![Capture_decran_2026-11-03_a_00.19.20.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-03_a_00.19.20.png)
 
-- 
+- AIPROPI sort un courant proportionnel à celui du moteur, 5000x plus petit. On met une résistance en série pour pouvoir lire la tension via loi d’Ohm sur un ADC de la portenta X8. La valeur de 33k peut être modifiée en fonction du max de courant consommée par le moteur.
