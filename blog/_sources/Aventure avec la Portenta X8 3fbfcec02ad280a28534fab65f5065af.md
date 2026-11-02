@@ -1,7 +1,7 @@
 # Aventure avec la Portenta X8
 
 <!-- date: 16/10/2026 -->
-<!-- modified: 02/11/2026 -->
+<!-- modified: 03/11/2026 -->
 
 Dans le cadre de mon alternance je dois concevoir un système embarqué pour interfacer plusieurs machine médicales, capteurs bio etc pour pouvoir centralisé les mesures d’une opérations sensible. Le projet est pas dingue en gros c’est faire un hub. MAIS ça reste une occasion de passer du temps à manipuler du materiel nouveau.
 
@@ -265,3 +265,7 @@ Les broches d’un connecteurs SD sont donc:
 Lors d’une session via l’interface SD, la PX8 démarre sont horloge à une vitesse lente (400kHz), puis envoie des commandes d’identification sur la SD pour déterminer la capacité, la vitesse etc. Si la vitesse 50MHz est possible l’horloge de la PX8 est modifié. L’état flottant de CMD, DAT et CB avant la négociation avec la PX8 impose des résistance de tirage. Elle sont très probablement interne à la PX8, mais dans le doute, je met des empreinte pour les placer si nécessaire.
 
 ![Capture_decran_2026-11-02_a_01.00.19.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-02_a_01.00.19.png)
+
+### Moteur PWM
+
+J’ai besoin d’exposer un connecteur 2PIN auquel je brancherai un micromoteur, et de détecter les bloquages qu
