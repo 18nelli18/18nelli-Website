@@ -263,3 +263,5 @@ Les broches d’un connecteurs SD sont donc:
 - VSS: la masse
 
 Lors d’une session via l’interface SD, la PX8 démarre sont horloge à une vitesse lente (400kHz), puis envoie des commandes d’identification sur la SD pour déterminer la capacité, la vitesse etc. Si la vitesse 50MHz est possible l’horloge de la PX8 est modifié. L’état flottant de CMD, DAT et CB avant la négociation avec la PX8 impose des résistance de tirage. Elle sont très probablement interne à la PX8, mais dans le doute, je met des empreinte pour les placer si nécessaire.
+
+![Capture_decran_2026-11-02_a_01.00.19.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-02_a_01.00.19.png)
