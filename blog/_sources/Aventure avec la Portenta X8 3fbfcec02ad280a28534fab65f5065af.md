@@ -208,15 +208,15 @@ Le schema du block PoE:
 
 ### Port USB
 
-Pour l’USB de la carte, je souhaite mettre un port micro-usb en branchement par le haut, comme pour le RJ45. J’en ai trouvé chez Molex qui conviendrait bien. J’utilise l’ESD USBLC6-2SC6Y pour la protection contre les décharge,
+Pour l’USB de la carte, je souhaite mettre un port micro-usb en branchement par le haut, comme pour le RJ45. J’en ai trouvé chez Molex qui conviendrait bien. J’utilise l’ESD USBLC6-2SC6Y pour la protection contre les décharge, et le TPS2065CDBVR en interrupteur USB (pour pouvoir utiliser le port en mode hôte.
 
 ![Capture_decran_2026-10-31_a_17.05.55.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-31_a_17.05.55.png)
 
 ![Capture_decran_2026-10-31_a_17.09.13.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-31_a_17.09.13.png)
 
-Le schéma est super simple, on met les 2 VBUS au VBUS\_USB de la PX8, les D+ et D- du connecteur en entrée de la protection ESD et la sortie vers les pin USB de la PX8
+Voici le schema final du block USB
 
-![Capture_decran_2026-10-31_a_17.29.48.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-10-31_a_17.29.48.png)
+![Capture_decran_2026-11-02_a_11.23.37.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-02_a_11.23.37.png)
 
 ### Connecteur Camera
 
