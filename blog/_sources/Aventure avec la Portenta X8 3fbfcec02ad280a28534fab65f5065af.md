@@ -268,4 +268,11 @@ Lors d’une session via l’interface SD, la PX8 démarre sont horloge à une v
 
 ### Moteur PWM
 
-J’ai besoin d’exposer un connecteur 2PIN auquel je brancherai un micromoteur, et de détecter les bloquages qu
+J’ai besoin d’exposer un connecteur 2PIN auquel je brancherai un micromoteur, et de détecter lorsque des bloquages surviennent. La puce DRV8411ARTER permet à la fois le contrôle de polarité du moteur mais aussi la mesure du courant qui le traverse. Voici le montage:
+
+![Capture_decran_2026-11-03_a_00.11.43.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-03_a_00.11.43.png)
+
+Explication des pins:
+
+- VM est l’alimentation du moteur. Elle est directement relié au 5V du module PoE. Un condensateur de 10uF est recommandé par la doc de la puce, en réservoir lorsque le moteur tire l’alim pour démarrer.
+- 

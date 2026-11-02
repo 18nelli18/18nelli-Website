@@ -334,7 +334,19 @@ doute, je met des empreinte pour les placer si nécessaire.</p>
 </div>
 <h3 id="moteur-pwm">Moteur PWM</h3>
 <p>J’ai besoin d’exposer un connecteur 2PIN auquel je brancherai un
-micromoteur, et de détecter les bloquages qu</p>
+micromoteur, et de détecter lorsque des bloquages surviennent. La puce
+DRV8411ARTER permet à la fois le contrôle de polarité du moteur mais
+aussi la mesure du courant qui le traverse. Voici le montage:</p>
+<div class="img-single">
+<img src="_sources/Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-03_a_00.11.43.png" alt="Capture_decran_2026-11-03_a_00.11.43.png" />
+</div>
+<p>Explication des pins:</p>
+<ul>
+<li>VM est l’alimentation du moteur. Elle est directement relié au 5V du
+module PoE. Un condensateur de 10uF est recommandé par la doc de la
+puce, en réservoir lorsque le moteur tire l’alim pour démarrer.</li>
+<li></li>
+</ul>
     </article>
   </body>
 </html>
