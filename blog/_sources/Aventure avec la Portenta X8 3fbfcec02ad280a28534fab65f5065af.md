@@ -274,5 +274,14 @@ J’ai besoin d’exposer un connecteur 2PIN auquel je brancherai un micromoteur
 
 Explication des pins:
 
-- VM est l’alimentation du moteur. Elle est directement relié au 5V du module PoE. Un condensateur de 10uF est recommandé par la doc de la puce, en réservoir lorsque le moteur tire l’alim pour démarrer.
+- VM est l’alimentation du moteur. Elle est directement relié au 5V du module PoE. Un condensateur de 10uF est recommandé par la doc de la puce, en réservoir lorsque le moteur tire l’alim pour démarrer, ainsi qu’un découplage de 100nF
+
+    ![Capture_decran_2026-11-03_a_00.16.20.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-03_a_00.16.20.png)
+
+- PGNDA PGNDB EP et GND sont à la masse. EP est le pad sous la puce pour dissiper la chaleur
+- AOUT1 et A
+- AIN1 AIN2 sont les entrée de commande du moteur. Elles reçoit de la PX8 un signal PWM qui contrôle la vitesse et la polarité du moteur selon ce tableau:
+
+    ![Capture_decran_2026-11-03_a_00.19.20.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-03_a_00.19.20.png)
+
 - 

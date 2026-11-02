@@ -342,9 +342,30 @@ aussi la mesure du courant qui le traverse. Voici le montage:</p>
 </div>
 <p>Explication des pins:</p>
 <ul>
-<li>VM est l’alimentation du moteur. Elle est directement relié au 5V du
-module PoE. Un condensateur de 10uF est recommandé par la doc de la
-puce, en réservoir lorsque le moteur tire l’alim pour démarrer.</li>
+<li><p>VM est l’alimentation du moteur. Elle est directement relié au 5V
+du module PoE. Un condensateur de 10uF est recommandé par la doc de la
+puce, en réservoir lorsque le moteur tire l’alim pour démarrer, ainsi
+qu’un découplage de 100nF</p>
+<figure>
+<img
+src="_sources/Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-03_a_00.16.20.png"
+alt="Capture_decran_2026-11-03_a_00.16.20.png" />
+<figcaption
+aria-hidden="true">Capture_decran_2026-11-03_a_00.16.20.png</figcaption>
+</figure></li>
+<li><p>PGNDA PGNDB EP et GND sont à la masse. EP est le pad sous la puce
+pour dissiper la chaleur</p></li>
+<li><p>AOUT1 et A</p></li>
+<li><p>AIN1 AIN2 sont les entrée de commande du moteur. Elles reçoit de
+la PX8 un signal PWM qui contrôle la vitesse et la polarité du moteur
+selon ce tableau:</p>
+<figure>
+<img
+src="_sources/Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-03_a_00.19.20.png"
+alt="Capture_decran_2026-11-03_a_00.19.20.png" />
+<figcaption
+aria-hidden="true">Capture_decran_2026-11-03_a_00.19.20.png</figcaption>
+</figure></li>
 <li></li>
 </ul>
     </article>
