@@ -285,3 +285,4 @@ Explication des pins:
     ![Capture_decran_2026-11-03_a_00.19.20.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-03_a_00.19.20.png)
 
 - AIPROPI sort un courant proportionnel à celui du moteur, 5000x plus petit. On met une résistance en série pour pouvoir lire la tension via loi d’Ohm sur un ADC de la portenta X8. La valeur de 33k peut être modifiée en fonction du max de courant consommée par le moteur.
+- nFAULT sert à signaler une erreur (court circuit ou surchauffe) en tirant vers 0V. Elle a besoin de tirer 3V3 pour son état par défaut (RAS).
