@@ -291,4 +291,6 @@ Explication des pins:
 
 ### Règles de conception initiales
 
+![Capture_decran_2026-11-03_a_11.55.50.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-03_a_11.55.50.png)
+
 ![Capture_decran_2026-11-03_a_09.34.01.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-03_a_09.34.01.png)
