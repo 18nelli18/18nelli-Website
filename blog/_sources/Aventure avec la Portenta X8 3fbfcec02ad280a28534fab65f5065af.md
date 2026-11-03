@@ -266,7 +266,7 @@ Lors d’une session via l’interface SD, la PX8 démarre sont horloge à une v
 
 ![Capture_decran_2026-11-02_a_01.00.19.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-02_a_01.00.19.png)
 
-### Moteur PWM
+### Moteur PWM et connecteurs de fourches optiques
 
 J’ai besoin d’exposer un connecteur 2PIN auquel je brancherai un micromoteur, et de détecter lorsque des bloquages surviennent. La puce DRV8411ARTER permet à la fois le contrôle de polarité du moteur mais aussi la mesure du courant qui le traverse. Voici le montage:
 
@@ -286,3 +286,9 @@ Explication des pins:
 
 - AIPROPI sort un courant proportionnel à celui du moteur, 5000x plus petit. On met une résistance en série pour pouvoir lire la tension via loi d’Ohm sur un ADC de la portenta X8. La valeur de 33k peut être modifiée en fonction du max de courant consommée par le moteur.
 - nFAULT sert à signaler une erreur (court circuit ou surchauffe) en tirant vers 0V. Elle a besoin de tirer 3V3 pour son état par défaut (RAS).
+
+## Routage PCB
+
+### Règles de conception initiales
+
+![Capture_decran_2026-11-03_a_09.34.01.png](Aventure%20avec%20la%20Portenta%20X8/Capture_decran_2026-11-03_a_09.34.01.png)
